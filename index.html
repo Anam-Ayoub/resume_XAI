@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fuzzy Logic & XAI - Study Guide</title>
+    <meta name="description" content="A comprehensive, beautifully designed study summary for Fuzzy Logic and Explainable AI (XAI).">
+    
+    <!-- Prism for Syntax Highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- MathJax for rendering LaTeX formulas -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body class="lang-fr">
+    
+    <div class="lang-switch-container">
+        <button id="lang-switch" class="lang-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+            <span id="lang-text">Switch to English</span>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- ============================== -->
+        <!-- ENGLISH CONTENT (with French)  -->
+        <!-- ============================== -->
+        <div lang="en">
+            <header>
+                <span class="badge">Study Summary</span>
+                <h1>Fuzzy Logic & XAI</h1>
+                <p class="subtitle">Complete study guide covering classical vs fuzzy sets, inference systems, fuzzy clustering, and ANFIS.</p>
+            </header>
+
+            <main>
+                <section id="fuzzy-logic-en">
+                    <h2>I. Fuzzy Logic</h2>
+                    
+                    <div class="card">
+                        <h3>Classic Sets vs. Fuzzy Sets</h3>
+                        <p><strong>Classic Sets (Ensembles classiques):</strong> In traditional logic, an item completely belongs to a group (a value of 1) or it doesn't belong at all (a value of 0).</p>
+                        <p><strong>Fuzzy Sets (Ensembles flous):</strong> Fuzzy logic allows for <em>partial</em> belonging. An item's membership can be any value in the interval <strong>[0, 1]</strong>.</p>
+                    </div>
+
+                    <h3>Basic Characteristics of Fuzzy Sets</h3>
+                    <ul>
+                        <li><strong>Support (Le support):</strong> Every item that belongs to the set even a tiny bit ($\mu_A(x) > 0$).
+                            <div class="math-block">$$ \text{supp}(A) = \{x \in X, \mu_A(x) > 0\} $$</div>
+                        </li>
+                        <li><strong>Kernel (Le noyau):</strong> Only the items that perfectly and completely belong to the set ($\mu_A(x) = 1$).
+                            <div class="math-block">$$ \text{Noyau}(A) = \{x \in X, \mu_A(x) = 1\} $$</div>
+                        </li>
+                        <li><strong>Height (La hauteur):</strong> The highest possible membership score that any item achieves in the whole set.
+                            <div class="math-block">$$ H(A) = \sup_{x \in X} \mu_A(x) $$</div>
+                        </li>
+                        <li><strong>Alpha-cut ($\alpha$-Coupe):</strong> A filter that keeps items with a membership score above a specific threshold ($\alpha$).
+                            <div class="math-block">$$ A_\alpha = \{x \in X, \mu_A(x) \geq \alpha\} $$</div>
+                        </li>
+                        <li><strong>Crossover point (Point de croisement):</strong> The exact point where an item is right in the middle, with a score of exactly 0.5.</li>
+                        <li><strong>Normalized fuzzy sets (Ensembles flous normalisés):</strong> A set is considered "normalized" if at least one item in it reaches a perfect score of 1.
+                            <div class="math-block">$$ A \text{ est normalisé } \iff \exists x \in X, \mu_A(x) = 1 $$</div>
+                        </li>
+                        <li>A fuzzy set is <strong>convex</strong> if and only if its $\alpha$-cuts are convex.</li>
+                    </ul>
+                    
+                    <figure>
+                        <img src="figs/1/fig1.1.png" alt="Normalized Fuzzy Sets" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+1.1+Missing'">
+                        <figcaption>Figure 1.1: Normalized fuzzy sets representation.</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="figs/1/fig1.2.png" alt="Convexity" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+1.2+Missing'">
+                        <figcaption>Figure 1.2: Convexity in fuzzy sets.</figcaption>
+                    </figure>
+
+                    <div class="card">
+                        <h3>The Linguistic Variable</h3>
+                        <p>Fuzzy logic computes using everyday words instead of exact numbers to mimic human reasoning.</p>
+                        <ul>
+                            <li><strong>Universe of discourse (L'univers du discours):</strong> The complete range of possible values for a given variable.</li>
+                            <li><strong>Linguistic values (Valeurs linguistiques):</strong> The descriptive words used for different parts of that range (e.g., "cold" or "young").</li>
+                            <li><strong>Membership function (Fonction d'appartenance):</strong> The mathematical shapes used to map these words to numbers (Triangular, Gaussian, Trapezoidal).</li>
+                        </ul>
+                    </div>
+                    
+                    <figure>
+                        <img src="figs/1/fig1.3.png" alt="Linguistic Variables" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+1.3+Missing'">
+                        <figcaption>Figure 1.3: Examples of membership functions for linguistic variables.</figcaption>
+                    </figure>
+
+                    <h3>Fuzzy Logic Operators (Zadeh's Formalism)</h3>
+                    <p>When combining fuzzy sets, we use specific mathematical rules:</p>
+                    <ul>
+                        <li><strong>Logical AND (ET logique):</strong> Represents the intersection by taking the smallest value: $\min(a, b)$.</li>
+                        <li><strong>Logical OR (OU logique):</strong> Represents the union by taking the largest value: $\max(a, b)$.</li>
+                        <li><strong>Logical NOT (NON logique):</strong> Represents the opposite (le complément), calculated as $1 - a$.</li>
+                    </ul>
+
+                    <figure>
+                        <img src="figs/1/fig1.4.png" alt="Logical AND" onerror="this.style.display='none'">
+                        <img src="figs/1/fig1.5.png" alt="Logical OR" onerror="this.style.display='none'">
+                        <img src="figs/1/fig1.6.png" alt="Logical NOT" onerror="this.style.display='none'">
+                        <figcaption>Figures 1.4 - 1.6: Visual representation of Fuzzy Operators.</figcaption>
+                    </figure>
+
+                </section>
+
+                <section id="inference-systems-en">
+                    <h2>II. Inference Systems</h2>
+
+                    <div class="card">
+                        <h3>1. Classic Inference Systems</h3>
+                        <p>These systems use strict Boolean logic (0=False, 1=True) to deduce conclusions.</p>
+                        <ul>
+                            <li><strong>Knowledge Base (Base de connaissances):</strong> Comprises the <em>Database</em> (known facts) and the <em>Rule Base</em> (IF-THEN rules).</li>
+                            <li><strong>Inference Engine (Moteur d'inférence):</strong> Searches for and applies rules to data.</li>
+                            <li><strong>Methods:</strong> <em>Forward Chaining</em> (Facts &rarr; Conclusion) and <em>Backward Chaining</em> (Goal &rarr; Facts).</li>
+                            <li><strong>Pros & Cons:</strong> Simple, fast, but cannot handle uncertainty and has abrupt boundaries.</li>
+                        </ul>
+                    </div>
+                    
+                    <figure>
+                        <img src="figs/2/fig2.1.png" alt="Classic Inference System" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+2.1+Missing'">
+                        <figcaption>Figure 2.1: Classic Inference System Architecture.</figcaption>
+                    </figure>
+
+                    <div class="card">
+                        <h3>2. Fuzzy Inference Systems (FIS)</h3>
+                        <p>Handle uncertainty by using linguistic variables instead of strict 0s and 1s. Formally defined by (X, Y, F, R, M).</p>
+                        <ol>
+                            <li><strong>Fuzzification:</strong> Converting a precise number into a membership degree.</li>
+                            <li><strong>Inference:</strong> Applying linguistic rules (e.g., "IF Temp is Cold THEN Fan is Slow").</li>
+                            <li><strong>Defuzzification:</strong> Converting the final fuzzy result back into a precise number.</li>
+                        </ol>
+                    </div>
+                    
+                    <figure>
+                        <img src="figs/2/fig2.2.png" alt="Fuzzy Inference System Steps" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+2.2+Missing'">
+                        <figcaption>Figure 2.2: The steps of a Fuzzy Inference System.</figcaption>
+                    </figure>
+
+                    <h3>3. Fuzzy Inference Models</h3>
+                    <ul>
+                        <li><strong>Mamdani Model (Le modèle Mamdani):</strong> The conclusion of each rule is a fuzzy set. Defuzzification uses the weighted average of the centers:
+                            <div class="math-block">$$ z = \frac{\sum (w_i \cdot C_i)}{\sum w_i} $$</div>
+                            <em>($w_i$ = rule activation degree, $C_i$ = center of output triangle).</em>
+                        </li>
+                        <li><strong>Sugeno Model (Le modèle Sugeno):</strong> The conclusion is a strict mathematical function, great for optimization.
+                            <div class="math-block">$$ z = \frac{\sum (w_i \cdot z_i)}{\sum w_i} $$</div>
+                        </li>
+                        <li><strong>Tsukamoto Model (Modèle Tsukamoto):</strong> Output sets must be strictly monotonic. Output is calculated using specific values on the curve.</li>
+                    </ul>
+                </section>
+
+                <section id="clustering-en">
+                    <h2>III. Fuzzy Clustering</h2>
+
+                    <div class="card">
+                        <h3>Review: Classic / Hard Clustering</h3>
+                        <p>Data points belong to exactly one cluster. $u_{ij} \in \{0, 1\}$.</p>
+                        <p><strong>Limitations:</strong> Forces abrupt assignments, causes information loss, and is sensitive to noise.</p>
+                    </div>
+
+                    <h3>Mathematical Formalism</h3>
+                    <p>A single data point can belong to multiple clusters at the same time based on a membership degree.</p>
+                    <ul>
+                        <li><strong>Constraints:</strong> 
+                            <div class="math-block">$$ 0 \leq u_{ij} \leq 1 \quad \text{and} \quad \sum_{j=1}^{c} u_{ij} = 1 $$</div>
+                        </li>
+                        <li><strong>FCM Objective Function:</strong> 
+                            <div class="math-block">$$ J_m = \sum_{i=1}^{n}\sum_{j=1}^{c} u_{ij}^m ||x_i - c_j||^2 $$</div>
+                            <em>Where $m$ is the fuzziness coefficient.</em>
+                        </li>
+                    </ul>
+
+                    <h3>FCM Algorithm Steps</h3>
+                    <ol>
+                        <li>Initialize membership matrix $U$.</li>
+                        <li><strong>Calculate Centers:</strong>
+                            <div class="math-block">$$ c_j = \frac{\sum_{i=1}^{n} u_{ij}^m x_i}{\sum_{i=1}^{n} u_{ij}^m} $$</div>
+                        </li>
+                        <li><strong>Update Memberships:</strong>
+                            <div class="math-block">$$ u_{ij} = \frac{1}{\sum_{k=1}^{c} \left( \frac{||x_i - c_j||}{||x_i - c_k||} \right)^{\frac{2}{m-1}}} $$</div>
+                        </li>
+                        <li>Repeat until convergence (difference $< \epsilon$).</li>
+                    </ol>
+
+                    <h3>FCM Python Implementation</h3>
+                    <pre><code class="language-python">import numpy as np
+
+# --- 1. DATA INITIALIZATION ---
+X = np.array([1, 2, 5, 8], dtype=float)
+n = len(X)
+c = 2 # Number of clusters
+m = 2 # Fuzziness parameter
+epsilon = 0.1 # Stopping criteria
+max_iter = 100
+
+# Initial membership matrix
+U = np.array([
+    [0.8, 0.2],
+    [0.7, 0.3],
+    [0.3, 0.7],
+    [0.2, 0.8]
+], dtype=float)
+
+# --- 2. MATH FUNCTIONS ---
+def calcul_centres(X, U, m):
+    um = U ** m
+    # Weighted average
+    centres = (um.T @ X) / np.sum(um.T, axis=1) 
+    return centres
+
+def update_U(X, centres, m):
+    n, c = len(X), len(centres)
+    U_new = np.zeros((n, c))
+    for i in range(n):
+        for j in range(c):
+            somme = 0
+            for k in range(c):
+                d1 = abs(X[i] - centres[j])
+                d2 = abs(X[i] - centres[k])
+                if d2 == 0:
+                    d2 = 1e-6
+                somme += (d1 / d2) ** (2 / (m - 1))
+            U_new[i, j] = 1 / somme
+    return U_new
+
+# --- 3. ALGORITHM LOOP ---
+iteration = 0
+while iteration < max_iter:
+    iteration += 1
+    centres = calcul_centres(X, U, m)
+    U_new = update_U(X, centres, m)
+    
+    if np.linalg.norm(U_new - U) < epsilon:
+        break
+        
+    U = U_new</code></pre>
+                </section>
+
+                <section id="anfis-en">
+                    <h2>IV. Adaptive Neuro-Fuzzy Inference System (ANFIS)</h2>
+                    
+                    <div class="card">
+                        <h3>Why ANFIS?</h3>
+                        <p>Standard Neural Networks (ANN) are powerful but act as a "black box" that cannot explain decisions. Standard Fuzzy Logic is interpretable but requires manual rule creation. <strong>ANFIS combines both:</strong> it learns parameters automatically from data while generating clear, interpretable IF-THEN rules.</p>
+                    </div>
+
+                    <h3>Architecture (The 5 Layers)</h3>
+                    <ol>
+                        <li><strong>Layer 1 (Fuzzification):</strong> Calculates membership degree.</li>
+                        <li><strong>Layer 2 (Rule Activation):</strong> Multiplies inputs to find the activation strength of the rule.</li>
+                        <li><strong>Layer 3 (Normalization):</strong> Calculates the relative weight of the rule.</li>
+                        <li><strong>Layer 4 (Rule Output):</strong> Applies the mathematical Sugeno function.</li>
+                        <li><strong>Layer 5 (Final Output):</strong> Calculates final global output (Defuzzification).</li>
+                    </ol>
+
+                    <div class="card">
+                        <h3>Comparison & Applications</h3>
+                        <p><strong>ANN vs ANFIS:</strong> ANN says "I predict, but I cannot explain", whereas ANFIS says "I predict AND I explain using rules".</p>
+                        <p><strong>Pros & Cons:</strong> Highly precise and explainable, but computationally expensive and sensitive to data.</p>
+                        <p><strong>Example (Credit Risk):</strong> "IF income is low AND debt is high THEN credit = refused". Used in finance, medical diagnosis, smart grids, robotics, and XAI.</p>
+                    </div>
+                </section>
+                <section id="quantifiers-en">
+                    <h2>V. Fuzzy Quantifiers</h2>
+                    
+                    <div class="card">
+                        <h3>Why use them?</h3>
+                        <p><strong>Why use them? (Pourquoi les utiliser ?)</strong> Classic rules (like "IF CPU is high") are too rigid and lack explanation. Quantifiers (like "IF most indicators are high") make the rules much more natural, flexible, and interpretable.</p>
+                        <p><strong>Formal Definition (Définition formelle):</strong> A fuzzy quantifier is a mathematical function that takes a satisfied proportion ($p$) and converts it into a degree of truth ($Q(p)$).</p>
+                        <div class="math-block">$$ Q: [0, 1] \rightarrow [0, 1] $$</div>
+                    </div>
+
+                    <h3>Mathematical Example</h3>
+                    <p>To calculate the exact degree of truth for the word "most" (<em>la plupart</em>), we use this function:</p>
+                    <div class="math-block">
+                        $$
+                        Q_{\text{most}}(p) = 
+                        \begin{cases} 
+                          0 & \text{for } p < 0.5 \\
+                          2p - 1 & \text{for } 0.5 \leq p \leq 1 
+                        \end{cases}
+                        $$
+                    </div>
+                    <p><em>Interpretation:</em> If less than 50% of conditions are met, "most" is 0% true. Once you pass 50%, the truth degree scales up progressively until it hits 100% truth at $p=1$.</p>
+
+                    <h3>Types of Fuzzy Quantifiers</h3>
+                    <ul>
+                        <li><strong>Monotonic (Quantificateurs monotones):</strong> Functions that only go in one direction (strictly increasing like "a lot" or strictly decreasing like "few"). Logically coherent, but cannot cover specific target concepts.
+                            <figure>
+                                <img src="figs/5/fig5.1.png" alt="Monotonic Quantifiers" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+5.1+Missing'">
+                            </figure>
+                        </li>
+                        <li><strong>Non-monotonic (Quantificateurs non monotones):</strong> Functions centered on a specific target value, using triangular or Gaussian shapes (e.g., "about 5"). Great for precise concepts.
+                            <figure>
+                                <img src="figs/5/fig5.2.png" alt="Non-monotonic Quantifiers" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+5.2+Missing'">
+                            </figure>
+                        </li>
+                        <li><strong>Regular (Quantificateurs réguliers de Zadeh):</strong> These must strictly start at zero and end at exactly one ($Q(0)=0$ and $Q(1)=1$). Examples: "most", "a lot".
+                            <figure>
+                                <img src="figs/5/fig5.3.png" alt="Regular Quantifiers" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+5.3+Missing'">
+                            </figure>
+                        </li>
+                        <li><strong>Non-regular (Quantificateurs non réguliers):</strong> Do not respect Zadeh's strict boundaries. Flexible for real-world situations.
+                            <figure>
+                                <img src="figs/5/fig5.4.png" alt="Non-regular Quantifiers" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+5.4+Missing'">
+                            </figure>
+                        </li>
+                        <li><strong>Linguistic (Quantificateurs linguistiques flous):</strong> Natural language expressions modeled directly by fuzzy functions. Extremely natural but highly subjective.
+                            <figure>
+                                <img src="figs/5/fig5.5.png" alt="Linguistic Quantifiers" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+5.5+Missing'">
+                            </figure>
+                        </li>
+                    </ul>
+                </section>
+            </main>
+            
+            <footer>
+                <p>Generated for Study Preparation • Fuzzy Logic & XAI</p>
+            </footer>
+        </div>
+
+        <!-- ============================== -->
+        <!-- FRENCH CONTENT                 -->
+        <!-- ============================== -->
+        <div lang="fr">
+            <header>
+                <span class="badge">Résumé de cours</span>
+                <h1>Logique Floue & XAI</h1>
+                <p class="subtitle">Guide d'étude complet couvrant les ensembles classiques vs flous, les systèmes d'inférence, le clustering flou et ANFIS.</p>
+            </header>
+
+            <main>
+                <section id="fuzzy-logic-fr">
+                    <h2>I. Logique Floue</h2>
+                    
+                    <div class="card">
+                        <h3>Ensembles Classiques vs. Ensembles Flous</h3>
+                        <p><strong>Ensembles classiques :</strong> Dans la logique traditionnelle, un élément appartient complètement à un groupe (une valeur de 1) ou n'y appartient pas du tout (une valeur de 0).</p>
+                        <p><strong>Ensembles flous :</strong> La logique floue permet une appartenance <em>partielle</em>. L'appartenance d'un élément peut être n'importe quelle valeur dans l'intervalle <strong>[0, 1]</strong>.</p>
+                    </div>
+
+                    <h3>Caractéristiques de base des ensembles flous</h3>
+                    <ul>
+                        <li><strong>Le support :</strong> Tout élément qui appartient à l'ensemble même un tout petit peu ($\mu_A(x) > 0$).
+                            <div class="math-block">$$ \text{supp}(A) = \{x \in X, \mu_A(x) > 0\} $$</div>
+                        </li>
+                        <li><strong>Le noyau :</strong> Uniquement les éléments qui appartiennent parfaitement et complètement à l'ensemble ($\mu_A(x) = 1$).
+                            <div class="math-block">$$ \text{Noyau}(A) = \{x \in X, \mu_A(x) = 1\} $$</div>
+                        </li>
+                        <li><strong>La hauteur :</strong> Le plus haut score d'appartenance possible atteint dans tout l'ensemble.
+                            <div class="math-block">$$ H(A) = \sup_{x \in X} \mu_A(x) $$</div>
+                        </li>
+                        <li><strong>$\alpha$-Coupe :</strong> Un filtre qui conserve uniquement les éléments ayant un score d'appartenance supérieur à un seuil spécifique ($\alpha$).
+                            <div class="math-block">$$ A_\alpha = \{x \in X, \mu_A(x) \geq \alpha\} $$</div>
+                        </li>
+                        <li><strong>Point de croisement :</strong> Le point exact où un élément se trouve juste au milieu, avec un score de exactement 0.5.</li>
+                        <li><strong>Ensembles flous normalisés :</strong> Un ensemble est considéré comme "normalisé" si au moins l'un de ses éléments atteint un score parfait de 1.
+                            <div class="math-block">$$ A \text{ est normalisé } \iff \exists x \in X, \mu_A(x) = 1 $$</div>
+                        </li>
+                        <li>Un ensemble flou est <strong>convexe</strong> si et seulement si ses $\alpha$-coupes sont convexes.</li>
+                    </ul>
+                    
+                    <figure>
+                        <img src="figs/1/fig1.1.png" alt="Ensembles flous normalisés" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+1.1+Manquante'">
+                        <figcaption>Figure 1.1 : Représentation d'ensembles flous normalisés.</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="figs/1/fig1.2.png" alt="Convexité" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+1.2+Manquante'">
+                        <figcaption>Figure 1.2 : Convexité dans les ensembles flous.</figcaption>
+                    </figure>
+
+                    <div class="card">
+                        <h3>La Variable Linguistique</h3>
+                        <p>La logique floue calcule en utilisant des mots de la vie courante au lieu de nombres exacts pour imiter le raisonnement humain.</p>
+                        <ul>
+                            <li><strong>L'univers du discours :</strong> La plage complète des valeurs possibles pour une variable donnée.</li>
+                            <li><strong>Valeurs linguistiques :</strong> Les mots descriptifs utilisés pour différentes parties de cette plage (ex: "froid" ou "jeune").</li>
+                            <li><strong>Fonction d'appartenance :</strong> Les formes mathématiques utilisées pour mapper ces mots à des nombres (Triangulaire, Gaussienne, Trapézoïdale).</li>
+                        </ul>
+                    </div>
+                    
+                    <figure>
+                        <img src="figs/1/fig1.3.png" alt="Variables Linguistiques" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+1.3+Manquante'">
+                        <figcaption>Figure 1.3 : Exemples de fonctions d'appartenance pour des variables linguistiques.</figcaption>
+                    </figure>
+
+                    <h3>Opérateurs à Logique Floue (Formalisme de Zadeh)</h3>
+                    <p>Lors de la combinaison d'ensembles flous, nous utilisons des règles mathématiques spécifiques :</p>
+                    <ul>
+                        <li><strong>ET logique :</strong> Représente l'intersection en prenant la plus petite valeur : $\min(a, b)$.</li>
+                        <li><strong>OU logique :</strong> Représente l'union en prenant la plus grande valeur : $\max(a, b)$.</li>
+                        <li><strong>NON logique :</strong> Représente le complémentaire, calculé comme $1 - a$.</li>
+                    </ul>
+
+                    <figure>
+                        <img src="figs/1/fig1.4.png" alt="ET Logique" onerror="this.style.display='none'">
+                        <img src="figs/1/fig1.5.png" alt="OU Logique" onerror="this.style.display='none'">
+                        <img src="figs/1/fig1.6.png" alt="NON Logique" onerror="this.style.display='none'">
+                        <figcaption>Figures 1.4 - 1.6 : Représentation visuelle des opérateurs flous.</figcaption>
+                    </figure>
+
+                </section>
+
+                <section id="inference-systems-fr">
+                    <h2>II. Systèmes d'Inférence</h2>
+
+                    <div class="card">
+                        <h3>1. Systèmes d'Inférence Classiques</h3>
+                        <p>Ces systèmes utilisent la logique booléenne stricte (0=Faux, 1=Vrai) pour déduire des conclusions.</p>
+                        <ul>
+                            <li><strong>Base de connaissances :</strong> Comprend la <em>Base de données</em> (faits connus) et la <em>Base de règles</em> (règles SI-ALORS).</li>
+                            <li><strong>Moteur d'inférence :</strong> Cherche et applique les règles aux données.</li>
+                            <li><strong>Méthodes :</strong> <em>Chaînage avant</em> (Faits &rarr; Conclusion) et <em>Chaînage arrière</em> (But &rarr; Faits).</li>
+                            <li><strong>Avantages & Inconvénients :</strong> Simple et rapide, mais ne peut pas gérer l'incertitude et possède des frontières brutales.</li>
+                        </ul>
+                    </div>
+                    
+                    <figure>
+                        <img src="figs/2/fig2.1.png" alt="Système d'Inférence Classique" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+2.1+Manquante'">
+                        <figcaption>Figure 2.1 : Architecture d'un système d'inférence classique.</figcaption>
+                    </figure>
+
+                    <div class="card">
+                        <h3>2. Systèmes d'Inférence Flous (FIS)</h3>
+                        <p>Gèrent l'incertitude en utilisant des variables linguistiques au lieu de 0 et 1 stricts. Définis formellement par (X, Y, F, R, M).</p>
+                        <ol>
+                            <li><strong>Fuzzification :</strong> Conversion d'un nombre précis en un degré d'appartenance.</li>
+                            <li><strong>Inférence :</strong> Application des règles linguistiques (ex: "SI Température est Froide ALORS Ventilateur est Lent").</li>
+                            <li><strong>Défuzzification :</strong> Conversion du résultat flou final en un nombre précis.</li>
+                        </ol>
+                    </div>
+                    
+                    <figure>
+                        <img src="figs/2/fig2.2.png" alt="Étapes du FIS" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+2.2+Manquante'">
+                        <figcaption>Figure 2.2 : Les étapes d'un Système d'Inférence Floue.</figcaption>
+                    </figure>
+
+                    <h3>3. Modèles d'Inférence Floue</h3>
+                    <ul>
+                        <li><strong>Le modèle Mamdani :</strong> La conclusion de chaque règle est un ensemble flou. La défuzzification utilise la moyenne pondérée des centres :
+                            <div class="math-block">$$ z = \frac{\sum (w_i \cdot C_i)}{\sum w_i} $$</div>
+                            <em>($w_i$ = degré d'activation de la règle, $C_i$ = centre du triangle de sortie).</em>
+                        </li>
+                        <li><strong>Le modèle Sugeno :</strong> La conclusion est une fonction mathématique stricte, idéale pour l'optimisation.
+                            <div class="math-block">$$ z = \frac{\sum (w_i \cdot z_i)}{\sum w_i} $$</div>
+                        </li>
+                        <li><strong>Modèle Tsukamoto :</strong> Les ensembles de sortie doivent être strictement monotones. La sortie est calculée en utilisant des valeurs spécifiques sur la courbe.</li>
+                    </ul>
+                </section>
+
+                <section id="clustering-fr">
+                    <h2>III. Clustering Flou</h2>
+
+                    <div class="card">
+                        <h3>Rappel : Clustering Classique / Dur</h3>
+                        <p>Les points de données appartiennent à exactement un seul cluster. $u_{ij} \in \{0, 1\}$.</p>
+                        <p><strong>Limites :</strong> Force des affectations brutales, entraîne une perte d'information et est sensible au bruit.</p>
+                    </div>
+
+                    <h3>Formalisme Mathématique</h3>
+                    <p>Un seul point de données peut appartenir à plusieurs clusters en même temps selon un degré d'appartenance.</p>
+                    <ul>
+                        <li><strong>Contraintes :</strong> 
+                            <div class="math-block">$$ 0 \leq u_{ij} \leq 1 \quad \text{et} \quad \sum_{j=1}^{c} u_{ij} = 1 $$</div>
+                        </li>
+                        <li><strong>Fonction Objectif FCM :</strong> 
+                            <div class="math-block">$$ J_m = \sum_{i=1}^{n}\sum_{j=1}^{c} u_{ij}^m ||x_i - c_j||^2 $$</div>
+                            <em>Où $m$ est le coefficient de flou.</em>
+                        </li>
+                    </ul>
+
+                    <h3>Étapes de l'Algorithme FCM</h3>
+                    <ol>
+                        <li>Initialiser la matrice d'appartenance $U$.</li>
+                        <li><strong>Calculer les centres :</strong>
+                            <div class="math-block">$$ c_j = \frac{\sum_{i=1}^{n} u_{ij}^m x_i}{\sum_{i=1}^{n} u_{ij}^m} $$</div>
+                        </li>
+                        <li><strong>Mettre à jour les appartenances :</strong>
+                            <div class="math-block">$$ u_{ij} = \frac{1}{\sum_{k=1}^{c} \left( \frac{||x_i - c_j||}{||x_i - c_k||} \right)^{\frac{2}{m-1}}} $$</div>
+                        </li>
+                        <li>Répéter jusqu'à convergence (différence $< \epsilon$).</li>
+                    </ol>
+
+                    <h3>Implémentation Python FCM</h3>
+                    <pre><code class="language-python">import numpy as np
+
+# --- 1. INITIALISATION DES DONNÉES ---
+X = np.array([1, 2, 5, 8], dtype=float)
+n = len(X)
+c = 2 # Nombre de clusters
+m = 2 # Paramètre de flou
+epsilon = 0.1 # Critère d'arrêt
+max_iter = 100
+
+# Matrice d'appartenance initiale
+U = np.array([
+    [0.8, 0.2],
+    [0.7, 0.3],
+    [0.3, 0.7],
+    [0.2, 0.8]
+], dtype=float)
+
+# --- 2. FONCTIONS DE CALCUL MATHÉMATIQUE ---
+def calcul_centres(X, U, m):
+    um = U ** m
+    # Moyenne pondérée
+    centres = (um.T @ X) / np.sum(um.T, axis=1) 
+    return centres
+
+def update_U(X, centres, m):
+    n, c = len(X), len(centres)
+    U_new = np.zeros((n, c))
+    for i in range(n):
+        for j in range(c):
+            somme = 0
+            for k in range(c):
+                d1 = abs(X[i] - centres[j])
+                d2 = abs(X[i] - centres[k])
+                if d2 == 0:
+                    d2 = 1e-6
+                somme += (d1 / d2) ** (2 / (m - 1))
+            U_new[i, j] = 1 / somme
+    return U_new
+
+# --- 3. BOUCLE PRINCIPALE ---
+iteration = 0
+while iteration < max_iter:
+    iteration += 1
+    centres = calcul_centres(X, U, m)
+    U_new = update_U(X, centres, m)
+    
+    if np.linalg.norm(U_new - U) < epsilon:
+        break
+        
+    U = U_new</code></pre>
+                </section>
+
+                <section id="anfis-fr">
+                    <h2>IV. Adaptive Neuro-Fuzzy Inference System (ANFIS)</h2>
+                    
+                    <div class="card">
+                        <h3>Pourquoi ANFIS ?</h3>
+                        <p>Les réseaux de neurones (ANN) sont puissants mais agissent comme une "boîte noire" qui ne peut pas expliquer ses décisions. La logique floue est interprétable mais nécessite la création manuelle de règles. <strong>ANFIS combine les deux :</strong> il apprend les paramètres automatiquement à partir des données tout en générant des règles SI-ALORS claires et interprétables.</p>
+                    </div>
+
+                    <h3>Architecture (Les 5 Couches)</h3>
+                    <ol>
+                        <li><strong>Couche 1 (Fuzzification) :</strong> Calcule le degré d'appartenance.</li>
+                        <li><strong>Couche 2 (Activation des règles) :</strong> Multiplie les entrées pour trouver la force d'activation de la règle.</li>
+                        <li><strong>Couche 3 (Normalisation) :</strong> Calcule le poids relatif de la règle.</li>
+                        <li><strong>Couche 4 (Sortie des règles) :</strong> Applique la fonction mathématique de Sugeno.</li>
+                        <li><strong>Couche 5 (Sortie finale) :</strong> Calcule la sortie globale finale (Défuzzification).</li>
+                    </ol>
+
+                    <div class="card">
+                        <h3>Comparaison & Applications</h3>
+                        <p><strong>ANN vs ANFIS :</strong> ANN dit "Je prédis, mais je ne peux pas expliquer", alors qu'ANFIS dit "Je prédis ET j'explique en utilisant des règles".</p>
+                        <p><strong>Avantages & Inconvénients :</strong> Très précis et explicable, mais coûteux en calcul et sensible aux données.</p>
+                        <p><strong>Exemple (Risque de crédit) :</strong> "SI revenu est faible ET dette est élevée ALORS crédit = refusé". Utilisé en finance, diagnostic médical, smart grids, robotique et XAI.</p>
+                    </div>
+                </section>
+                <section id="quantifiers-fr">
+                    <h2>V. Les quantificateurs flous</h2>
+                    
+                    <div class="card">
+                        <h3>Pourquoi les utiliser ?</h3>
+                        <p>Les règles classiques (comme "SI CPU est élevé") sont trop rigides et manquent d'explication. Les quantificateurs (comme "SI la plupart des indicateurs sont élevés") rendent les règles beaucoup plus naturelles, flexibles et interprétables.</p>
+                        <p><strong>Définition formelle :</strong> Un quantificateur flou est une fonction mathématique qui prend une proportion satisfaite ($p$) et la convertit en un degré de vérité ($Q(p)$).</p>
+                        <div class="math-block">$$ Q: [0, 1] \rightarrow [0, 1] $$</div>
+                    </div>
+
+                    <h3>Exemple mathématique</h3>
+                    <p>Pour calculer le degré de vérité exact du mot "la plupart", nous utilisons cette fonction :</p>
+                    <div class="math-block">
+                        $$
+                        Q_{\text{most}}(p) = 
+                        \begin{cases} 
+                          0 & \text{pour } p < 0.5 \\
+                          2p - 1 & \text{pour } 0.5 \leq p \leq 1 
+                        \end{cases}
+                        $$
+                    </div>
+                    <p><em>Interprétation :</em> Si moins de 50% des conditions sont remplies, "la plupart" est vrai à 0%. Une fois les 50% dépassés, le degré de vérité augmente progressivement jusqu'à atteindre 100% à $p=1$.</p>
+
+                    <h3>Types de quantificateurs flous</h3>
+                    <ul>
+                        <li><strong>Quantificateurs monotones :</strong> Fonctions qui ne vont que dans une seule direction (strictement croissantes comme "beaucoup" ou strictement décroissantes comme "peu"). Logiquement cohérents, mais ne peuvent pas couvrir des concepts cibles spécifiques.
+                            <figure>
+                                <img src="figs/5/fig5.1.png" alt="Quantificateurs monotones" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+5.1+Manquante'">
+                            </figure>
+                        </li>
+                        <li><strong>Quantificateurs non monotones :</strong> Fonctions centrées sur une valeur cible spécifique, utilisant des formes triangulaires ou gaussiennes (ex: "environ 5"). Idéal pour des concepts précis.
+                            <figure>
+                                <img src="figs/5/fig5.2.png" alt="Quantificateurs non monotones" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+5.2+Manquante'">
+                            </figure>
+                        </li>
+                        <li><strong>Quantificateurs réguliers de Zadeh :</strong> Doivent strictement commencer à zéro et se terminer à exactement un ($Q(0)=0$ et $Q(1)=1$). Exemples : "la plupart", "beaucoup".
+                            <figure>
+                                <img src="figs/5/fig5.3.png" alt="Quantificateurs réguliers" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+5.3+Manquante'">
+                            </figure>
+                        </li>
+                        <li><strong>Quantificateurs non réguliers :</strong> Ne respectent pas les frontières strictes de Zadeh. Très flexibles pour des situations du monde réel.
+                            <figure>
+                                <img src="figs/5/fig5.4.png" alt="Quantificateurs non réguliers" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+5.4+Manquante'">
+                            </figure>
+                        </li>
+                        <li><strong>Quantificateurs linguistiques flous :</strong> Expressions du langage naturel modélisées directement par des fonctions floues. Extrêmement naturels mais très subjectifs.
+                            <figure>
+                                <img src="figs/5/fig5.5.png" alt="Quantificateurs linguistiques" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+5.5+Manquante'">
+                            </figure>
+                        </li>
+                    </ul>
+                </section>
+            </main>
+            
+            <footer>
+                <p>Généré pour la préparation aux examens • Logique Floue & XAI</p>
+            </footer>
+        </div>
+    </div>
+
+    <!-- JS for Language Toggle -->
+    <script>
+        const btn = document.getElementById('lang-switch');
+        const text = document.getElementById('lang-text');
+        
+        btn.addEventListener('click', () => {
+            const isEnglish = document.body.classList.contains('lang-en');
+            if (isEnglish) {
+                document.body.classList.remove('lang-en');
+                document.body.classList.add('lang-fr');
+                text.textContent = "Switch to English";
+            } else {
+                document.body.classList.remove('lang-fr');
+                document.body.classList.add('lang-en');
+                text.textContent = "Passer au Français";
+            }
+        });
+    </script>
+
+    <!-- Prism JS for Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+</body>
+</html>
