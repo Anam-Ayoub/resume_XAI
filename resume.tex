@@ -98,17 +98,45 @@ Fuzzy logic computes using everyday words instead of exact numbers to mimic huma
 \end{itemize}
 \textit{Note: Reference figure fig1.3.png illustrates linguistic variables.}
 
-\subsection{Fuzzy Logic Operators (Zadeh's Formalism)}
-When combining fuzzy sets, specific mathematical rules are applied:
+\subsection{Fuzzy Logic Operators (Lotfi A. Zadeh, 1973)}
+When combining fuzzy sets, specific mathematical rules introduced by Lotfi A. Zadeh in 1973 are applied:
 \begin{itemize}
     \item \textbf{ET logique (Logical AND):} Represents intersection (takes the minimum).
     \[ \mu_{A \cap B}(x) = \min(\mu_A(x), \mu_B(x)) \]
+    \begin{center}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            A & B & A AND B ($\cap$) \\ \hline
+            0 & 0 & 0 \\ \hline
+            0 & 1 & 0 \\ \hline
+            1 & 0 & 0 \\ \hline
+            1 & 1 & 1 \\ \hline
+        \end{tabular}
+    \end{center}
     
     \item \textbf{OU logique (Logical OR):} Represents union (takes the maximum).
     \[ \mu_{A \cup B}(x) = \max(\mu_A(x), \mu_B(x)) \]
+    \begin{center}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            A & B & A OR B ($\cup$) \\ \hline
+            0 & 0 & 0 \\ \hline
+            0 & 1 & 1 \\ \hline
+            1 & 0 & 1 \\ \hline
+            1 & 1 & 1 \\ \hline
+        \end{tabular}
+    \end{center}
     
     \item \textbf{NON logique (Logical NOT):} Represents the opposite (complement).
     \[ \mu_{\bar{A}}(x) = 1 - \mu_A(x) \]
+    \begin{center}
+        \begin{tabular}{|c|c|}
+            \hline
+            A & NOT A ($\neg$) \\ \hline
+            0 & 1 \\ \hline
+            1 & 0 \\ \hline
+        \end{tabular}
+    \end{center}
 \end{itemize}
 \textit{Note: Reference figures fig1.4.png, fig1.5.png, and fig1.6.png.}
 
@@ -335,6 +363,79 @@ A hybrid model that uses Sugeno fuzzy rules structured inside a neural network a
     \begin{itemize}
         \item \textit{Pros/Cons:} Extremely natural for the user and expert systems, but highly subjective and require careful calibration.
     \end{itemize}
+\end{itemize}
+
+\section{Fuzzy Decision Trees}
+
+\subsection{Introduction \& Review (Arbres de Décision Classiques)}
+\begin{itemize}
+    \item \textbf{Classic Trees (Arbres classiques):} Supervised learning models making hierarchical decisions via rules. They consist of a root node, branches, and leaves, where each node applies a strict, precise binary test (e.g., Age > 30).
+\begin{verbatim}
+        Age > 30 ?
+        /        \
+      Oui        Non
+      /            \
+Revenu eleve ?    Refus
+    /      \
+  Oui      Non
+Accepte   Refus
+\end{verbatim}
+    \item \textbf{Fuzzy Decision Trees (Arbres de Décision Flous):} Extend classic trees using fuzzy logic to handle uncertainty and imprecision. A single data point can belong partially to multiple classes.
+    \item \textbf{Construction of a Classic Tree:} Uses algorithms like ID3, C4.5, and CART to find the best attributes to separate the data based on calculation criteria:
+    \begin{itemize}
+        \item \textbf{Entropy (Entropie):} Calculates uncertainty.
+        \[ H(S) = - \sum_{i=1}^{n} p_i \log_2(p_i) \]
+        \item \textbf{Information Gain (Gain d'information):} Calculates the reduction in uncertainty to pick the best attribute.
+        \[ Gain(S,A) = H(S) - \sum_{v \in Values(A)} \left( \frac{|S_v|}{|S|} \right) H(S_v) \]
+    \end{itemize}
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figs/6/fig6.1.png}
+    \caption{Example of a classic decision tree.}
+\end{figure}
+
+\subsection{Why Use a Fuzzy Decision Tree? (Limites de l'arbre classique)}
+Classic trees have several limitations:
+\begin{itemize}
+    \item \textbf{Strict Boundaries (Frontières de décision brutales):} Rigid cutoffs are not realistic (e.g., a tiny change leads to opposite decisions).
+    \item \textbf{No Linguistic Terms (Absence de notion linguistique):} They manipulate exact numbers instead of human concepts like "salaire faible".
+    \item \textbf{Poor Uncertainty Handling (Mauvaise gestion de l'incertitude):} Highly unstable to small data variations.
+    \item \textbf{Rule Explosion \& Overfitting (Surapprentissage):} Deep trees memorize training data but fail on new clients.
+\end{itemize}
+\textbf{The Fuzzy Solution:} Fuzzy trees replace strict bounds with membership degrees, making decisions progressive instead of binary.
+
+\subsection{Construction of a Fuzzy Decision Tree}
+The goal is to build the tree using fuzzy membership degrees, calculate fuzzy entropies, and generate fuzzy rules.
+\begin{itemize}
+    \item \textbf{Fuzzy Sets (Ensembles flous):} Instead of a strict boundary, variables are divided into fuzzy sets like "Faible", "Moyen", and "Élevé".
+    \item \textbf{Fuzzy Entropy (Entropie Floue):} Similar to classic entropy, but uses fuzzy probabilities. To find the probability, you sum the membership degrees for each class instead of counting whole units.
+\end{itemize}
+
+\subsection{Rule Generation (Génération des règles)}
+\begin{itemize}
+    \item \textbf{Fuzzy Weights (Poids flous des ensembles):} The weight of each fuzzy branch is calculated by summing the membership degrees.
+    \item \textbf{Fuzzy Information Gain (Gain d'Information Flou):} Determines which attribute to place at the top of the tree.
+\begin{verbatim}
+         Salaire
+       /    |    \
+  Faible  Moyen  Eleve
+    |       |      |
+ Refuser  Mixte  Accorder
+\end{verbatim}
+    \item \textbf{Rule Generation Principle:} A rule is created by taking the fuzzified values, selecting the dominant class, and translating the path into natural linguistic terms.
+\end{itemize}
+\textbf{Examples of generated rules:}
+\begin{itemize}
+    \item \textit{Règle 1:} IF Salary is Low AND Debt is High THEN Decision = Refuse
+    \item \textit{Règle 2:} IF Salary is Medium AND Age is Young AND Debt is Medium THEN Decision = Accept
+    \item \textit{Règle 3:} IF Salary is High AND Age is Medium AND Debt is Low THEN Decision = Accept
+\end{itemize}
+
+\subsection{Conclusion (Arbres flous)}
+\begin{itemize}
+    \item \textbf{Main Advantages:} Better uncertainty management, progressive decisions, greater robustness, and rules that map closely to natural human reasoning.
+    \item \textbf{Applications:} Expert systems, finance, medicine, and general decision support.
 \end{itemize}
 
 \end{document}
