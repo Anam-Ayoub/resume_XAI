@@ -90,17 +90,26 @@ h1 {
 }
 
 section {
-    margin-bottom: 4rem;
+    margin-bottom: 5rem;
+    padding-bottom: 5rem;
+    border-bottom: 2px dashed var(--border-color);
+}
+
+section:last-of-type {
+    border-bottom: none;
+    margin-bottom: 2rem;
+    padding-bottom: 0;
 }
 
 h2 {
-    font-size: 1.5rem;
-    font-weight: 600;
+    font-size: 1.8rem;
+    font-weight: 700;
     color: var(--text-primary);
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--text-primary);
     letter-spacing: -0.01em;
+    text-transform: uppercase;
 }
 
 h3 {
