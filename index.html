@@ -566,10 +566,77 @@ Accept    Refuse
                             </ul>
                         </li>
                     </ul>
-                    <figure>
-                        <img src="figs/6/fig6.1.png" alt="Classic Decision Tree" onerror="this.style.display='none'">
-                        <figcaption>Figure 6.1: Example of a classic decision tree.</figcaption>
-                    </figure>
+                    <div style="display: flex; gap: 1rem; margin: 1.5rem 0; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 300px; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; background: var(--card-bg);">
+                            <div style="background: var(--hover-bg); padding: 0.75rem 1rem; border-bottom: 1px solid var(--border-color); font-weight: bold;">
+                                Split by Salary: Salary ≤ 3750
+                            </div>
+                            <div style="padding: 1rem;">
+                                <table style="width: 100%; text-align: left; margin-bottom: 1rem; border-collapse: collapse;">
+                                    <tr style="border-bottom: 2px solid var(--border-color);">
+                                        <th style="padding: 0.5rem 0;">Salary</th>
+                                        <th style="padding: 0.5rem 0;">Decision</th>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--border-color);">
+                                        <td style="padding: 0.5rem 0;">2500</td>
+                                        <td style="padding: 0.5rem 0;">Refuse</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--border-color);">
+                                        <td style="padding: 0.5rem 0;">3000</td>
+                                        <td style="padding: 0.5rem 0;">Refuse</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--border-color);">
+                                        <td style="padding: 0.5rem 0;">3500</td>
+                                        <td style="padding: 0.5rem 0;">Refuse</td>
+                                    </tr>
+                                </table>
+                                <ul style="list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1rem;">
+                                    <li>Refuse = 3</li>
+                                    <li>Accept = 0</li>
+                                </ul>
+                                <div class="math-block" style="background: none; border: none; padding: 0;">
+                                    $$ H(S_1) = -1 \log_2(1) - 0 \log_2(0) = 0 $$
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="flex: 1; min-width: 300px; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; background: var(--card-bg);">
+                            <div style="background: var(--hover-bg); padding: 0.75rem 1rem; border-bottom: 1px solid var(--border-color); font-weight: bold;">
+                                Split by Salary: Salary > 3750
+                            </div>
+                            <div style="padding: 1rem;">
+                                <table style="width: 100%; text-align: left; margin-bottom: 1rem; border-collapse: collapse;">
+                                    <tr style="border-bottom: 2px solid var(--border-color);">
+                                        <th style="padding: 0.5rem 0;">Salary</th>
+                                        <th style="padding: 0.5rem 0;">Decision</th>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--border-color);">
+                                        <td style="padding: 0.5rem 0;">4000</td>
+                                        <td style="padding: 0.5rem 0;">Accept</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--border-color);">
+                                        <td style="padding: 0.5rem 0;">5000</td>
+                                        <td style="padding: 0.5rem 0;">Accept</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--border-color);">
+                                        <td style="padding: 0.5rem 0;">6000</td>
+                                        <td style="padding: 0.5rem 0;">Accept</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--border-color);">
+                                        <td style="padding: 0.5rem 0;">7000</td>
+                                        <td style="padding: 0.5rem 0;">Accept</td>
+                                    </tr>
+                                </table>
+                                <ul style="list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1rem;">
+                                    <li>Accept = 4</li>
+                                    <li>Refuse = 0</li>
+                                </ul>
+                                <div class="math-block" style="background: none; border: none; padding: 0;">
+                                    $$ H(S_2) = -1 \log_2(1) - 0 \log_2(0) = 0 $$
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <h3>Why Use a Fuzzy Decision Tree?</h3>
                     <p>Classic trees have several limitations:</p>
@@ -1148,10 +1215,77 @@ Accepte   Refus
                             </ul>
                         </li>
                     </ul>
-                    <figure>
-                        <img src="figs/6/fig6.1.png" alt="Arbre de Décision Classique" onerror="this.style.display='none'">
-                        <figcaption>Figure 6.1 : Exemple d'un arbre de décision classique.</figcaption>
-                    </figure>
+                    <div style="display: flex; gap: 1rem; margin: 1.5rem 0; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 300px; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; background: var(--card-bg);">
+                            <div style="background: var(--hover-bg); padding: 0.75rem 1rem; border-bottom: 1px solid var(--border-color); font-weight: bold;">
+                                Découpage selon Salaire : Salaire ≤ 3750
+                            </div>
+                            <div style="padding: 1rem;">
+                                <table style="width: 100%; text-align: left; margin-bottom: 1rem; border-collapse: collapse;">
+                                    <tr style="border-bottom: 2px solid var(--border-color);">
+                                        <th style="padding: 0.5rem 0;">Salaire</th>
+                                        <th style="padding: 0.5rem 0;">Décision</th>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--border-color);">
+                                        <td style="padding: 0.5rem 0;">2500</td>
+                                        <td style="padding: 0.5rem 0;">Refuser</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--border-color);">
+                                        <td style="padding: 0.5rem 0;">3000</td>
+                                        <td style="padding: 0.5rem 0;">Refuser</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--border-color);">
+                                        <td style="padding: 0.5rem 0;">3500</td>
+                                        <td style="padding: 0.5rem 0;">Refuser</td>
+                                    </tr>
+                                </table>
+                                <ul style="list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1rem;">
+                                    <li>Refuser = 3</li>
+                                    <li>Accorder = 0</li>
+                                </ul>
+                                <div class="math-block" style="background: none; border: none; padding: 0;">
+                                    $$ H(S_1) = -1 \log_2(1) - 0 \log_2(0) = 0 $$
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="flex: 1; min-width: 300px; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; background: var(--card-bg);">
+                            <div style="background: var(--hover-bg); padding: 0.75rem 1rem; border-bottom: 1px solid var(--border-color); font-weight: bold;">
+                                Découpage selon Salaire : Salaire > 3750
+                            </div>
+                            <div style="padding: 1rem;">
+                                <table style="width: 100%; text-align: left; margin-bottom: 1rem; border-collapse: collapse;">
+                                    <tr style="border-bottom: 2px solid var(--border-color);">
+                                        <th style="padding: 0.5rem 0;">Salaire</th>
+                                        <th style="padding: 0.5rem 0;">Décision</th>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--border-color);">
+                                        <td style="padding: 0.5rem 0;">4000</td>
+                                        <td style="padding: 0.5rem 0;">Accorder</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--border-color);">
+                                        <td style="padding: 0.5rem 0;">5000</td>
+                                        <td style="padding: 0.5rem 0;">Accorder</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--border-color);">
+                                        <td style="padding: 0.5rem 0;">6000</td>
+                                        <td style="padding: 0.5rem 0;">Accorder</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--border-color);">
+                                        <td style="padding: 0.5rem 0;">7000</td>
+                                        <td style="padding: 0.5rem 0;">Accorder</td>
+                                    </tr>
+                                </table>
+                                <ul style="list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1rem;">
+                                    <li>Accorder = 4</li>
+                                    <li>Refuser = 0</li>
+                                </ul>
+                                <div class="math-block" style="background: none; border: none; padding: 0;">
+                                    $$ H(S_2) = -1 \log_2(1) - 0 \log_2(0) = 0 $$
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <h3>Pourquoi utiliser un arbre de décision flou ?</h3>
                     <p>Les arbres classiques ont plusieurs limites :</p>
