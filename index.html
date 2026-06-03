@@ -386,15 +386,25 @@
                         <p><strong>Limitations:</strong> Forces abrupt assignments, causes information loss, and is sensitive to noise.</p>
                     </div>
 
+                    <div class="card">
+                        <h3>Principle of Fuzzy Clustering</h3>
+                        <p>A data point can belong to multiple clusters with a degree of membership. Fuzzy C-Means is a fuzzy clustering algorithm that allows each point to belong to multiple clusters with varying degrees of membership.</p>
+                    </div>
+
                     <h3>Mathematical Formalism</h3>
-                    <p>A single data point can belong to multiple clusters at the same time based on a membership degree.</p>
                     <ul>
                         <li><strong>Constraints:</strong> 
                             <div class="math-block">$$ 0 \leq u_{ij} \leq 1 \quad \text{and} \quad \sum_{j=1}^{c} u_{ij} = 1 $$</div>
                         </li>
                         <li><strong>FCM Objective Function:</strong> 
                             <div class="math-block">$$ J_m = \sum_{i=1}^{n}\sum_{j=1}^{c} u_{ij}^m ||x_i - c_j||^2 $$</div>
-                            <em>Where $m$ is the fuzziness coefficient.</em>
+                            <ul style="list-style-type: disc; margin-left: 1.5rem; margin-top: 1rem;">
+                                <li>$u$: membership degree</li>
+                                <li>$c_j$: cluster center</li>
+                                <li>$m$: fuzziness coefficient to be defined</li>
+                                <li>$n$: number of points</li>
+                                <li>$c$: number of clusters</li>
+                            </ul>
                         </li>
                     </ul>
 
@@ -1035,15 +1045,25 @@ Accept    Refuse
                         <p><strong>Limites :</strong> Force des affectations brutales, entraîne une perte d'information et est sensible au bruit.</p>
                     </div>
 
+                    <div class="card">
+                        <h3>Principe de Clustering Flou</h3>
+                        <p>Un point peut appartenir à plusieurs clusters avec un degré d'appartenance. Le Fuzzy C-Means est un algorithme de clustering flou qui permet à chaque point d'appartenir à plusieurs clusters avec des degrés d'appartenance.</p>
+                    </div>
+
                     <h3>Formalisme Mathématique</h3>
-                    <p>Un seul point de données peut appartenir à plusieurs clusters en même temps selon un degré d'appartenance.</p>
                     <ul>
                         <li><strong>Contraintes :</strong> 
                             <div class="math-block">$$ 0 \leq u_{ij} \leq 1 \quad \text{et} \quad \sum_{j=1}^{c} u_{ij} = 1 $$</div>
                         </li>
                         <li><strong>Fonction Objectif FCM :</strong> 
                             <div class="math-block">$$ J_m = \sum_{i=1}^{n}\sum_{j=1}^{c} u_{ij}^m ||x_i - c_j||^2 $$</div>
-                            <em>Où $m$ est le coefficient de flou.</em>
+                            <ul style="list-style-type: disc; margin-left: 1.5rem; margin-top: 1rem;">
+                                <li>$u$ : degré d'appartenance</li>
+                                <li>$c_j$ : centre cluster</li>
+                                <li>$m$ : coefficient de flou à définir</li>
+                                <li>$n$ : nombre points</li>
+                                <li>$c$ : nombre clusters</li>
+                            </ul>
                         </li>
                     </ul>
 
