@@ -1956,7 +1956,7 @@ Accepte   Refus
                     
                     // Draw Chord
                     ctx.setLineDash([5, 5]);
-                    ctx.strokeStyle = '#ef4444'; // red for chord
+                    ctx.strokeStyle = 'rgba(239, 68, 68, 0.5)'; // softer red for chord
                     ctx.beginPath();
                     ctx.moveTo(x.getPixelForValue(x1), y.getPixelForValue(y1));
                     ctx.lineTo(x.getPixelForValue(x2), y.getPixelForValue(y2));
@@ -1971,7 +1971,7 @@ Accepte   Refus
                         ctx.stroke();
                         
                         // point on curve
-                        ctx.fillStyle = pt.xv === xm ? '#10b981' : '#111827';
+                        ctx.fillStyle = pt.xv === xm ? 'rgba(16, 185, 129, 0.6)' : '#111827';
                         ctx.beginPath();
                         ctx.arc(x.getPixelForValue(pt.xv), y.getPixelForValue(pt.yv), 4, 0, 2*Math.PI);
                         ctx.fill();
@@ -1997,13 +1997,13 @@ Accepte   Refus
                     });
 
                     // Highlight the chord midpoint
-                    ctx.fillStyle = '#ef4444';
+                    ctx.fillStyle = 'rgba(239, 68, 68, 0.6)';
                     ctx.beginPath();
                     ctx.arc(x.getPixelForValue(xm), y.getPixelForValue(yChord), 4, 0, 2*Math.PI);
                     ctx.fill();
                     
                     // Connect mid curve point to chord mid point to show gap explicitly
-                    ctx.strokeStyle = isConvex ? '#10b981' : '#ef4444';
+                    ctx.strokeStyle = isConvex ? 'rgba(16, 185, 129, 0.5)' : 'rgba(239, 68, 68, 0.5)';
                     ctx.setLineDash([2, 2]);
                     ctx.beginPath();
                     ctx.moveTo(x.getPixelForValue(xm), y.getPixelForValue(ym));
