@@ -252,12 +252,9 @@
                         </div>
                     </div>
 
-                    <figure>
-                        <img src="figs/1/fig1.4.png" alt="Logical AND" onerror="this.style.display='none'">
-                        <img src="figs/1/fig1.5.png" alt="Logical OR" onerror="this.style.display='none'">
-                        <img src="figs/1/fig1.6.png" alt="Logical NOT" onerror="this.style.display='none'">
-                        <figcaption>Figures 1.4 - 1.6: Visual representation of Fuzzy Operators.</figcaption>
-                    </figure>
+                    <div class="chart-container" style="position: relative; height:300px; width:100%">
+                        <canvas id="intersectionChartEn"></canvas>
+                    </div>
 
                 </section>
 
@@ -953,12 +950,9 @@ Accept    Refuse
                         </div>
                     </div>
 
-                    <figure>
-                        <img src="figs/1/fig1.4.png" alt="ET Logique" onerror="this.style.display='none'">
-                        <img src="figs/1/fig1.5.png" alt="OU Logique" onerror="this.style.display='none'">
-                        <img src="figs/1/fig1.6.png" alt="NON Logique" onerror="this.style.display='none'">
-                        <figcaption>Figures 1.4 - 1.6 : Représentation visuelle des opérateurs flous.</figcaption>
-                    </figure>
+                    <div class="chart-container" style="position: relative; height:300px; width:100%">
+                        <canvas id="intersectionChartFr"></canvas>
+                    </div>
 
                 </section>
 
@@ -1678,19 +1672,79 @@ Accepte   Refus
                 }
             };
 
-            function createChart(ctxId, dataConfig) {
+            function createChart(ctxId, dataConfig, customOptions = commonOptions) {
                 ['En', 'Fr'].forEach(lang => {
                     const ctx = document.getElementById(ctxId + lang);
                     if (ctx) {
                         new Chart(ctx, {
                             type: 'line',
                             data: dataConfig,
-                            options: commonOptions,
+                            options: customOptions,
                             plugins: [pointLabelsPlugin]
                         });
                     }
                 });
             }
+
+            // Intersection (Logical AND) Chart
+            const interX = Array.from({length: 21}, (_, i) => i);
+            const interTriangle = interX.map(x => {
+                if (x <= 5 || x >= 15) return 0;
+                if (x <= 10) return (x - 5) / 5;
+                return (15 - x) / 5;
+            });
+            const interTrapezoid = interX.map(x => {
+                if (x <= 10 || x >= 20) return 0;
+                if (x <= 12) return (x - 10) / 2;
+                if (x <= 18) return 1;
+                return (20 - x) / 2;
+            });
+            const interMin = interX.map((x, i) => Math.min(interTriangle[i], interTrapezoid[i]));
+
+            const intersectionOptions = {
+                ...commonOptions,
+                scales: {
+                    y: { 
+                        min: 0, max: 1.2, 
+                        title: { display: true, text: 'A ∩ B' },
+                        ticks: { stepSize: 1, callback: function(value) { return (value === 0 || value === 1) ? value : ''; } }
+                    },
+                    x: { title: { display: true, text: 'Input (x)' } }
+                }
+            };
+
+            createChart('intersectionChart', {
+                labels: interX,
+                datasets: [
+                    {
+                        label: 'A (Triangle)',
+                        data: interTriangle,
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'transparent',
+                        fill: false,
+                        tension: 0,
+                        pointRadius: 0
+                    },
+                    {
+                        label: 'B (Trapezoid)',
+                        data: interTrapezoid,
+                        borderColor: '#f59e0b',
+                        backgroundColor: 'transparent',
+                        fill: false,
+                        tension: 0,
+                        pointRadius: 0
+                    },
+                    {
+                        label: 'A ∩ B',
+                        data: interMin,
+                        borderColor: 'transparent',
+                        backgroundColor: 'rgba(16, 185, 129, 0.4)',
+                        fill: true,
+                        tension: 0,
+                        pointRadius: 0
+                    }
+                ]
+            }, intersectionOptions);
 
             // 1. Triangular (10, 20, 30)
             createChart('triangularChart', {
