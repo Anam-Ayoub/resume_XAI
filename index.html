@@ -210,6 +210,48 @@
                         <li><strong>Logical NOT (NON logique):</strong> Represents the opposite (le complément), calculated as $1 - a$.</li>
                     </ul>
 
+                    <div style="display: flex; gap: 1rem; margin-top: 2rem; margin-bottom: 2rem; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 150px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden;">
+                            <div style="background: var(--hover-bg); padding: 0.75rem; border-bottom: 1px solid var(--border-color); font-weight: 600; text-align: center;">Logical AND (min)</div>
+                            <table style="width: 100%; border-collapse: collapse; text-align: center;">
+                                <tr>
+                                    <th style="padding: 0.5rem; border-bottom: 1px solid var(--border-color);">A</th>
+                                    <th style="padding: 0.5rem; border-bottom: 1px solid var(--border-color);">B</th>
+                                    <th style="padding: 0.5rem; border-bottom: 1px solid var(--border-color);">A AND B</th>
+                                </tr>
+                                <tr><td style="padding: 0.5rem;">0</td><td style="padding: 0.5rem;">0</td><td style="padding: 0.5rem;">0</td></tr>
+                                <tr><td style="padding: 0.5rem;">0</td><td style="padding: 0.5rem;">1</td><td style="padding: 0.5rem;">0</td></tr>
+                                <tr><td style="padding: 0.5rem;">1</td><td style="padding: 0.5rem;">0</td><td style="padding: 0.5rem;">0</td></tr>
+                                <tr><td style="padding: 0.5rem;">1</td><td style="padding: 0.5rem;">1</td><td style="padding: 0.5rem; font-weight:bold; color: #10b981;">1</td></tr>
+                            </table>
+                        </div>
+                        <div style="flex: 1; min-width: 150px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden;">
+                            <div style="background: var(--hover-bg); padding: 0.75rem; border-bottom: 1px solid var(--border-color); font-weight: 600; text-align: center;">Logical OR (max)</div>
+                            <table style="width: 100%; border-collapse: collapse; text-align: center;">
+                                <tr>
+                                    <th style="padding: 0.5rem; border-bottom: 1px solid var(--border-color);">A</th>
+                                    <th style="padding: 0.5rem; border-bottom: 1px solid var(--border-color);">B</th>
+                                    <th style="padding: 0.5rem; border-bottom: 1px solid var(--border-color);">A OR B</th>
+                                </tr>
+                                <tr><td style="padding: 0.5rem;">0</td><td style="padding: 0.5rem;">0</td><td style="padding: 0.5rem;">0</td></tr>
+                                <tr><td style="padding: 0.5rem;">0</td><td style="padding: 0.5rem;">1</td><td style="padding: 0.5rem; font-weight:bold; color: #3b82f6;">1</td></tr>
+                                <tr><td style="padding: 0.5rem;">1</td><td style="padding: 0.5rem;">0</td><td style="padding: 0.5rem; font-weight:bold; color: #3b82f6;">1</td></tr>
+                                <tr><td style="padding: 0.5rem;">1</td><td style="padding: 0.5rem;">1</td><td style="padding: 0.5rem; font-weight:bold; color: #3b82f6;">1</td></tr>
+                            </table>
+                        </div>
+                        <div style="flex: 1; min-width: 150px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden;">
+                            <div style="background: var(--hover-bg); padding: 0.75rem; border-bottom: 1px solid var(--border-color); font-weight: 600; text-align: center;">Logical NOT (1 - a)</div>
+                            <table style="width: 100%; border-collapse: collapse; text-align: center;">
+                                <tr>
+                                    <th style="padding: 0.5rem; border-bottom: 1px solid var(--border-color);">A</th>
+                                    <th style="padding: 0.5rem; border-bottom: 1px solid var(--border-color);">NOT A</th>
+                                </tr>
+                                <tr><td style="padding: 0.5rem;">0</td><td style="padding: 0.5rem; font-weight:bold; color: #f59e0b;">1</td></tr>
+                                <tr><td style="padding: 0.5rem;">1</td><td style="padding: 0.5rem;">0</td></tr>
+                            </table>
+                        </div>
+                    </div>
+
                     <figure>
                         <img src="figs/1/fig1.4.png" alt="Logical AND" onerror="this.style.display='none'">
                         <img src="figs/1/fig1.5.png" alt="Logical OR" onerror="this.style.display='none'">
@@ -868,6 +910,48 @@ Accept    Refuse
                         <li><strong>OU logique :</strong> Représente l'union en prenant la plus grande valeur : $\max(a, b)$.</li>
                         <li><strong>NON logique :</strong> Représente le complémentaire, calculé comme $1 - a$.</li>
                     </ul>
+
+                    <div style="display: flex; gap: 1rem; margin-top: 2rem; margin-bottom: 2rem; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 150px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden;">
+                            <div style="background: var(--hover-bg); padding: 0.75rem; border-bottom: 1px solid var(--border-color); font-weight: 600; text-align: center;">ET Logique (min)</div>
+                            <table style="width: 100%; border-collapse: collapse; text-align: center;">
+                                <tr>
+                                    <th style="padding: 0.5rem; border-bottom: 1px solid var(--border-color);">A</th>
+                                    <th style="padding: 0.5rem; border-bottom: 1px solid var(--border-color);">B</th>
+                                    <th style="padding: 0.5rem; border-bottom: 1px solid var(--border-color);">A ET B</th>
+                                </tr>
+                                <tr><td style="padding: 0.5rem;">0</td><td style="padding: 0.5rem;">0</td><td style="padding: 0.5rem;">0</td></tr>
+                                <tr><td style="padding: 0.5rem;">0</td><td style="padding: 0.5rem;">1</td><td style="padding: 0.5rem;">0</td></tr>
+                                <tr><td style="padding: 0.5rem;">1</td><td style="padding: 0.5rem;">0</td><td style="padding: 0.5rem;">0</td></tr>
+                                <tr><td style="padding: 0.5rem;">1</td><td style="padding: 0.5rem;">1</td><td style="padding: 0.5rem; font-weight:bold; color: #10b981;">1</td></tr>
+                            </table>
+                        </div>
+                        <div style="flex: 1; min-width: 150px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden;">
+                            <div style="background: var(--hover-bg); padding: 0.75rem; border-bottom: 1px solid var(--border-color); font-weight: 600; text-align: center;">OU Logique (max)</div>
+                            <table style="width: 100%; border-collapse: collapse; text-align: center;">
+                                <tr>
+                                    <th style="padding: 0.5rem; border-bottom: 1px solid var(--border-color);">A</th>
+                                    <th style="padding: 0.5rem; border-bottom: 1px solid var(--border-color);">B</th>
+                                    <th style="padding: 0.5rem; border-bottom: 1px solid var(--border-color);">A OU B</th>
+                                </tr>
+                                <tr><td style="padding: 0.5rem;">0</td><td style="padding: 0.5rem;">0</td><td style="padding: 0.5rem;">0</td></tr>
+                                <tr><td style="padding: 0.5rem;">0</td><td style="padding: 0.5rem;">1</td><td style="padding: 0.5rem; font-weight:bold; color: #3b82f6;">1</td></tr>
+                                <tr><td style="padding: 0.5rem;">1</td><td style="padding: 0.5rem;">0</td><td style="padding: 0.5rem; font-weight:bold; color: #3b82f6;">1</td></tr>
+                                <tr><td style="padding: 0.5rem;">1</td><td style="padding: 0.5rem;">1</td><td style="padding: 0.5rem; font-weight:bold; color: #3b82f6;">1</td></tr>
+                            </table>
+                        </div>
+                        <div style="flex: 1; min-width: 150px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden;">
+                            <div style="background: var(--hover-bg); padding: 0.75rem; border-bottom: 1px solid var(--border-color); font-weight: 600; text-align: center;">NON Logique (1 - a)</div>
+                            <table style="width: 100%; border-collapse: collapse; text-align: center;">
+                                <tr>
+                                    <th style="padding: 0.5rem; border-bottom: 1px solid var(--border-color);">A</th>
+                                    <th style="padding: 0.5rem; border-bottom: 1px solid var(--border-color);">NON A</th>
+                                </tr>
+                                <tr><td style="padding: 0.5rem;">0</td><td style="padding: 0.5rem; font-weight:bold; color: #f59e0b;">1</td></tr>
+                                <tr><td style="padding: 0.5rem;">1</td><td style="padding: 0.5rem;">0</td></tr>
+                            </table>
+                        </div>
+                    </div>
 
                     <figure>
                         <img src="figs/1/fig1.4.png" alt="ET Logique" onerror="this.style.display='none'">
