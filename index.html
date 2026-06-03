@@ -249,16 +249,122 @@
                     </figure>
 
                     <h3>3. Fuzzy Inference Models</h3>
-                    <ul>
-                        <li><strong>Mamdani Model (Le modèle Mamdani):</strong> The conclusion of each rule is a fuzzy set. Defuzzification uses the weighted average of the centers:
-                            <div class="math-block">$$ z = \frac{\sum (w_i \cdot C_i)}{\sum w_i} $$</div>
-                            <em>($w_i$ = rule activation degree, $C_i$ = center of output triangle).</em>
-                        </li>
-                        <li><strong>Sugeno Model (Le modèle Sugeno):</strong> The conclusion is a strict mathematical function, great for optimization.
+                    <div class="card model-section">
+                        <h4>A. Mamdani Model (Le modèle Mamdani)</h4>
+                        <p><strong>Scenario:</strong> Fan speed based on Temperature (30°C).</p>
+                        <p><strong>Rule Centers:</strong> Lent = 25, Moyen = 50, Rapide = 75.</p>
+                        <div class="step-card">
+                            <h5>Step 1: Fuzzification</h5>
+                            <p><strong>Concept:</strong> Convert a crisp input into a fuzzy membership degree using membership functions.</p>
+                            <div class="math-block">$$ \mu_A(x) $$</div>
+                            <div class="example-box">
+                                <strong>Example:</strong> The input Temperature of 30°C evaluates to $\mu_{chaude} = 0.5$.
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <h5>Step 2: Rule Implication</h5>
+                            <p><strong>Concept:</strong> Determine the weight of each rule based on the premise and truncate the output fuzzy set.</p>
+                            <div class="math-block">$$ w_i = \min(\mu_A(x), \mu_B(y)) $$</div>
+                            <div class="example-box">
+                                <strong>Example:</strong> The rule "If Temp is Chaude, then Fan is Rapide" is triggered. The weight $w = 0.5$ activates the "Rapide" rule.
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <h5>Step 3: Aggregation</h5>
+                            <p><strong>Concept:</strong> Combine the truncated output sets of all triggered rules into a single global fuzzy set.</p>
+                            <div class="math-block">$$ \mu_{agg}(z) = \max(\mu_{R1}(z), \mu_{R2}(z), ...) $$</div>
+                            <div class="example-box">
+                                <strong>Example:</strong> Combine outputs. Here, only the "Rapide" rule is active ($w_{rapide} = 0.5$), the others are $0$.
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <h5>Step 4: Defuzzification</h5>
+                            <p><strong>Concept:</strong> Extract a crisp numeric value from the global fuzzy set, typically using the weighted average of the centers.</p>
+                            <div class="math-block">$$ V = \frac{\sum (w_i \cdot C_i)}{\sum w_i} $$</div>
+                            <div class="example-box">
+                                <strong>Example Calculation:</strong>
+                                <div class="math-block" style="margin: 0.5rem 0 0 0; background: none; border: none; padding: 0;">$$ V = \frac{0 \times 25 + 0 \times 50 + 0.5 \times 75}{0.5} = 75\% $$</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card model-section">
+                        <h4>B. Sugeno Model (Le modèle Sugeno)</h4>
+                        <p><strong>Scenario:</strong> Constant mathematical outputs (Zero-order Sugeno).</p>
+                        <p><strong>Rules:</strong> R1 (Froide) → $z = 20$, R2 (Chaude) → $z = 80$.</p>
+                        <div class="step-card">
+                            <h5>Step 1: Fuzzification</h5>
+                            <p><strong>Concept:</strong> Evaluate inputs into membership degrees, exactly like Mamdani.</p>
+                            <div class="math-block">$$ \mu_A(x) $$</div>
+                            <div class="example-box">
+                                <strong>Example:</strong> Inputs are evaluated to multiple memberships: $\mu_{froid} = 0.3$ and $\mu_{chaud} = 0.7$.
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <h5>Step 2: Rule Implication</h5>
+                            <p><strong>Concept:</strong> Instead of fuzzy shapes, the output is a strict mathematical function (or constant).</p>
+                            <div class="math-block">$$ z_i = f(x, y) \quad \text{(or } z_i = k \text{)} $$</div>
+                            <div class="example-box">
+                                <strong>Example:</strong> Each rule weight activates a constant: <br>R1: $w_1 = 0.3 \rightarrow z_1 = 20$<br>R2: $w_2 = 0.7 \rightarrow z_2 = 80$
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <h5>Step 3: Aggregation</h5>
+                            <p><strong>Concept:</strong> Prepare the weights and the precise output values for the final average. No shape merging is needed.</p>
+                            <div class="math-block">$$ \text{Gather } (w_1, z_1), (w_2, z_2), ... $$</div>
+                            <div class="example-box">
+                                <strong>Example:</strong> We prepare the pairs $(0.3, 20)$ and $(0.7, 80)$.
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <h5>Step 4: Defuzzification</h5>
+                            <p><strong>Concept:</strong> Calculate the final crisp value using the weighted average of the precise outputs.</p>
                             <div class="math-block">$$ z = \frac{\sum (w_i \cdot z_i)}{\sum w_i} $$</div>
-                        </li>
-                        <li><strong>Tsukamoto Model (Modèle Tsukamoto):</strong> Output sets must be strictly monotonic. Output is calculated using specific values on the curve.</li>
-                    </ul>
+                            <div class="example-box">
+                                <strong>Example Calculation:</strong>
+                                <div class="math-block" style="margin: 0.5rem 0 0 0; background: none; border: none; padding: 0;">$$ z = \frac{0.3 \times 20 + 0.7 \times 80}{0.3 + 0.7} = 62 $$</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card model-section">
+                        <h4>C. Tsukamoto Model (Modèle Tsukamoto)</h4>
+                        <p><strong>Scenario:</strong> Monotonic output functions.</p>
+                        <p><strong>Functions:</strong> Lente $u(z) = (60 - z)/40$, Rapide $u(z) = (z - 40)/40$.</p>
+                        <div class="step-card">
+                            <h5>Step 1: Fuzzification</h5>
+                            <p><strong>Concept:</strong> Evaluate inputs into membership degrees.</p>
+                            <div class="math-block">$$ \mu_A(x) $$</div>
+                            <div class="example-box">
+                                <strong>Example:</strong> Inputs evaluate to $\mu_{froid} = 0.3$ and $\mu_{chaude} = 0.7$.
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <h5>Step 2: Rule Implication</h5>
+                            <p><strong>Concept:</strong> The output fuzzy sets are strictly monotonic functions. Solve the function to find the exact $z$ where the membership equals the rule weight.</p>
+                            <div class="math-block">$$ w_i = \mu_{\text{out}}(z_i) \implies z_i = \mu_{\text{out}}^{-1}(w_i) $$</div>
+                            <div class="example-box">
+                                <strong>Example:</strong> Solve the monotonic functions:<br>For $\mu_{froid}=0.3$, solve $0.3 = (60-z)/40 \rightarrow z_1 = 48$.<br>For $\mu_{chaude}=0.7$, solve $0.7 = (z-40)/40 \rightarrow z_2 = 68$.
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <h5>Step 3: Aggregation</h5>
+                            <p><strong>Concept:</strong> Gather the calculated precise $z_i$ values and their rule weights.</p>
+                            <div class="math-block">$$ \text{Gather } (w_1, z_1), (w_2, z_2), ... $$</div>
+                            <div class="example-box">
+                                <strong>Example:</strong> We prepare the pairs $(0.3, 48)$ and $(0.7, 68)$.
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <h5>Step 4: Defuzzification</h5>
+                            <p><strong>Concept:</strong> Calculate the weighted average of the precisely mapped values.</p>
+                            <div class="math-block">$$ z = \frac{\sum (w_i \cdot z_i)}{\sum w_i} $$</div>
+                            <div class="example-box">
+                                <strong>Example Calculation:</strong>
+                                <div class="math-block" style="margin: 0.5rem 0 0 0; background: none; border: none; padding: 0;">$$ z = \frac{0.3 \times 48 + 0.7 \times 68}{1} = 62 $$</div>
+                            </div>
+                        </div>
+                    </div>
                 </section>
 
                 <section id="clustering-en">
@@ -715,16 +821,122 @@ Accept    Refuse
                     </figure>
 
                     <h3>3. Modèles d'Inférence Floue</h3>
-                    <ul>
-                        <li><strong>Le modèle Mamdani :</strong> La conclusion de chaque règle est un ensemble flou. La défuzzification utilise la moyenne pondérée des centres :
-                            <div class="math-block">$$ z = \frac{\sum (w_i \cdot C_i)}{\sum w_i} $$</div>
-                            <em>($w_i$ = degré d'activation de la règle, $C_i$ = centre du triangle de sortie).</em>
-                        </li>
-                        <li><strong>Le modèle Sugeno :</strong> La conclusion est une fonction mathématique stricte, idéale pour l'optimisation.
+                    <div class="card model-section">
+                        <h4>A. Le modèle Mamdani</h4>
+                        <p><strong>Scénario :</strong> Vitesse du ventilateur selon la Température (30°C).</p>
+                        <p><strong>Centres de règles :</strong> Lent = 25, Moyen = 50, Rapide = 75.</p>
+                        <div class="step-card">
+                            <h5>Étape 1: Fuzzification</h5>
+                            <p><strong>Concept :</strong> Convertir une entrée précise en un degré d'appartenance flou via les fonctions d'appartenance.</p>
+                            <div class="math-block">$$ \mu_A(x) $$</div>
+                            <div class="example-box">
+                                <strong>Exemple :</strong> La température d'entrée de 30°C est évaluée à $\mu_{chaude} = 0.5$.
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <h5>Étape 2: Implication</h5>
+                            <p><strong>Concept :</strong> Déterminer le poids de chaque règle en fonction des prémisses et tronquer l'ensemble flou de sortie.</p>
+                            <div class="math-block">$$ w_i = \min(\mu_A(x), \mu_B(y)) $$</div>
+                            <div class="example-box">
+                                <strong>Exemple :</strong> La règle "Si Temp est Chaude, alors Vent est Rapide" est déclenchée. Le poids $w = 0.5$ active la règle "Rapide".
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <h5>Étape 3: Agrégation</h5>
+                            <p><strong>Concept :</strong> Combiner les ensembles de sortie tronqués de toutes les règles déclenchées en un seul ensemble flou global.</p>
+                            <div class="math-block">$$ \mu_{agg}(z) = \max(\mu_{R1}(z), \mu_{R2}(z), ...) $$</div>
+                            <div class="example-box">
+                                <strong>Exemple :</strong> Combinaison des sorties. Ici, seule la règle "Rapide" est activée ($w_{rapide} = 0.5$), les autres sont à $0$.
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <h5>Étape 4: Défuzzification</h5>
+                            <p><strong>Concept :</strong> Extraire une valeur numérique précise de l'ensemble flou global (ex. moyenne pondérée des centres).</p>
+                            <div class="math-block">$$ V = \frac{\sum (w_i \cdot C_i)}{\sum w_i} $$</div>
+                            <div class="example-box">
+                                <strong>Exemple de Calcul :</strong>
+                                <div class="math-block" style="margin: 0.5rem 0 0 0; background: none; border: none; padding: 0;">$$ V = \frac{0 \times 25 + 0 \times 50 + 0.5 \times 75}{0.5} = 75\% $$</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card model-section">
+                        <h4>B. Le modèle Sugeno</h4>
+                        <p><strong>Scénario :</strong> Sorties mathématiques constantes (Sugeno ordre 0).</p>
+                        <p><strong>Règles :</strong> R1 (Froide) → $z = 20$, R2 (Chaude) → $z = 80$.</p>
+                        <div class="step-card">
+                            <h5>Étape 1: Fuzzification</h5>
+                            <p><strong>Concept :</strong> Évaluer les entrées en degrés d'appartenance, comme pour Mamdani.</p>
+                            <div class="math-block">$$ \mu_A(x) $$</div>
+                            <div class="example-box">
+                                <strong>Exemple :</strong> Les entrées sont évaluées à de multiples degrés d'appartenance : $\mu_{froid} = 0.3$ et $\mu_{chaud} = 0.7$.
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <h5>Étape 2: Implication</h5>
+                            <p><strong>Concept :</strong> Au lieu de formes floues, la sortie est une fonction mathématique stricte (ou une constante).</p>
+                            <div class="math-block">$$ z_i = f(x, y) \quad \text{(ou } z_i = k \text{)} $$</div>
+                            <div class="example-box">
+                                <strong>Exemple :</strong> Chaque poids multiplie une constante : <br>R1: $w_1 = 0.3 \rightarrow z_1 = 20$<br>R2: $w_2 = 0.7 \rightarrow z_2 = 80$
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <h5>Étape 3: Agrégation</h5>
+                            <p><strong>Concept :</strong> Préparer les poids et les valeurs de sortie précises pour la moyenne finale. Aucun mélange de formes n'est nécessaire.</p>
+                            <div class="math-block">$$ \text{Rassembler } (w_1, z_1), (w_2, z_2), ... $$</div>
+                            <div class="example-box">
+                                <strong>Exemple :</strong> Nous préparons les paires $(0.3, 20)$ et $(0.7, 80)$.
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <h5>Étape 4: Défuzzification</h5>
+                            <p><strong>Concept :</strong> Calculer la valeur précise finale en utilisant la moyenne pondérée des sorties exactes.</p>
                             <div class="math-block">$$ z = \frac{\sum (w_i \cdot z_i)}{\sum w_i} $$</div>
-                        </li>
-                        <li><strong>Modèle Tsukamoto :</strong> Les ensembles de sortie doivent être strictement monotones. La sortie est calculée en utilisant des valeurs spécifiques sur la courbe.</li>
-                    </ul>
+                            <div class="example-box">
+                                <strong>Exemple de Calcul :</strong>
+                                <div class="math-block" style="margin: 0.5rem 0 0 0; background: none; border: none; padding: 0;">$$ z = \frac{0.3 \times 20 + 0.7 \times 80}{0.3 + 0.7} = 62 $$</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card model-section">
+                        <h4>C. Modèle Tsukamoto</h4>
+                        <p><strong>Scénario :</strong> Fonctions de sortie monotones.</p>
+                        <p><strong>Fonctions :</strong> Lente $u(z) = (60 - z)/40$, Rapide $u(z) = (z - 40)/40$.</p>
+                        <div class="step-card">
+                            <h5>Étape 1: Fuzzification</h5>
+                            <p><strong>Concept :</strong> Évaluer les entrées en degrés d'appartenance.</p>
+                            <div class="math-block">$$ \mu_A(x) $$</div>
+                            <div class="example-box">
+                                <strong>Exemple :</strong> Les entrées sont évaluées à $\mu_{froid} = 0.3$ et $\mu_{chaude} = 0.7$.
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <h5>Étape 2: Implication</h5>
+                            <p><strong>Concept :</strong> Les ensembles flous de sortie sont des fonctions strictement monotones. Résoudre la fonction pour trouver le $z$ exact correspondant au poids.</p>
+                            <div class="math-block">$$ w_i = \mu_{\text{out}}(z_i) \implies z_i = \mu_{\text{out}}^{-1}(w_i) $$</div>
+                            <div class="example-box">
+                                <strong>Exemple :</strong> Résolution de la fonction monotone :<br>Pour $\mu_{froid}=0.3$, on résout $0.3 = (60-z)/40 \rightarrow z_1 = 48$.<br>Pour $\mu_{chaude}=0.7$, on résout $0.7 = (z-40)/40 \rightarrow z_2 = 68$.
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <h5>Étape 3: Agrégation</h5>
+                            <p><strong>Concept :</strong> Rassembler les valeurs précises calculées $z_i$ et les poids de leurs règles.</p>
+                            <div class="math-block">$$ \text{Rassembler } (w_1, z_1), (w_2, z_2), ... $$</div>
+                            <div class="example-box">
+                                <strong>Exemple :</strong> Nous préparons les paires $(0.3, 48)$ et $(0.7, 68)$.
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <h5>Étape 4: Défuzzification</h5>
+                            <p><strong>Concept :</strong> Moyenne pondérée des valeurs mappées précisément.</p>
+                            <div class="math-block">$$ z = \frac{\sum (w_i \cdot z_i)}{\sum w_i} $$</div>
+                            <div class="example-box">
+                                <strong>Exemple de Calcul :</strong>
+                                <div class="math-block" style="margin: 0.5rem 0 0 0; background: none; border: none; padding: 0;">$$ z = \frac{0.3 \times 48 + 0.7 \times 68}{1} = 62 $$</div>
+                            </div>
+                        </div>
+                    </div>
                 </section>
 
                 <section id="clustering-fr">
@@ -973,8 +1185,25 @@ Accepte   Refus
         </div>
     </div>
 
-    <!-- JS for Language Toggle -->
+    <!-- JS for Language Toggle and Interactive UI -->
     <script>
+        function switchTab(event, lang, tabName) {
+            const container = event.currentTarget.closest('.tabs-container');
+            container.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            container.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.currentTarget.classList.add('active');
+            document.getElementById(`tab-${lang}-${tabName}`).classList.add('active');
+        }
+
+        function switchStep(btn) {
+            const container = btn.closest('.stepper');
+            container.querySelectorAll('.step-btn').forEach(b => b.classList.remove('active'));
+            container.querySelectorAll('.step-content').forEach(c => c.classList.remove('active'));
+            
+            btn.classList.add('active');
+            btn.nextElementSibling.classList.add('active');
+        }
         const btn = document.getElementById('lang-switch');
         const text = document.getElementById('lang-text');
         
