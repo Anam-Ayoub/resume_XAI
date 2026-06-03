@@ -87,12 +87,21 @@
                     </ul>
                     
                     <figure>
-                        <img src="figs/1/fig1.1.png" alt="Normalized Fuzzy Sets" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+1.1+Missing'">
+                        <div class="chart-container" style="position: relative; height:300px; width:100%">
+                            <canvas id="normalizedChartEn"></canvas>
+                        </div>
                         <figcaption>Figure 1.1: Normalized fuzzy sets representation.</figcaption>
                     </figure>
                     <figure>
-                        <img src="figs/1/fig1.2.png" alt="Convexity" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+1.2+Missing'">
-                        <figcaption>Figure 1.2: Convexity in fuzzy sets.</figcaption>
+                        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                            <div class="chart-container" style="position: relative; height:300px; flex: 1; min-width: 300px;">
+                                <canvas id="convexChartEn"></canvas>
+                            </div>
+                            <div class="chart-container" style="position: relative; height:300px; flex: 1; min-width: 300px;">
+                                <canvas id="nonConvexChartEn"></canvas>
+                            </div>
+                        </div>
+                        <figcaption>Figure 1.2: Convex vs Non-Convex Fuzzy Sets</figcaption>
                     </figure>
 
                     <div class="card">
@@ -173,7 +182,7 @@
                         <ol>
                             <li>Calculate the squared distance from center: $(x - c)^2$.</li>
                             <li>Divide by the spread factor: $(x - c)^2 / (2\sigma^2)$.</li>
-                            <li>Calculate the final degree: $e^{-((x - c)^2 / 2\sigma^2)}$.</li>
+                            <li>Calculate the final degree: $e^{-((x - c)^2 / (2\sigma^2))}$.</li>
                         </ol>
 
                         <div class="chart-container" style="position: relative; height:300px; width:100%">
@@ -818,12 +827,21 @@ Accept    Refuse
                     </ul>
                     
                     <figure>
-                        <img src="figs/1/fig1.1.png" alt="Ensembles flous normalisés" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+1.1+Manquante'">
+                        <div class="chart-container" style="position: relative; height:300px; width:100%">
+                            <canvas id="normalizedChartFr"></canvas>
+                        </div>
                         <figcaption>Figure 1.1 : Représentation d'ensembles flous normalisés.</figcaption>
                     </figure>
                     <figure>
-                        <img src="figs/1/fig1.2.png" alt="Convexité" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+1.2+Manquante'">
-                        <figcaption>Figure 1.2 : Convexité dans les ensembles flous.</figcaption>
+                        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                            <div class="chart-container" style="position: relative; height:300px; flex: 1; min-width: 300px;">
+                                <canvas id="convexChartFr"></canvas>
+                            </div>
+                            <div class="chart-container" style="position: relative; height:300px; flex: 1; min-width: 300px;">
+                                <canvas id="nonConvexChartFr"></canvas>
+                            </div>
+                        </div>
+                        <figcaption>Figure 1.2 : Ensembles flous convexes vs non-convexes</figcaption>
                     </figure>
 
                     <div class="card">
@@ -1751,6 +1769,294 @@ Accepte   Refus
                     }
                 });
             }
+
+            // Normalized Fuzzy Sets Representation Chart (Figure 1.1)
+            const normData = [];
+            // We want a shape that is flat at the top for the "Noyau" (Core)
+            // It goes from x=1 to x=9. Flat from x=4 to x=6.
+            for (let i = 0; i <= 100; i++) {
+                let x = i / 10;
+                let y = 0;
+                if (x >= 1 && x <= 4) {
+                    // smooth rise from 0 to 1
+                    y = (Math.cos((x - 4) * Math.PI / 3) + 1) / 2; 
+                } else if (x > 4 && x < 6) {
+                    y = 1; // Flat peak (Noyau)
+                } else if (x >= 6 && x <= 9) {
+                    // smooth fall from 1 to 0
+                    y = (Math.cos((x - 6) * Math.PI / 3) + 1) / 2;
+                }
+                normData.push({x, y});
+            }
+
+            const normalizedBoxesPlugin = {
+                id: 'normalizedBoxesPlugin',
+                afterDatasetsDraw(chart, args, options) {
+                    const { ctx, chartArea: { top, bottom, left, right }, scales: { x, y } } = chart;
+                    
+                    ctx.save();
+                    ctx.lineWidth = 1.5;
+                    ctx.font = '14px Inter, sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+
+                    // Define the levels and their x-intervals based on our mathematical function
+                    // Noyau (y=1): x in [4, 6]
+                    // alpha (let's say y=0.8): cos((x-4)pi/3) = 0.6 => x approx 3.11 and 6.89
+                    // 0.5: cos((x-4)pi/3) = 0 => x=2.5 and 7.5
+                    // Support (y=0): x in [1, 9]
+                    
+                    const levels = [
+                        { name: 'Noyau (A)', yVal: 1, x1: 4, x2: 6 },
+                        { name: 'α-Coupe (A)', yVal: 0.8, x1: 3.116, x2: 6.884 },
+                        { name: 'Point de croisement (A)', yVal: 0.5, x1: 2.5, x2: 7.5 },
+                        { name: 'Support (A)', yVal: 0, x1: 1, x2: 9 }
+                    ];
+
+                    // To draw the pyramid *below* the chart, we need space.
+                    // The y-axis stops at 0. We'll use the space below y(0) to draw the boxes.
+                    // We can configure the y scale to go down to -0.5 so we have visual room!
+                    
+                    // Box drawing logic:
+                    let boxHeight = (y.getPixelForValue(-0.5) - y.getPixelForValue(0)) / 4;
+                    
+                    levels.forEach((lvl, index) => {
+                        const px1 = x.getPixelForValue(lvl.x1);
+                        const px2 = x.getPixelForValue(lvl.x2);
+                        const pyCurve = y.getPixelForValue(lvl.yVal);
+                        const boxYTop = y.getPixelForValue(0) + (index * boxHeight);
+                        const boxYBottom = boxYTop + boxHeight;
+                        
+                        // Draw dotted lines dropping from the curve down to the box
+                        ctx.setLineDash([4, 4]);
+                        ctx.strokeStyle = '#6b7280'; // gray
+                        
+                        // Left line
+                        ctx.beginPath();
+                        ctx.moveTo(px1, pyCurve);
+                        ctx.lineTo(px1, boxYBottom);
+                        ctx.stroke();
+                        
+                        // Right line
+                        ctx.beginPath();
+                        ctx.moveTo(px2, pyCurve);
+                        ctx.lineTo(px2, boxYBottom);
+                        ctx.stroke();
+                        
+                        // Draw the box
+                        ctx.setLineDash([]);
+                        ctx.fillStyle = '#f9fafb';
+                        ctx.fillRect(px1, boxYTop, px2 - px1, boxHeight);
+                        ctx.strokeStyle = '#374151'; // dark gray border
+                        ctx.strokeRect(px1, boxYTop, px2 - px1, boxHeight);
+                        
+                        // Draw text inside the box
+                        ctx.fillStyle = '#111827';
+                        ctx.fillText(lvl.name, (px1 + px2) / 2, boxYTop + boxHeight / 2);
+                    });
+                    
+                    ctx.restore();
+                }
+            };
+
+            const normalizedOptions = {
+                ...commonOptions,
+                layout: {
+                    padding: { bottom: 10 }
+                },
+                plugins: {
+                    ...commonOptions.plugins,
+                    title: { display: false }
+                },
+                scales: {
+                    y: { 
+                        min: -0.6, max: 1.1, 
+                        title: { display: false },
+                        ticks: { 
+                            stepSize: 0.1,
+                            callback: function(value) { 
+                                if (Math.abs(value - 0) < 0.01) return '0';
+                                if (Math.abs(value - 0.5) < 0.01) return '0.5';
+                                if (Math.abs(value - 0.8) < 0.01) return 'α';
+                                if (Math.abs(value - 1) < 0.01) return '1';
+                                return null; 
+                            }
+                        }
+                    },
+                    x: { 
+                        type: 'linear',
+                        min: 0, max: 10,
+                        title: { display: false },
+                        ticks: { 
+                            stepSize: 10,
+                            callback: function(value) { 
+                                if (value === 0) return '0';
+                                if (value === 10) return 'X';
+                                return null; 
+                            }
+                        },
+                        grid: { drawOnChartArea: false } // clean up X grid
+                    }
+                }
+            };
+
+            ['En', 'Fr'].forEach(lang => {
+                const ctx = document.getElementById('normalizedChart' + lang);
+                if (ctx) {
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            datasets: [{
+                                label: 'Normalized Set',
+                                data: normData,
+                                borderColor: '#3b82f6',
+                                backgroundColor: 'transparent',
+                                borderWidth: 2,
+                                fill: false,
+                                tension: 0,
+                                pointRadius: 0
+                            }]
+                        },
+                        options: normalizedOptions,
+                        plugins: [normalizedBoxesPlugin] // add our custom pyramid plugin!
+                    });
+                }
+            });
+
+            // Convex vs Non-Convex Chart Logic (Figure 1.2)
+            const convexData = [];
+            const nonConvexData = [];
+            
+            for (let i = 0; i <= 100; i++) {
+                let x = i / 10;
+                convexData.push({ x, y: Math.exp(-Math.pow(x - 5, 2) / 4) });
+                nonConvexData.push({ x, y: 0.85 * Math.exp(-Math.pow(x - 3.5, 2) / 1.5) + 0.95 * Math.exp(-Math.pow(x - 6.5, 2) / 1.5) });
+            }
+
+            const convexityLinesPlugin = {
+                id: 'convexityLinesPlugin',
+                afterDatasetsDraw(chart, args, options) {
+                    const { ctx, chartArea: { top, bottom, left, right }, scales: { x, y } } = chart;
+                    const isConvex = chart.canvas.id.includes('convexChart');
+                    
+                    let x1 = 2.5, x2 = 6.5, xm = 4.5;
+                    if (!isConvex) {
+                        x1 = 3.5; x2 = 6.5; xm = 5.0; // peaks and valley
+                    }
+
+                    let y1 = isConvex ? Math.exp(-Math.pow(x1 - 5, 2) / 4) : 0.85 * Math.exp(-Math.pow(x1 - 3.5, 2) / 1.5) + 0.95 * Math.exp(-Math.pow(x1 - 6.5, 2) / 1.5);
+                    let y2 = isConvex ? Math.exp(-Math.pow(x2 - 5, 2) / 4) : 0.85 * Math.exp(-Math.pow(x2 - 3.5, 2) / 1.5) + 0.95 * Math.exp(-Math.pow(x2 - 6.5, 2) / 1.5);
+                    let ym = isConvex ? Math.exp(-Math.pow(xm - 5, 2) / 4) : 0.85 * Math.exp(-Math.pow(xm - 3.5, 2) / 1.5) + 0.95 * Math.exp(-Math.pow(xm - 6.5, 2) / 1.5);
+                    
+                    let yChord = y1 + ((xm - x1) / (x2 - x1)) * (y2 - y1);
+
+                    ctx.save();
+                    ctx.lineWidth = 1.5;
+                    ctx.font = '12px Inter, sans-serif';
+                    
+                    // Draw Chord
+                    ctx.setLineDash([5, 5]);
+                    ctx.strokeStyle = '#ef4444'; // red for chord
+                    ctx.beginPath();
+                    ctx.moveTo(x.getPixelForValue(x1), y.getPixelForValue(y1));
+                    ctx.lineTo(x.getPixelForValue(x2), y.getPixelForValue(y2));
+                    ctx.stroke();
+
+                    // Draw vertical dotted lines
+                    ctx.strokeStyle = '#9ca3af'; // gray
+                    [ {xv: x1, yv: y1, lab: 'x₁'}, {xv: x2, yv: y2, lab: 'x₂'}, {xv: xm, yv: ym, lab: 'λx₁+(1-λ)x₂'} ].forEach(pt => {
+                        ctx.beginPath();
+                        ctx.moveTo(x.getPixelForValue(pt.xv), y.getPixelForValue(pt.yv));
+                        ctx.lineTo(x.getPixelForValue(pt.xv), bottom);
+                        ctx.stroke();
+                        
+                        // point on curve
+                        ctx.fillStyle = pt.xv === xm ? '#10b981' : '#111827';
+                        ctx.beginPath();
+                        ctx.arc(x.getPixelForValue(pt.xv), y.getPixelForValue(pt.yv), 4, 0, 2*Math.PI);
+                        ctx.fill();
+
+                        // X-axis label
+                        ctx.fillStyle = '#111827';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'top';
+                        ctx.fillText(pt.lab, x.getPixelForValue(pt.xv), bottom + 5);
+                        
+                        // Horizontal line to Y-axis
+                        ctx.beginPath();
+                        ctx.moveTo(x.getPixelForValue(pt.xv), y.getPixelForValue(pt.yv));
+                        ctx.lineTo(left, y.getPixelForValue(pt.yv));
+                        ctx.stroke();
+                        
+                        // Y-axis label
+                        ctx.fillStyle = '#4b5563';
+                        ctx.textAlign = 'right';
+                        ctx.textBaseline = 'middle';
+                        let yLab = pt.xv === x1 ? 'μ(x₁)' : pt.xv === x2 ? 'μ(x₂)' : 'μ(mid)';
+                        ctx.fillText(yLab, left - 5, y.getPixelForValue(pt.yv));
+                    });
+
+                    // Highlight the chord midpoint
+                    ctx.fillStyle = '#ef4444';
+                    ctx.beginPath();
+                    ctx.arc(x.getPixelForValue(xm), y.getPixelForValue(yChord), 4, 0, 2*Math.PI);
+                    ctx.fill();
+                    
+                    // Connect mid curve point to chord mid point to show gap explicitly
+                    ctx.strokeStyle = isConvex ? '#10b981' : '#ef4444';
+                    ctx.setLineDash([2, 2]);
+                    ctx.beginPath();
+                    ctx.moveTo(x.getPixelForValue(xm), y.getPixelForValue(ym));
+                    ctx.lineTo(x.getPixelForValue(xm), y.getPixelForValue(yChord));
+                    ctx.stroke();
+
+                    ctx.restore();
+                }
+            };
+
+            const baseConvexOptions = {
+                ...commonOptions,
+                layout: { padding: { left: 40, bottom: 20 } },
+                plugins: { ...commonOptions.plugins },
+                scales: {
+                    y: { min: 0, max: 1.1, title: { display: false }, ticks: { display: false } },
+                    x: { min: 0, max: 10, title: { display: false }, ticks: { display: false }, grid: { drawOnChartArea: false } }
+                }
+            };
+
+            ['En', 'Fr'].forEach(lang => {
+                const ctxConvex = document.getElementById('convexChart' + lang);
+                if (ctxConvex) {
+                    new Chart(ctxConvex, {
+                        type: 'line',
+                        data: {
+                            datasets: [{
+                                label: 'Convex',
+                                data: convexData,
+                                borderColor: '#3b82f6', backgroundColor: 'transparent', borderWidth: 2, fill: false, tension: 0.4, pointRadius: 0
+                            }]
+                        },
+                        options: { ...baseConvexOptions, plugins: { title: { display: true, text: lang === 'En' ? 'Convex Set' : 'Ensemble Convexe' } } },
+                        plugins: [convexityLinesPlugin]
+                    });
+                }
+                
+                const ctxNonConvex = document.getElementById('nonConvexChart' + lang);
+                if (ctxNonConvex) {
+                    new Chart(ctxNonConvex, {
+                        type: 'line',
+                        data: {
+                            datasets: [{
+                                label: 'Non-Convex',
+                                data: nonConvexData,
+                                borderColor: '#3b82f6', backgroundColor: 'transparent', borderWidth: 2, fill: false, tension: 0.4, pointRadius: 0
+                            }]
+                        },
+                        options: { ...baseConvexOptions, plugins: { title: { display: true, text: lang === 'En' ? 'Non-Convex Set' : 'Ensemble Non-Convexe' } } },
+                        plugins: [convexityLinesPlugin]
+                    });
+                }
+            });
 
             // Intersection (Logical AND) Chart
             const interDataTriangle = [];
