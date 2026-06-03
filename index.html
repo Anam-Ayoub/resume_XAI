@@ -519,24 +519,24 @@ while iteration < max_iter:
                             </div>
                         </li>
                         <li><strong>Non-monotonic (Quantificateurs non monotones):</strong> Functions centered on a specific target value, using triangular or Gaussian shapes (e.g., "about 5"). Great for precise concepts.
-                            <figure>
-                                <img src="figs/5/fig5.2.png" alt="Non-monotonic Quantifiers" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+5.2+Missing'">
-                            </figure>
+                            <div class="chart-container" style="position: relative; height:300px; width:100%; max-width: 600px; margin: 1rem 0;">
+                                <canvas id="nonMonotonicChartEN"></canvas>
+                            </div>
                         </li>
                         <li><strong>Regular (Quantificateurs réguliers de Zadeh):</strong> These must strictly start at zero and end at exactly one ($Q(0)=0$ and $Q(1)=1$). Examples: "most", "a lot".
-                            <figure>
-                                <img src="figs/5/fig5.3.png" alt="Regular Quantifiers" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+5.3+Missing'">
-                            </figure>
+                            <div class="chart-container" style="position: relative; height:300px; width:100%; max-width: 600px; margin: 1rem 0;">
+                                <canvas id="regularChartEN"></canvas>
+                            </div>
                         </li>
                         <li><strong>Non-regular (Quantificateurs non réguliers):</strong> Do not respect Zadeh's strict boundaries. Flexible for real-world situations.
-                            <figure>
-                                <img src="figs/5/fig5.4.png" alt="Non-regular Quantifiers" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+5.4+Missing'">
-                            </figure>
+                            <div class="chart-container" style="position: relative; height:300px; width:100%; max-width: 600px; margin: 1rem 0;">
+                                <canvas id="nonRegularChartEN"></canvas>
+                            </div>
                         </li>
                         <li><strong>Linguistic (Quantificateurs linguistiques flous):</strong> Natural language expressions modeled directly by fuzzy functions. Extremely natural but highly subjective.
-                            <figure>
-                                <img src="figs/5/fig5.5.png" alt="Linguistic Quantifiers" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+5.5+Missing'">
-                            </figure>
+                            <div class="chart-container" style="position: relative; height:300px; width:100%; max-width: 600px; margin: 1rem 0;">
+                                <canvas id="linguisticChartEN"></canvas>
+                            </div>
                         </li>
                     </ul>
                 </section>
@@ -1168,24 +1168,24 @@ while iteration < max_iter:
                             </div>
                         </li>
                         <li><strong>Quantificateurs non monotones :</strong> Fonctions centrées sur une valeur cible spécifique, utilisant des formes triangulaires ou gaussiennes (ex: "environ 5"). Idéal pour des concepts précis.
-                            <figure>
-                                <img src="figs/5/fig5.2.png" alt="Quantificateurs non monotones" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+5.2+Manquante'">
-                            </figure>
+                            <div class="chart-container" style="position: relative; height:300px; width:100%; max-width: 600px; margin: 1rem 0;">
+                                <canvas id="nonMonotonicChartFR"></canvas>
+                            </div>
                         </li>
                         <li><strong>Quantificateurs réguliers de Zadeh :</strong> Doivent strictement commencer à zéro et se terminer à exactement un ($Q(0)=0$ et $Q(1)=1$). Exemples : "la plupart", "beaucoup".
-                            <figure>
-                                <img src="figs/5/fig5.3.png" alt="Quantificateurs réguliers" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+5.3+Manquante'">
-                            </figure>
+                            <div class="chart-container" style="position: relative; height:300px; width:100%; max-width: 600px; margin: 1rem 0;">
+                                <canvas id="regularChartFR"></canvas>
+                            </div>
                         </li>
                         <li><strong>Quantificateurs non réguliers :</strong> Ne respectent pas les frontières strictes de Zadeh. Très flexibles pour des situations du monde réel.
-                            <figure>
-                                <img src="figs/5/fig5.4.png" alt="Quantificateurs non réguliers" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+5.4+Manquante'">
-                            </figure>
+                            <div class="chart-container" style="position: relative; height:300px; width:100%; max-width: 600px; margin: 1rem 0;">
+                                <canvas id="nonRegularChartFR"></canvas>
+                            </div>
                         </li>
                         <li><strong>Quantificateurs linguistiques flous :</strong> Expressions du langage naturel modélisées directement par des fonctions floues. Extrêmement naturels mais très subjectifs.
-                            <figure>
-                                <img src="figs/5/fig5.5.png" alt="Quantificateurs linguistiques" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+5.5+Manquante'">
-                            </figure>
+                            <div class="chart-container" style="position: relative; height:300px; width:100%; max-width: 600px; margin: 1rem 0;">
+                                <canvas id="linguisticChartFR"></canvas>
+                            </div>
                         </li>
                     </ul>
                 </section>
@@ -1678,83 +1678,136 @@ Accepte   Refus
                     pointRadius: 0
                 }]
             });
-            // 5. Monotonic Quantifier ("Most" / "La plupart")
+            // Fuzzy Quantifier Charts (Figures 5.1 to 5.5)
             const monoX = Array.from({length: 101}, (_, i) => i / 100);
-            const monoY = monoX.map(x => {
-                if (x < 0.5) return 0;
-                return (2 * x) - 1;
-            });
+            const monoY = monoX.map(x => (x < 0.5 ? 0 : (2 * x) - 1));
             
-            const monotonicChartConfig = {
-                labels: monoX.map(x => x.toFixed(2)),
-                datasets: [{
-                    label: 'Q(p) = Monotone (la plupart)',
-                    data: monoY,
-                    borderColor: '#10b981',
-                    backgroundColor: 'rgba(16, 185, 129, 0.2)',
-                    fill: true,
-                    tension: 0, // strict straight lines
-                    pointRadius: 0
-                }]
-            };
-
-            const monoCtxEN = document.getElementById('monotonicChartEN');
-            if (monoCtxEN) {
-                new Chart(monoCtxEN, {
-                    type: 'line',
-                    data: monotonicChartConfig,
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: { min: 0, max: 1, title: { display: true, text: 'Truth Degree Q(p)' } },
-                            x: { 
-                                title: { display: true, text: 'Proportion (p)' },
-                                ticks: {
-                                    callback: function(val, index) {
-                                        const xVal = monoX[index];
-                                        return [0, 0.25, 0.5, 0.75, 1].includes(xVal) ? xVal.toFixed(2) : '';
-                                    },
-                                    maxRotation: 0
-                                }
-                            }
+            ['EN', 'FR'].forEach(lang => {
+                // 5.1 Monotonic
+                const monoCtx = document.getElementById('monotonicChart' + lang);
+                if (monoCtx) {
+                    new Chart(monoCtx, {
+                        type: 'line',
+                        data: {
+                            labels: monoX.map(x => x.toFixed(2)),
+                            datasets: [{
+                                label: 'Monotone (la plupart)',
+                                data: monoY,
+                                specialPoints: [{index: 50, label: '0.5'}],
+                                borderColor: '#10b981',
+                                backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                                fill: true,
+                                tension: 0,
+                                pointRadius: 0
+                            }]
                         },
-                        plugins: { legend: { display: true } }
-                    }
-                });
-            }
-
-            const monoCtxFR = document.getElementById('monotonicChartFR');
-            if (monoCtxFR) {
-                new Chart(monoCtxFR, {
-                    type: 'line',
-                    data: {
-                        ...monotonicChartConfig,
-                        datasets: [{
-                            ...monotonicChartConfig.datasets[0],
-                            label: 'Q(p) = Monotone (la plupart)'
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: { min: 0, max: 1, title: { display: true, text: 'Degré de vérité Q(p)' } },
-                            x: { 
-                                title: { display: true, text: 'Proportion (p)' },
-                                ticks: {
-                                    callback: function(val, index) {
-                                        const xVal = monoX[index];
-                                        return [0, 0.25, 0.5, 0.75, 1].includes(xVal) ? xVal.toFixed(2) : '';
-                                    },
-                                    maxRotation: 0
-                                }
-                            }
+                        options: commonOptions,
+                        plugins: [pointLabelsPlugin]
+                    });
+                }
+                
+                // 5.2 Non-monotonic (Gaussian around 0.5)
+                const nonMonoCtx = document.getElementById('nonMonotonicChart' + lang);
+                if (nonMonoCtx) {
+                    const nonMonoY = monoX.map(x => Math.exp(-0.5 * Math.pow((x - 0.5) / 0.1, 2)));
+                    new Chart(nonMonoCtx, {
+                        type: 'line',
+                        data: {
+                            labels: monoX.map(x => x.toFixed(2)),
+                            datasets: [{
+                                label: 'Non monotone (≈ moitié)',
+                                data: nonMonoY,
+                                specialPoints: [{index: 50, label: '0.5'}],
+                                borderColor: '#f59e0b',
+                                backgroundColor: 'rgba(245, 158, 11, 0.2)',
+                                fill: true,
+                                tension: 0.4,
+                                pointRadius: 0
+                            }]
                         },
-                        plugins: { legend: { display: true } }
-                    }
-                });
-            }
+                        options: commonOptions,
+                        plugins: [pointLabelsPlugin]
+                    });
+                }
+
+                // 5.3 Regular (Linear)
+                const regCtx = document.getElementById('regularChart' + lang);
+                if (regCtx) {
+                    new Chart(regCtx, {
+                        type: 'line',
+                        data: {
+                            labels: monoX.map(x => x.toFixed(2)),
+                            datasets: [{
+                                label: 'Régulier',
+                                data: monoX,
+                                borderColor: '#3b82f6',
+                                backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                                fill: true,
+                                tension: 0,
+                                pointRadius: 0
+                            }]
+                        },
+                        options: commonOptions
+                    });
+                }
+
+                // 5.4 Non-regular (Constant 0.5)
+                const nonRegCtx = document.getElementById('nonRegularChart' + lang);
+                if (nonRegCtx) {
+                    new Chart(nonRegCtx, {
+                        type: 'line',
+                        data: {
+                            labels: monoX.map(x => x.toFixed(2)),
+                            datasets: [{
+                                label: 'Non régulier',
+                                data: monoX.map(() => 0.5),
+                                borderColor: '#ef4444',
+                                backgroundColor: 'rgba(239, 68, 68, 0.2)',
+                                fill: true,
+                                tension: 0,
+                                pointRadius: 0
+                            }]
+                        },
+                        options: commonOptions
+                    });
+                }
+
+                // 5.5 Linguistic ("Beaucoup" & "Peu")
+                const lingCtx = document.getElementById('linguisticChart' + lang);
+                if (lingCtx) {
+                    const beaucoupY = monoX.map(x => 1 / (1 + Math.exp(-10 * (x - 0.5))));
+                    const peuY = monoX.map(x => 1 - (1 / (1 + Math.exp(-10 * (x - 0.5)))));
+                    new Chart(lingCtx, {
+                        type: 'line',
+                        data: {
+                            labels: monoX.map(x => x.toFixed(2)),
+                            datasets: [
+                                {
+                                    label: 'Beaucoup',
+                                    data: beaucoupY,
+                                    specialPoints: [{index: 50, label: '0.5'}],
+                                    borderColor: '#111827',
+                                    backgroundColor: 'transparent',
+                                    fill: false,
+                                    tension: 0.4,
+                                    pointRadius: 0
+                                },
+                                {
+                                    label: 'Peu',
+                                    data: peuY,
+                                    borderColor: '#d946ef',
+                                    backgroundColor: 'transparent',
+                                    fill: false,
+                                    tension: 0.4,
+                                    pointRadius: 0
+                                }
+                            ]
+                        },
+                        options: commonOptions,
+                        plugins: [pointLabelsPlugin]
+                    });
+                }
+            });
         });
     </script>
 </body>
