@@ -1834,12 +1834,6 @@ Accepte   Refus
             }, unionOptions);
 
             // NOT (Logical Complement) Chart
-            const interDataNot = [];
-            for (let i = 0; i <= 200; i++) {
-                let n = 1 - interDataTriangle[i].y;
-                interDataNot.push({x: interDataTriangle[i].x, y: n});
-            }
-
             const notOptions = {
                 ...commonOptions,
                 plugins: {
@@ -1878,10 +1872,10 @@ Accepte   Refus
                     },
                     {
                         label: '¬ A',
-                        data: interDataNot,
+                        data: interDataTriangle,
                         borderColor: 'transparent',
                         backgroundColor: 'rgba(16, 185, 129, 0.4)', // green fill
-                        fill: true,
+                        fill: {value: 1},
                         tension: 0,
                         pointRadius: 0
                     }
