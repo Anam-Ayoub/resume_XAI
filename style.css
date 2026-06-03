@@ -264,3 +264,23 @@ footer {
     margin: 0 auto;
     padding: 2rem 2rem;
 }
+
+/* Function Sections */
+.function-section {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--border-color);
+}
+.function-section:first-of-type {
+    border-top: none;
+    margin-top: 1rem;
+    padding-top: 0;
+}
+.chart-container {
+    margin: 2rem 0;
+    padding: 1rem;
+    background: var(--hover-bg);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+

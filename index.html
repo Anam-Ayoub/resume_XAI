@@ -100,10 +100,102 @@
                         </ul>
                     </div>
                     
-                    <figure>
-                        <img src="figs/1/fig1.3.png" alt="Linguistic Variables" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+1.3+Missing'">
-                        <figcaption>Figure 1.3: Examples of membership functions for linguistic variables.</figcaption>
-                    </figure>
+                    <div class="function-section">
+                        <h4>Triangular Function</h4>
+                        <p><strong>Concept:</strong> The triangular membership function is the simplest and most common. It uses three points to form a triangle: a starting point (degree 0), a peak point (degree 1), and an ending point (degree 0).</p>
+                        
+                        <div class="math-block">
+                            <strong>Formula:</strong><br>
+                            $$ \mu(x) = \begin{cases} 
+                            0 & x \le a \\
+                            \frac{x - a}{b - a} & a < x \le b \\
+                            \frac{c - x}{c - b} & b < x \le c \\
+                            0 & x > c 
+                            \end{cases} $$
+                        </div>
+                        
+                        <p><strong>Step-by-step Calculation:</strong></p>
+                        <ol>
+                            <li>If $x \le a$ or $x \ge c$, the membership degree is 0.</li>
+                            <li>If $x = b$, the degree is 1.</li>
+                            <li>If $a < x < b$, calculate the upward slope: $(x - a) / (b - a)$.</li>
+                            <li>If $b < x < c$, calculate the downward slope: $(c - x) / (c - b)$.</li>
+                        </ol>
+
+                        <div class="chart-container" style="position: relative; height:300px; width:100%">
+                            <canvas id="triangularChartEn"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="function-section">
+                        <h4>Trapezoidal Function</h4>
+                        <p><strong>Concept:</strong> The trapezoidal function is similar to the triangular one, but instead of a single peak point, it has a flat top where the membership degree remains 1 over an interval.</p>
+                        
+                        <div class="math-block">
+                            <strong>Formula:</strong><br>
+                            $$ \mu(x) = \begin{cases} 
+                            0 & x \le a \\
+                            \frac{x - a}{b - a} & a < x \le b \\
+                            1 & b < x \le c \\
+                            \frac{d - x}{d - c} & c < x \le d \\
+                            0 & x > d 
+                            \end{cases} $$
+                        </div>
+                        
+                        <p><strong>Step-by-step Calculation:</strong></p>
+                        <ol>
+                            <li>If $x \le a$ or $x \ge d$, the membership degree is 0.</li>
+                            <li>If $b \le x \le c$, the degree is 1.</li>
+                            <li>If $a < x < b$, calculate the upward slope: $(x - a) / (b - a)$.</li>
+                            <li>If $c < x < d$, calculate the downward slope: $(d - x) / (d - c)$.</li>
+                        </ol>
+
+                        <div class="chart-container" style="position: relative; height:300px; width:100%">
+                            <canvas id="trapezoidalChartEn"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="function-section">
+                        <h4>Gaussian Function</h4>
+                        <p><strong>Concept:</strong> The Gaussian function creates a smooth, bell-shaped curve. It is infinitely wide but approaches zero as it gets further from the center. It is defined by its center and its width.</p>
+                        
+                        <div class="math-block">
+                            <strong>Formula:</strong><br>
+                            $$ \mu(x) = e^{-\frac{(x - c)^2}{2\sigma^2}} $$
+                        </div>
+                        
+                        <p><strong>Step-by-step Calculation:</strong></p>
+                        <ol>
+                            <li>Calculate the squared distance from center: $(x - c)^2$.</li>
+                            <li>Divide by the spread factor: $(x - c)^2 / (2\sigma^2)$.</li>
+                            <li>Calculate the final degree: $e^{-((x - c)^2 / 2\sigma^2)}$.</li>
+                        </ol>
+
+                        <div class="chart-container" style="position: relative; height:300px; width:100%">
+                            <canvas id="gaussianChartEn"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="function-section">
+                        <h4>Sigmoid Function</h4>
+                        <p><strong>Concept:</strong> The sigmoid function provides a smooth transition from 0 to 1 (or 1 to 0). It is often used for concepts like "very large" or "very small" where the membership degree stays at 1 after a certain point.</p>
+                        
+                        <div class="math-block">
+                            <strong>Formula:</strong><br>
+                            $$ \mu(x) = \frac{1}{1 + e^{-a(x - c)}} $$
+                        </div>
+                        
+                        <p><strong>Step-by-step Calculation:</strong></p>
+                        <ol>
+                            <li>Calculate the distance multiplied by slope: $-a(x - c)$.</li>
+                            <li>Apply the exponential function: $e^{-a(x - c)}$.</li>
+                            <li>Calculate the final degree: $1 / (1 + e^{-a(x - c)})$.</li>
+                        </ol>
+
+                        <div class="chart-container" style="position: relative; height:300px; width:100%">
+                            <canvas id="sigmoidChartEn"></canvas>
+                        </div>
+                    </div>
 
                     <h3>Fuzzy Logic Operators (Zadeh's Formalism)</h3>
                     <p>When combining fuzzy sets, we use specific mathematical rules:</p>
@@ -406,7 +498,7 @@ Accept    Refuse
                         <li><strong>Main Advantages:</strong> Better uncertainty management, progressive decisions, greater robustness, and rules that map closely to natural human reasoning.</li>
                         <li><strong>Applications:</strong> Expert systems, finance, medicine, and general decision support.</li>
                     </ul>
-                </section>
+
             </main>
             
             <footer>
@@ -474,10 +566,102 @@ Accept    Refuse
                         </ul>
                     </div>
                     
-                    <figure>
-                        <img src="figs/1/fig1.3.png" alt="Variables Linguistiques" onerror="this.src='https://via.placeholder.com/800x400?text=Figure+1.3+Manquante'">
-                        <figcaption>Figure 1.3 : Exemples de fonctions d'appartenance pour des variables linguistiques.</figcaption>
-                    </figure>
+                    <div class="function-section">
+                        <h4>Fonction Triangulaire</h4>
+                        <p><strong>Concept :</strong> La fonction d'appartenance triangulaire est la plus simple et la plus courante. Elle utilise trois points pour former un triangle : un point de départ (degré 0), un sommet (degré 1) et un point de fin (degré 0).</p>
+                        
+                        <div class="math-block">
+                            <strong>Formule :</strong><br>
+                            $$ \mu(x) = \begin{cases} 
+                            0 & x \le a \\
+                            \frac{x - a}{b - a} & a < x \le b \\
+                            \frac{c - x}{c - b} & b < x \le c \\
+                            0 & x > c 
+                            \end{cases} $$
+                        </div>
+                        
+                        <p><strong>Calcul étape par étape :</strong></p>
+                        <ol>
+                            <li>Si $x \le a$ ou $x \ge c$, le degré d'appartenance est 0.</li>
+                            <li>Si $x = b$, le degré est 1.</li>
+                            <li>Si $a < x < b$, calculez la pente ascendante : $(x - a) / (b - a)$.</li>
+                            <li>Si $b < x < c$, calculez la pente descendante : $(c - x) / (c - b)$.</li>
+                        </ol>
+
+                        <div class="chart-container" style="position: relative; height:300px; width:100%">
+                            <canvas id="triangularChartFr"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="function-section">
+                        <h4>Fonction Trapézoïdale</h4>
+                        <p><strong>Concept :</strong> La fonction trapézoïdale est similaire à la fonction triangulaire, mais au lieu d'un seul point au sommet, elle possède un plateau où le degré d'appartenance reste à 1 sur un intervalle donné.</p>
+                        
+                        <div class="math-block">
+                            <strong>Formule :</strong><br>
+                            $$ \mu(x) = \begin{cases} 
+                            0 & x \le a \\
+                            \frac{x - a}{b - a} & a < x \le b \\
+                            1 & b < x \le c \\
+                            \frac{d - x}{d - c} & c < x \le d \\
+                            0 & x > d 
+                            \end{cases} $$
+                        </div>
+                        
+                        <p><strong>Calcul étape par étape :</strong></p>
+                        <ol>
+                            <li>Si $x \le a$ ou $x \ge d$, l'appartenance est 0.</li>
+                            <li>Si $b \le x \le c$, l'appartenance est 1.</li>
+                            <li>Si $a < x < b$, calculez la pente ascendante : $(x - a) / (b - a)$.</li>
+                            <li>Si $c < x < d$, calculez la pente descendante : $(d - x) / (d - c)$.</li>
+                        </ol>
+
+                        <div class="chart-container" style="position: relative; height:300px; width:100%">
+                            <canvas id="trapezoidalChartFr"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="function-section">
+                        <h4>Fonction Gaussienne</h4>
+                        <p><strong>Concept :</strong> La fonction gaussienne crée une courbe douce en forme de cloche. Elle est infiniment large mais s'approche de zéro en s'éloignant du centre. Elle est définie par son centre et sa largeur.</p>
+                        
+                        <div class="math-block">
+                            <strong>Formule :</strong><br>
+                            $$ \mu(x) = e^{-\frac{(x - c)^2}{2\sigma^2}} $$
+                        </div>
+                        
+                        <p><strong>Calcul étape par étape :</strong></p>
+                        <ol>
+                            <li>Calculez la distance au centre au carré : $(x - c)^2$.</li>
+                            <li>Divisez par le facteur d'écart : $(x - c)^2 / (2\sigma^2)$.</li>
+                            <li>Calculez le degré final : $e^{-((x - c)^2 / 2\sigma^2)}$.</li>
+                        </ol>
+
+                        <div class="chart-container" style="position: relative; height:300px; width:100%">
+                            <canvas id="gaussianChartFr"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="function-section">
+                        <h4>Fonction Sigmoïde</h4>
+                        <p><strong>Concept :</strong> La fonction sigmoïde offre une transition douce de 0 à 1 (ou de 1 à 0). Elle est souvent utilisée pour des concepts tels que "très grand" ou "très petit", où le degré d'appartenance reste à 1 après un certain point.</p>
+                        
+                        <div class="math-block">
+                            <strong>Formule :</strong><br>
+                            $$ \mu(x) = \frac{1}{1 + e^{-a(x - c)}} $$
+                        </div>
+                        
+                        <p><strong>Calcul étape par étape :</strong></p>
+                        <ol>
+                            <li>Calculez la distance multipliée par la pente : $-a(x - c)$.</li>
+                            <li>Appliquez la fonction exponentielle : $e^{-a(x - c)}$.</li>
+                            <li>Calculez le degré final : $1 / (1 + e^{-a(x - c)})$.</li>
+                        </ol>
+
+                        <div class="chart-container" style="position: relative; height:300px; width:100%">
+                            <canvas id="sigmoidChartFr"></canvas>
+                        </div>
+                    </div>
 
                     <h3>Opérateurs à Logique Floue (Formalisme de Zadeh)</h3>
                     <p>Lors de la combinaison d'ensembles flous, nous utilisons des règles mathématiques spécifiques :</p>
@@ -780,7 +964,7 @@ Accepte   Refus
                         <li><strong>Avantages principaux :</strong> Meilleure gestion de l'incertitude, décisions progressives, robustesse améliorée et règles proches du raisonnement humain.</li>
                         <li><strong>Domaines d'application :</strong> Systèmes experts, finance, médecine et aide à la décision.</li>
                     </ul>
-                </section>
+
             </main>
             
             <footer>
@@ -843,5 +1027,275 @@ Accepte   Refus
     <!-- Prism JS for Syntax Highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const pointLabelsPlugin = {
+                id: 'pointLabels',
+                afterDraw(chart) {
+                    const { ctx, scales: { x, y } } = chart;
+                    const dataset = chart.data.datasets[0];
+                    const specialPoints = dataset.specialPoints;
+
+                    if (!specialPoints) return;
+
+                    ctx.save();
+                    ctx.font = 'bold 18px Arial';
+                    
+                    specialPoints.forEach(pt => {
+                        const meta = chart.getDatasetMeta(0);
+                        const dataPoint = meta.data[pt.index];
+                        if (!dataPoint) return;
+
+                        const px = dataPoint.x;
+                        const py = dataPoint.y;
+                        const yZero = y.getPixelForValue(0);
+
+                        // Draw dotted line
+                        ctx.beginPath();
+                        ctx.setLineDash([6, 4]);
+                        ctx.moveTo(px, py);
+                        ctx.lineTo(px, yZero);
+                        ctx.lineWidth = 2;
+                        ctx.strokeStyle = '#e11d48'; // Prominent red
+                        ctx.stroke();
+
+                        // Draw label exactly near the point
+                        ctx.setLineDash([]);
+                        let textY = py - 12;
+                        let textX = px;
+                        
+                        // Move label higher if the point is at the bottom line
+                        if (Math.abs(py - yZero) < 5) {
+                            textY = py - 18;
+                        }
+
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+                        const textWidth = ctx.measureText(pt.label).width;
+                        
+                        // White semi-transparent background so the label pops
+                        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                        ctx.fillRect(textX - textWidth/2 - 4, textY - 18, textWidth + 8, 22);
+                        
+                        ctx.fillStyle = '#e11d48';
+                        ctx.fillText(pt.label, textX, textY);
+                    });
+                    
+                    const examplePoints = dataset.examplePoints;
+                    if (examplePoints) {
+                        ctx.font = 'bold 13px Arial';
+                        ctx.textBaseline = 'middle';
+                        
+                        examplePoints.forEach(ex => {
+                            const meta = chart.getDatasetMeta(0);
+                            const lower = Math.floor(ex.index);
+                            const upper = Math.ceil(ex.index);
+                            const fraction = ex.index - lower;
+                            
+                            const p1 = meta.data[lower];
+                            const p2 = meta.data[upper] || p1;
+                            
+                            if (!p1) return;
+
+                            const px = p1.x + fraction * (p2.x - p1.x);
+                            const py = p1.y + fraction * (p2.y - p1.y);
+
+                            // Draw a green dot
+                            ctx.beginPath();
+                            ctx.arc(px, py, 6, 0, 2 * Math.PI);
+                            ctx.fillStyle = '#059669'; // Emerald green
+                            ctx.fill();
+                            ctx.strokeStyle = '#fff';
+                            ctx.lineWidth = 2;
+                            ctx.stroke();
+
+                            // Determine where to place text
+                            let textY = py - 30;
+                            let textX;
+                            const textWidth = ctx.measureText(ex.formula).width;
+
+                            if (ex.forceLeft || px < chart.width / 2) {
+                                // Left half of the chart (or forced): point outward to the left
+                                textX = px - 20;
+                                ctx.textAlign = 'right';
+                                
+                                // Prevent going off the left edge
+                                if (textX - textWidth < 10) {
+                                    textX = px + 20;
+                                    ctx.textAlign = 'left';
+                                }
+                            } else {
+                                // Right half of the chart: point outward to the right
+                                textX = px + 20;
+                                ctx.textAlign = 'left';
+                                
+                                // Prevent going off the right edge
+                                if (textX + textWidth > chart.width - 10) {
+                                    textX = px - 20;
+                                    ctx.textAlign = 'right';
+                                }
+                            }
+                            
+                            // Prevent going off the top edge
+                            if (py < 60) {
+                                textY = py + 30;
+                            }
+
+                            // Draw pointer line
+                            ctx.beginPath();
+                            ctx.setLineDash([3, 3]);
+                            ctx.moveTo(px, py);
+                            ctx.lineTo(textX + (ctx.textAlign === 'right' ? 8 : -8), textY);
+                            ctx.strokeStyle = '#059669';
+                            ctx.lineWidth = 1.5;
+                            ctx.stroke();
+                            ctx.setLineDash([]);
+
+                            // Draw text background box
+                            const boxX = ctx.textAlign === 'right' ? textX - textWidth - 8 : textX - 8;
+                            
+                            ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+                            ctx.fillRect(boxX, textY - 14, textWidth + 16, 28);
+                            
+                            // Draw border for the box
+                            ctx.strokeStyle = '#059669';
+                            ctx.lineWidth = 1;
+                            ctx.strokeRect(boxX, textY - 14, textWidth + 16, 28);
+
+                            // Draw text
+                            ctx.fillStyle = '#059669';
+                            ctx.fillText(ex.formula, textX, textY);
+                        });
+                    }
+                    ctx.restore();
+                }
+            };
+
+            const commonOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return 'μ(x) = ' + context.parsed.y.toFixed(2);
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: { min: 0, max: 1.2, title: { display: true, text: 'Degree (μ)' } }, // increased max to 1.2 so labels fit
+                    x: { title: { display: true, text: 'Input (x)' } }
+                }
+            };
+
+            function createChart(ctxId, dataConfig) {
+                ['En', 'Fr'].forEach(lang => {
+                    const ctx = document.getElementById(ctxId + lang);
+                    if (ctx) {
+                        new Chart(ctx, {
+                            type: 'line',
+                            data: dataConfig,
+                            options: commonOptions,
+                            plugins: [pointLabelsPlugin]
+                        });
+                    }
+                });
+            }
+
+            // 1. Triangular (10, 20, 30)
+            createChart('triangularChart', {
+                labels: [0, 5, 10, 15, 20, 25, 30, 35, 40],
+                datasets: [{
+                    label: 'Triangular (10, 20, 30)',
+                    data: [0, 0, 0, 0.5, 1, 0.5, 0, 0, 0],
+                    specialPoints: [
+                        {index: 2, label: 'a'},
+                        {index: 4, label: 'b'},
+                        {index: 6, label: 'c'}
+                    ],
+                    examplePoints: [
+                        {index: 3, formula: 'μ(15) = (15-10)/10 = 0.5'},
+                        {index: 5.2, formula: 'μ(26) = (30-26)/10 = 0.4'}
+                    ],
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                    fill: true,
+                    tension: 0
+                }]
+            });
+
+            // 2. Trapezoidal (10, 20, 30, 40)
+            createChart('trapezoidalChart', {
+                labels: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50],
+                datasets: [{
+                    label: 'Trapezoidal (10, 20, 30, 40)',
+                    data: [0, 0, 0, 0.5, 1, 1, 1, 0.5, 0, 0, 0],
+                    specialPoints: [
+                        {index: 2, label: 'a'},
+                        {index: 4, label: 'b'},
+                        {index: 6, label: 'c'},
+                        {index: 8, label: 'd'}
+                    ],
+                    examplePoints: [
+                        {index: 2.4, formula: 'μ(12) = (12-10)/10 = 0.2'},
+                        {index: 6.8, formula: 'μ(34) = (40-34)/10 = 0.6'}
+                    ],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                    fill: true,
+                    tension: 0
+                }]
+            });
+
+            // 3. Gaussian (c=20, sigma=5)
+            const gaussX = Array.from({length: 41}, (_, i) => i);
+            const gaussY = gaussX.map(x => Math.exp(-Math.pow(x - 20, 2) / (2 * 25)));
+            createChart('gaussianChart', {
+                labels: gaussX,
+                datasets: [{
+                    label: 'Gaussian (c=20, σ=5)',
+                    data: gaussY,
+                    specialPoints: [
+                        {index: 20, label: 'c'}
+                    ],
+                    examplePoints: [
+                        {index: 13, formula: 'μ(13) = e^-(49/50) = 0.38'},
+                        {index: 27, formula: 'μ(27) = e^-(49/50) = 0.38'}
+                    ],
+                    borderColor: '#8b5cf6',
+                    backgroundColor: 'rgba(139, 92, 246, 0.2)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 0
+                }]
+            });
+
+            // 4. Sigmoid (a=0.5, c=20)
+            const sigX = Array.from({length: 41}, (_, i) => i);
+            const sigY = sigX.map(x => 1 / (1 + Math.exp(-0.5 * (x - 20))));
+            createChart('sigmoidChart', {
+                labels: sigX,
+                datasets: [{
+                    label: 'Sigmoid (a=0.5, c=20)',
+                    data: sigY,
+                    specialPoints: [
+                        {index: 20, label: 'c'}
+                    ],
+                    examplePoints: [
+                        {index: 18, formula: 'μ(18) = 1/(1+e^1) = 0.27', forceLeft: true},
+                        {index: 22, formula: 'μ(22) = 1/(1+e^-1) = 0.73', forceLeft: true}
+                    ],
+                    borderColor: '#f59e0b',
+                    backgroundColor: 'rgba(245, 158, 11, 0.2)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 0
+                }]
+            });
+        });
+    </script>
 </body>
 </html>
