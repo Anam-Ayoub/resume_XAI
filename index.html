@@ -523,25 +523,51 @@ while iteration < max_iter:
                     <h2>IV. Adaptive Neuro-Fuzzy Inference System (ANFIS)</h2>
                     
                     <div class="card">
-                        <h3>Why ANFIS?</h3>
-                        <p>Standard Neural Networks (ANN) are powerful but act as a "black box" that cannot explain decisions. Standard Fuzzy Logic is interpretable but requires manual rule creation. <strong>ANFIS combines both:</strong> it learns parameters automatically from data while generating clear, interpretable IF-THEN rules.</p>
+                        <h3>1. Review & The Problem</h3>
+                        <p><strong>Review (Fuzzy System):</strong> A classic fuzzy system includes fuzzification, a rule base, an inference engine, and defuzzification (e.g., Mamdani, Sugeno, Tsukamoto). ANFIS is specifically based on the <strong>Sugeno model</strong>.</p>
+                        <p><strong>The Problem:</strong> Classic fuzzy systems require defining rules manually. Conversely, Neural Networks (ANN) learn automatically but are opaque "black boxes".</p>
                     </div>
-
-                    <h3>Architecture (The 5 Layers)</h3>
-                    <ol>
-                        <li><strong>Layer 1 (Fuzzification):</strong> Calculates membership degree.</li>
-                        <li><strong>Layer 2 (Rule Activation):</strong> Multiplies inputs to find the activation strength of the rule.</li>
-                        <li><strong>Layer 3 (Normalization):</strong> Calculates the relative weight of the rule.</li>
-                        <li><strong>Layer 4 (Rule Output):</strong> Applies the mathematical Sugeno function.</li>
-                        <li><strong>Layer 5 (Final Output):</strong> Calculates final global output (Defuzzification).</li>
-                    </ol>
 
                     <div class="card">
-                        <h3>Comparison & Applications</h3>
-                        <p><strong>ANN vs ANFIS:</strong> ANN says "I predict, but I cannot explain", whereas ANFIS says "I predict AND I explain using rules".</p>
-                        <p><strong>Pros & Cons:</strong> Highly precise and explainable, but computationally expensive and sensitive to data.</p>
-                        <p><strong>Example (Credit Risk):</strong> "IF income is low AND debt is high THEN credit = refused". Used in finance, medical diagnosis, smart grids, robotics, and XAI.</p>
+                        <h3>2. Definition & Sugeno Rules</h3>
+                        <p><strong>Definition:</strong> ANFIS is the perfect hybrid solution (Neural Networks + Fuzzy Logic). It uses Sugeno fuzzy rules, adopts the structure of a neural network, and learns its parameters automatically while remaining interpretable.</p>
+                        <p><strong>Sugeno Rules Review (1st Order):</strong></p>
+                        <ul>
+                            <li><strong>Rule 1:</strong> IF $x$ is $A_1$ AND $y$ is $B_1$ THEN $f_1 = a_1x + b_1y + c_1$</li>
+                            <li><strong>Rule 2:</strong> IF $x$ is $A_2$ AND $y$ is $B_2$ THEN $f_2 = a_2x + b_2y + c_2$</li>
+                        </ul>
                     </div>
+
+                    <div class="card">
+                        <h3>3. Real Context vs ANN & The ANFIS Approach</h3>
+                        <p><strong>Real Context (Credit Risk):</strong> A bank evaluates a credit application (accepted or risky) based on income and debt. A classic ANN model learns a function $f(x,y) \rightarrow \text{Decision}$ but provides no understandable explanation to justify a refusal.</p>
+                        <p><strong>The ANFIS Approach & Modeling:</strong> ANFIS combines machine learning and fuzzy interpretability.</p>
+                        <ul>
+                            <li><strong>Step 1 (Fuzzification):</strong> Income becomes Low/Medium/High and debt becomes Low/High.</li>
+                            <li><strong>Step 2 (Rules):</strong> Logical rules are created (e.g., IF income is low AND debt is high THEN refused).</li>
+                            <li><strong>Step 3 (Learning):</strong> ANFIS automatically adjusts the membership functions using the bank's data.</li>
+                        </ul>
+                        <p><strong>Concrete Example:</strong> For a client with €3000 income and 60% debt, ANFIS calculates the degrees (e.g., Medium Income = 0.6, High Debt = 0.7) and outputs a clear decision: Credit accepted at 0.4 and Credit risky at 0.6.</p>
+                    </div>
+
+                    <h3>4. Architecture (The 5 Layers)</h3>
+                    <ol>
+                        <li><strong>Layer 1 (Fuzzification):</strong> Calculates membership degrees using functions (e.g., Gaussian).
+                            <div class="math-block">$$ \mu(x) = e^{-\frac{(x-c)^2}{2\sigma^2}} $$</div>
+                        </li>
+                        <li><strong>Layer 2 (Rule Activation):</strong> Calculates the activation weight.
+                            <div class="math-block">$$ w_i = \mu_{A_i}(x)\mu_{B_i}(y) $$</div>
+                        </li>
+                        <li><strong>Layer 3 (Normalization):</strong>
+                            <div class="math-block">$$ \overline{w}_i = \frac{w_i}{\sum w_i} $$</div>
+                        </li>
+                        <li><strong>Layer 4 (Rule Output):</strong> Applies the Sugeno equation.
+                            <div class="math-block">$$ O_{4,i} = \overline{w}_i(a_i x + b_i y + c_i) $$</div>
+                        </li>
+                        <li><strong>Layer 5 (Final Output):</strong> Global sum.
+                            <div class="math-block">$$ f = \sum \overline{w}_i f_i $$</div>
+                        </li>
+                    </ol>
                 </section>
                 <section id="quantifiers-en">
                     <h2>V. Fuzzy Quantifiers</h2>
@@ -1227,25 +1253,51 @@ while iteration < max_iter:
                     <h2>IV. Système d'Inférence Neuro-Flou Adaptatif (ANFIS)</h2>
                     
                     <div class="card">
-                        <h3>Pourquoi ANFIS ?</h3>
-                        <p>Les réseaux de neurones (ANN) sont puissants mais agissent comme une "boîte noire" qui ne peut pas expliquer ses décisions. La logique floue est interprétable mais nécessite la création manuelle de règles. <strong>ANFIS combine les deux :</strong> il apprend les paramètres automatiquement à partir des données tout en générant des règles SI-ALORS claires et interprétables.</p>
+                        <h3>1. Rappel & Le Problème</h3>
+                        <p><strong>Rappel (Système Flou) :</strong> Un système flou classique comprend la fuzzification, une base de règles, un moteur d'inférence et la défuzzification (ex: Mamdani, Sugeno, Tsukamoto). ANFIS est spécifiquement basé sur le modèle de <strong>Sugeno</strong>.</p>
+                        <p><strong>Le Problème :</strong> Les systèmes flous classiques nécessitent de définir les règles manuellement. À l'inverse, les réseaux de neurones (ANN) apprennent automatiquement mais sont des "boîtes noires" opaques.</p>
                     </div>
-
-                    <h3>Architecture (Les 5 Couches)</h3>
-                    <ol>
-                        <li><strong>Couche 1 (Fuzzification) :</strong> Calcule le degré d'appartenance.</li>
-                        <li><strong>Couche 2 (Activation des règles) :</strong> Multiplie les entrées pour trouver la force d'activation de la règle.</li>
-                        <li><strong>Couche 3 (Normalisation) :</strong> Calcule le poids relatif de la règle.</li>
-                        <li><strong>Couche 4 (Sortie des règles) :</strong> Applique la fonction mathématique de Sugeno.</li>
-                        <li><strong>Couche 5 (Sortie finale) :</strong> Calcule la sortie globale finale (Défuzzification).</li>
-                    </ol>
 
                     <div class="card">
-                        <h3>Comparaison & Applications</h3>
-                        <p><strong>ANN vs ANFIS :</strong> ANN dit "Je prédis, mais je ne peux pas expliquer", alors qu'ANFIS dit "Je prédis ET j'explique en utilisant des règles".</p>
-                        <p><strong>Avantages & Inconvénients :</strong> Très précis et explicable, mais coûteux en calcul et sensible aux données.</p>
-                        <p><strong>Exemple (Risque de crédit) :</strong> "SI revenu est faible ET dette est élevée ALORS crédit = refusé". Utilisé en finance, diagnostic médical, smart grids, robotique et XAI.</p>
+                        <h3>2. Définition & Règles Sugeno</h3>
+                        <p><strong>Définition :</strong> ANFIS est la solution hybride parfaite (Réseaux de neurones + Logique floue). Il utilise des règles floues Sugeno, adopte la structure d'un réseau de neurones, et apprend ses paramètres automatiquement tout en restant interprétable.</p>
+                        <p><strong>Rappel des Règles Sugeno (Ordre 1) :</strong></p>
+                        <ul>
+                            <li><strong>Règle 1 :</strong> SI $x$ est $A_1$ ET $y$ est $B_1$ ALORS $f_1 = a_1x + b_1y + c_1$</li>
+                            <li><strong>Règle 2 :</strong> SI $x$ est $A_2$ ET $y$ est $B_2$ ALORS $f_2 = a_2x + b_2y + c_2$</li>
+                        </ul>
                     </div>
+
+                    <div class="card">
+                        <h3>3. Contexte Réel vs ANN & L'Approche ANFIS</h3>
+                        <p><strong>Contexte Réel & Limites de l'Approche ANN :</strong> Une banque évalue un crédit (accepté ou risqué) selon le revenu et l'endettement. Un modèle ANN classique (boîte noire) apprend une fonction $f(x,y) \rightarrow \text{Décision}$ mais ne fournit aucune explication compréhensible pour justifier un refus.</p>
+                        <p><strong>L'Approche ANFIS & Modélisation :</strong> ANFIS combine l'apprentissage automatique et l'interprétabilité floue.</p>
+                        <ul>
+                            <li><strong>Étape 1 (Fuzzification) :</strong> Le revenu devient Faible/Moyen/Élevé et la dette Faible/Élevée.</li>
+                            <li><strong>Étape 2 (Règles) :</strong> Création de règles logiques (ex: SI revenu faible ET dette élevée ALORS refusé).</li>
+                            <li><strong>Étape 3 (Apprentissage) :</strong> ANFIS ajuste automatiquement les fonctions d'appartenance à partir des données de la banque.</li>
+                        </ul>
+                        <p><strong>Exemple Concret :</strong> Pour un client avec un revenu de 3000€ et une dette de 60%. ANFIS calcule les degrés (ex: Revenu moyen = 0.6, Dette élevée = 0.7) et sort une décision claire : Crédit accepté à 0.4 et Crédit risqué à 0.6.</p>
+                    </div>
+
+                    <h3>4. Architecture (Les 5 Couches)</h3>
+                    <ol>
+                        <li><strong>Couche 1 (Fuzzification) :</strong> Calcul des degrés via des fonctions (ex: Gaussienne).
+                            <div class="math-block">$$ \mu(x) = e^{-\frac{(x-c)^2}{2\sigma^2}} $$</div>
+                        </li>
+                        <li><strong>Couche 2 (Activation des règles) :</strong> Calcul du poids d'activation.
+                            <div class="math-block">$$ w_i = \mu_{A_i}(x)\mu_{B_i}(y) $$</div>
+                        </li>
+                        <li><strong>Couche 3 (Normalisation) :</strong>
+                            <div class="math-block">$$ \overline{w}_i = \frac{w_i}{\sum w_i} $$</div>
+                        </li>
+                        <li><strong>Couche 4 (Sortie des règles) :</strong> Application de l'équation de Sugeno.
+                            <div class="math-block">$$ O_{4,i} = \overline{w}_i(a_i x + b_i y + c_i) $$</div>
+                        </li>
+                        <li><strong>Couche 5 (Sortie finale) :</strong> Somme globale.
+                            <div class="math-block">$$ f = \sum \overline{w}_i f_i $$</div>
+                        </li>
+                    </ol>
                 </section>
                 <section id="quantifiers-fr">
                     <h2>V. Quantificateurs Flous</h2>
