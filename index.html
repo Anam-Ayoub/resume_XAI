@@ -258,6 +258,9 @@
                     <div class="chart-container" style="position: relative; height:300px; width:100%; margin-top: 2rem;">
                         <canvas id="unionChartEn"></canvas>
                     </div>
+                    <div class="chart-container" style="position: relative; height:300px; width:100%; margin-top: 2rem;">
+                        <canvas id="notChartEn"></canvas>
+                    </div>
 
                 </section>
 
@@ -958,6 +961,9 @@ Accept    Refuse
                     </div>
                     <div class="chart-container" style="position: relative; height:300px; width:100%; margin-top: 2rem;">
                         <canvas id="unionChartFr"></canvas>
+                    </div>
+                    <div class="chart-container" style="position: relative; height:300px; width:100%; margin-top: 2rem;">
+                        <canvas id="notChartFr"></canvas>
                     </div>
 
                 </section>
@@ -1826,6 +1832,61 @@ Accepte   Refus
                     }
                 ]
             }, unionOptions);
+
+            // NOT (Logical Complement) Chart
+            const interDataNot = [];
+            for (let i = 0; i <= 200; i++) {
+                let n = 1 - interDataTriangle[i].y;
+                interDataNot.push({x: interDataTriangle[i].x, y: n});
+            }
+
+            const notOptions = {
+                ...commonOptions,
+                plugins: {
+                    ...commonOptions.plugins,
+                    title: {
+                        display: true,
+                        text: '¬ A',
+                        font: { size: 18 }
+                    }
+                },
+                scales: {
+                    y: { 
+                        min: 0, max: 1.2, 
+                        title: { display: true, text: 'Degree (μ)' },
+                        ticks: { stepSize: 1, callback: function(value) { return (value === 0 || value === 1) ? value : ''; } }
+                    },
+                    x: { 
+                        type: 'linear',
+                        min: 0, max: 20,
+                        title: { display: true, text: 'Input (x)' }
+                    }
+                }
+            };
+
+            createChart('notChart', {
+                labels: interDataTriangle.map(d => d.x),
+                datasets: [
+                    {
+                        label: 'A (Triangle)',
+                        data: interDataTriangle,
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'transparent',
+                        fill: false,
+                        tension: 0,
+                        pointRadius: 0
+                    },
+                    {
+                        label: '¬ A',
+                        data: interDataNot,
+                        borderColor: 'transparent',
+                        backgroundColor: 'rgba(16, 185, 129, 0.4)', // green fill
+                        fill: true,
+                        tension: 0,
+                        pointRadius: 0
+                    }
+                ]
+            }, notOptions);
 
             // 1. Triangular (10, 20, 30)
             createChart('triangularChart', {
