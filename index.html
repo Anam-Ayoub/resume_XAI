@@ -218,7 +218,7 @@
                     <h2>II. Inference Systems</h2>
 
                     <div class="card">
-                        <h3>1. Classic Inference Systems</h3>
+                        <h3>Classic Inference Systems</h3>
                         <p>These systems use strict Boolean logic (0=False, 1=True) to deduce conclusions.</p>
                         <ul>
                             <li><strong>Knowledge Base (Base de connaissances):</strong> Comprises the <em>Database</em> (known facts) and the <em>Rule Base</em> (IF-THEN rules).</li>
@@ -234,7 +234,7 @@
                     </figure>
 
                     <div class="card">
-                        <h3>2. Fuzzy Inference Systems (FIS)</h3>
+                        <h3>Fuzzy Inference Systems (FIS)</h3>
                         <p>Handle uncertainty by using linguistic variables instead of strict 0s and 1s. Formally defined by (X, Y, F, R, M).</p>
                         <ol>
                             <li><strong>Fuzzification:</strong> Converting a precise number into a membership degree.</li>
@@ -248,7 +248,7 @@
                         <figcaption>Figure 2.2: The steps of a Fuzzy Inference System.</figcaption>
                     </figure>
 
-                    <h3>3. Fuzzy Inference Models</h3>
+                    <h3>Fuzzy Inference Models</h3>
                     <div class="card model-section">
                         <h4>A. Mamdani Model (Le modèle Mamdani)</h4>
                         <p><strong>Scenario:</strong> Fan speed based on Temperature (30°C).</p>
@@ -482,7 +482,7 @@ while iteration < max_iter:
                     <h2>V. Fuzzy Quantifiers</h2>
                     
                     <div class="card">
-                        <h3>Why use them?</h3>
+                        <h3>Why Use Them?</h3>
                         <p><strong>Why use them? (Pourquoi les utiliser ?)</strong> Classic rules (like "IF CPU is high") are too rigid and lack explanation. Quantifiers (like "IF most indicators are high") make the rules much more natural, flexible, and interpretable.</p>
                         <p><strong>Formal Definition (Définition formelle):</strong> A fuzzy quantifier is a mathematical function that takes a satisfied proportion ($p$) and converts it into a degree of truth ($Q(p)$).</p>
                         <div class="math-block">$$ Q: [0, 1] \rightarrow [0, 1] $$</div>
@@ -534,7 +534,7 @@ while iteration < max_iter:
                 <section class="card">
                     <h2>VI. Fuzzy Decision Trees</h2>
                     
-                    <h3>1. Introduction & Review (Classic Trees)</h3>
+                    <h3>Introduction & Review (Classic Trees)</h3>
                     <ul>
                         <li><strong>Classic Trees:</strong> Supervised learning models making hierarchical decisions via rules. They consist of a root node, branches, and leaves, where each node applies a strict, precise binary test (e.g., Age > 30).
 <pre>
@@ -561,7 +561,7 @@ Accept    Refuse
                         <figcaption>Figure 6.1: Example of a classic decision tree.</figcaption>
                     </figure>
 
-                    <h3>2. Why Use a Fuzzy Decision Tree?</h3>
+                    <h3>Why Use a Fuzzy Decision Tree?</h3>
                     <p>Classic trees have several limitations:</p>
                     <ul>
                         <li><strong>Strict Boundaries:</strong> Rigid cutoffs are not realistic (e.g., a tiny change leads to opposite decisions).</li>
@@ -571,14 +571,14 @@ Accept    Refuse
                     </ul>
                     <p><strong>The Fuzzy Solution:</strong> Fuzzy trees replace strict bounds with membership degrees, making decisions progressive instead of binary.</p>
 
-                    <h3>3. Construction of a Fuzzy Decision Tree</h3>
+                    <h3>Construction of a Fuzzy Decision Tree</h3>
                     <p>The goal is to build the tree using fuzzy membership degrees, calculate fuzzy entropies, and generate fuzzy rules.</p>
                     <ul>
                         <li><strong>Fuzzy Sets:</strong> Instead of a strict boundary, variables are divided into fuzzy sets like "Low", "Medium", and "High".</li>
                         <li><strong>Fuzzy Entropy:</strong> Similar to classic entropy, but uses fuzzy probabilities. To find the probability, you sum the membership degrees for each class instead of counting whole units.</li>
                     </ul>
 
-                    <h3>4. Rule Generation</h3>
+                    <h3>Rule Generation</h3>
                     <ul>
                         <li><strong>Fuzzy Weights:</strong> The weight of each fuzzy branch is calculated by summing the membership degrees.</li>
                         <li><strong>Fuzzy Information Gain:</strong> Determines which attribute to place at the top of the tree.
@@ -599,7 +599,7 @@ Accept    Refuse
                         <em>Rule 3:</em> IF Salary is High AND Age is Medium AND Debt is Low THEN Decision = Accept
                     </div>
 
-                    <h3>5. Conclusion</h3>
+                    <h3>Conclusion</h3>
                     <ul>
                         <li><strong>Main Advantages:</strong> Better uncertainty management, progressive decisions, greater robustness, and rules that map closely to natural human reasoning.</li>
                         <li><strong>Applications:</strong> Expert systems, finance, medicine, and general decision support.</li>
@@ -790,7 +790,7 @@ Accept    Refuse
                     <h2>II. Systèmes d'Inférence</h2>
 
                     <div class="card">
-                        <h3>1. Systèmes d'Inférence Classiques</h3>
+                        <h3>Systèmes d'Inférence Classiques</h3>
                         <p>Ces systèmes utilisent la logique booléenne stricte (0=Faux, 1=Vrai) pour déduire des conclusions.</p>
                         <ul>
                             <li><strong>Base de connaissances :</strong> Comprend la <em>Base de données</em> (faits connus) et la <em>Base de règles</em> (règles SI-ALORS).</li>
@@ -806,7 +806,7 @@ Accept    Refuse
                     </figure>
 
                     <div class="card">
-                        <h3>2. Systèmes d'Inférence Flous (FIS)</h3>
+                        <h3>Systèmes d'Inférence Flous (FIS)</h3>
                         <p>Gèrent l'incertitude en utilisant des variables linguistiques au lieu de 0 et 1 stricts. Définis formellement par (X, Y, F, R, M).</p>
                         <ol>
                             <li><strong>Fuzzification :</strong> Conversion d'un nombre précis en un degré d'appartenance.</li>
@@ -820,7 +820,7 @@ Accept    Refuse
                         <figcaption>Figure 2.2 : Les étapes d'un Système d'Inférence Floue.</figcaption>
                     </figure>
 
-                    <h3>3. Modèles d'Inférence Floue</h3>
+                    <h3>Modèles d'Inférence Floue</h3>
                     <div class="card model-section">
                         <h4>A. Le modèle Mamdani</h4>
                         <p><strong>Scénario :</strong> Vitesse du ventilateur selon la Température (30°C).</p>
@@ -1106,7 +1106,7 @@ while iteration < max_iter:
                 <section class="card">
                     <h2>VI. Arbres de Décision Flous</h2>
                     
-                    <h3>1. Introduction & Rappel (Arbres Classiques)</h3>
+                    <h3>Introduction & Rappel (Arbres Classiques)</h3>
                     <ul>
                         <li><strong>Arbres classiques :</strong> Modèles d'apprentissage supervisé prenant des décisions hiérarchiques via des règles. Ils appliquent un test binaire strict et précis (ex : Age > 30).
 <pre>
@@ -1133,7 +1133,7 @@ Accepte   Refus
                         <figcaption>Figure 6.1 : Exemple d'un arbre de décision classique.</figcaption>
                     </figure>
 
-                    <h3>2. Pourquoi utiliser un arbre de décision flou ?</h3>
+                    <h3>Pourquoi utiliser un arbre de décision flou ?</h3>
                     <p>Les arbres classiques ont plusieurs limites :</p>
                     <ul>
                         <li><strong>Frontières de décision brutales :</strong> Les limites strictes ne sont pas réalistes.</li>
@@ -1143,14 +1143,14 @@ Accepte   Refus
                     </ul>
                     <p><strong>La Solution Floue :</strong> Remplacer les limites strictes par des degrés d'appartenance, rendant les décisions progressives.</p>
 
-                    <h3>3. Construction d'un Arbre de Décision Flou</h3>
+                    <h3>Construction d'un Arbre de Décision Flou</h3>
                     <p>L'objectif est de construire l'arbre en utilisant des degrés d'appartenance flous, calculer les entropies floues et générer des règles floues.</p>
                     <ul>
                         <li><strong>Ensembles flous :</strong> Les variables sont divisées en ensembles flous (ex: "Faible", "Moyen", "Élevé").</li>
                         <li><strong>Entropie Floue :</strong> Utilise des probabilités floues (en sommant les degrés d'appartenance pour chaque classe).</li>
                     </ul>
 
-                    <h3>4. Génération des règles</h3>
+                    <h3>Génération des règles</h3>
                     <ul>
                         <li><strong>Poids flous des ensembles :</strong> Le poids de chaque branche est calculé en sommant les degrés d'appartenance.</li>
                         <li><strong>Gain d'Information Flou :</strong> Détermine quel attribut placer au sommet de l'arbre.
@@ -1171,7 +1171,7 @@ Accepte   Refus
                         <em>Règle 3 :</em> SI Salaire est Élevé ET Age est Moyen ET Dette est Faible ALORS Décision = Accorder
                     </div>
 
-                    <h3>5. Conclusion (Arbres flous)</h3>
+                    <h3>Conclusion (Arbres flous)</h3>
                     <ul>
                         <li><strong>Avantages principaux :</strong> Meilleure gestion de l'incertitude, décisions progressives, robustesse améliorée et règles proches du raisonnement humain.</li>
                         <li><strong>Domaines d'application :</strong> Systèmes experts, finance, médecine et aide à la décision.</li>
