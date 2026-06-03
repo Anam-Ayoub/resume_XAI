@@ -1687,19 +1687,18 @@ Accepte   Refus
             }
 
             // Intersection (Logical AND) Chart
-            const interX = Array.from({length: 21}, (_, i) => i);
-            const interTriangle = interX.map(x => {
-                if (x <= 5 || x >= 15) return 0;
-                if (x <= 10) return (x - 5) / 5;
-                return (15 - x) / 5;
-            });
-            const interTrapezoid = interX.map(x => {
-                if (x <= 10 || x >= 20) return 0;
-                if (x <= 12) return (x - 10) / 2;
-                if (x <= 18) return 1;
-                return (20 - x) / 2;
-            });
-            const interMin = interX.map((x, i) => Math.min(interTriangle[i], interTrapezoid[i]));
+            const interDataTriangle = [];
+            const interDataTrapezoid = [];
+            const interDataMin = [];
+            for (let i = 0; i <= 200; i++) {
+                let x = i / 10;
+                let t = (x <= 5 || x >= 15) ? 0 : (x <= 10 ? (x - 5) / 5 : (15 - x) / 5);
+                let p = (x <= 10 || x >= 20) ? 0 : (x <= 12 ? (x - 10) / 2 : (x <= 18 ? 1 : (20 - x) / 2));
+                let m = Math.min(t, p);
+                interDataTriangle.push({x, y: t});
+                interDataTrapezoid.push({x, y: p});
+                interDataMin.push({x, y: m});
+            }
 
             const intersectionOptions = {
                 ...commonOptions,
@@ -1709,12 +1708,16 @@ Accepte   Refus
                         title: { display: true, text: 'A ∩ B' },
                         ticks: { stepSize: 1, callback: function(value) { return (value === 0 || value === 1) ? value : ''; } }
                     },
-                    x: { title: { display: true, text: 'Input (x)' } }
+                    x: { 
+                        type: 'linear',
+                        min: 0, max: 20,
+                        title: { display: true, text: 'Input (x)' }
+                    }
                 }
             };
 
             createChart('intersectionChart', {
-                labels: interX,
+                labels: interDataTriangle.map(d => d.x),
                 datasets: [
                     {
                         label: 'A (Triangle)',
