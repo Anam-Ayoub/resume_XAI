@@ -1694,6 +1694,7 @@ Accepte   Refus
                         max: 1.1,
                         title: { display: true, text: 'Q(p)' },
                         ticks: {
+                            stepSize: 1,
                             callback: function(value) {
                                 return (value === 0 || value === 1) ? value : '';
                             }
@@ -1702,6 +1703,7 @@ Accepte   Refus
                     x: {
                         title: { display: true, text: 'Proportion (p)' },
                         ticks: {
+                            autoSkip: false,
                             callback: function(val, index) {
                                 const xVal = monoX[index];
                                 if (xVal === undefined) return '';
