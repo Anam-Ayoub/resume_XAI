@@ -10,3 +10,4 @@ plain.txt
 *.fls
 *.fdb_latexmk
 *.synctex.gz
+AGENTS.md
