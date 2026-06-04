@@ -428,3 +428,14 @@ footer {
 .example-box p:last-child {
     margin-bottom: 0;
 }
+
+/* Mermaid Diagram Styling */
+.mermaid {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+    padding: 1rem;
+    background: var(--hover-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}

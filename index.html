@@ -638,16 +638,13 @@ while iteration < max_iter:
                     <h3>Introduction & Review (Classic Trees)</h3>
                     <ul>
                         <li><strong>Classic Trees:</strong> Supervised learning models making hierarchical decisions via rules. They consist of a root node, branches, and leaves, where each node applies a strict, precise binary test (e.g., Age > 30).
-<pre>
-        Age > 30 ?
-        /        \
-      Yes         No
-      /            \
- High Income?     Refuse
-    /      \
-  Yes      No
-Accept    Refuse
-</pre>
+<div class="mermaid">
+graph TD
+    A["Age > 30 ?"] -->|Yes| B["High Income?"]
+    A -->|No| C["Refuse"]
+    B -->|Yes| D["Accept"]
+    B -->|No| E["Refuse"]
+</div>
                         </li>
                         <li><strong>Fuzzy Decision Trees:</strong> Extend classic trees using fuzzy logic to handle uncertainty and imprecision. A single data point can belong partially to multiple classes.</li>
                         <li><strong>Construction of a Classic Tree:</strong> Uses algorithms like ID3, C4.5, and CART to find the best attributes to separate the data based on calculation criteria:
@@ -750,13 +747,12 @@ Accept    Refuse
                     <ul>
                         <li><strong>Fuzzy Weights:</strong> The weight of each fuzzy branch is calculated by summing the membership degrees.</li>
                         <li><strong>Fuzzy Information Gain:</strong> Determines which attribute to place at the top of the tree.
-<pre>
-          Salary
-        /   |   \
-     Low Medium High
-      |     |     |
-   Refuse Mixed Accept
-</pre>
+<div class="mermaid">
+graph TD
+    A["Salary"] -->|Low| B["Refuse"]
+    A -->|Medium| C["Mixed"]
+    A -->|High| D["Accept"]
+</div>
                         </li>
                         <li><strong>Rule Generation Principle:</strong> A rule is created by taking the fuzzified values, selecting the dominant class, and translating the path into natural linguistic terms.</li>
                     </ul>
@@ -1410,16 +1406,13 @@ while iteration < max_iter:
                     <h3>Introduction & Rappel (Arbres Classiques)</h3>
                     <ul>
                         <li><strong>Arbres classiques :</strong> Modèles d'apprentissage supervisé prenant des décisions hiérarchiques via des règles. Ils appliquent un test binaire strict et précis (ex : Age > 30).
-<pre>
-        Age > 30 ?
-        /        \
-      Oui        Non
-      /            \
-Revenu élevé ?    Refus
-    /      \
-  Oui      Non
-Accepte   Refus
-</pre>
+<div class="mermaid">
+graph TD
+    A["Age > 30 ?"] -->|Oui| B["Revenu élevé ?"]
+    A -->|Non| C["Refus"]
+    B -->|Oui| D["Accepte"]
+    B -->|Non| E["Refus"]
+</div>
                         </li>
                         <li><strong>Arbres de Décision Flous :</strong> Étendent les arbres classiques en utilisant la logique floue pour gérer l'incertitude. Un point de données peut appartenir partiellement à plusieurs classes.</li>
                         <li><strong>Construction d'un Arbre Classique :</strong> Utilise des algorithmes comme ID3, C4.5 et CART pour séparer les données selon des critères mathématiques :
@@ -1522,13 +1515,12 @@ Accepte   Refus
                     <ul>
                         <li><strong>Poids flous des ensembles :</strong> Le poids de chaque branche est calculé en sommant les degrés d'appartenance.</li>
                         <li><strong>Gain d'Information Flou :</strong> Détermine quel attribut placer au sommet de l'arbre.
-<pre>
-         Salaire
-       /    |    \
-  Faible  Moyen  Élevé
-    |       |      |
- Refuser  Mixte  Accorder
-</pre>
+<div class="mermaid">
+graph TD
+    A["Salaire"] -->|Faible| B["Refuser"]
+    A -->|Moyen| C["Mixte"]
+    A -->|Élevé| D["Accorder"]
+</div>
                         </li>
                         <li><strong>Principe de génération :</strong> Une règle est créée en prenant les valeurs fuzzifiées, sélectionnant la classe dominante et en traduisant le chemin en termes linguistiques naturels.</li>
                     </ul>
@@ -2529,6 +2521,15 @@ Accepte   Refus
                     });
                 }
             });
+        });
+    </script>
+    <!-- Mermaid for graphs -->
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ 
+            startOnLoad: true, 
+            theme: 'default',
+            fontFamily: 'inherit'
         });
     </script>
 </body>
