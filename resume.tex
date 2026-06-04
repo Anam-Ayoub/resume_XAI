@@ -365,6 +365,25 @@ A hybrid model that uses Sugeno fuzzy rules structured inside a neural network a
     \end{itemize}
 \end{itemize}
 
+\subsection{Integration in Fuzzy Rules (Intégration des quantificateurs flous dans les règles floues)}
+\begin{itemize}
+    \item \textbf{The Problem with Classic Rules:} Without quantifiers, a standard fuzzy rule looks like: \textit{IF Temperature is hot THEN Fan is fast}. While functional, this approach is often considered too raw, rigid, and lacking nuance to model complex scenarios.
+    \item \textbf{Integration of Quantifiers:} Adding quantifiers enriches these rules to make them more nuanced and interpretable. For example:
+    \begin{itemize}
+        \item R1: \textit{SI Température est très chaude ALORS Ventilateur est très rapide.}
+        \item R2: \textit{SI Température est moyennement chaude ALORS Ventilateur est moyen.}
+        \item R3: \textit{SI Température est peu chaude ALORS Ventilateur est lent.}
+    \end{itemize}
+    \item \textbf{Effect of Modifiers:} On a logical level, each word mathematically modifies the raw information:
+    \begin{itemize}
+        \item "Très" (Very) reinforces the condition.
+        \item "Moyennement" (Moderately) softens the condition.
+        \item "Peu" (Little) reverses or reduces the condition.
+    \end{itemize}
+    \item \textbf{Added Value (Conclusion):} Using quantifiers transforms simple rules into rich linguistic expressions. This brings very strong explainability to the system, greater flexibility, and reproduces human reasoning much more faithfully.
+\end{itemize}
+
+
 \section{Fuzzy Decision Trees}
 
 \subsection{Introduction \& Review (Arbres de Décision Classiques)}

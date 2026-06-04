@@ -1344,32 +1344,64 @@ while iteration < max_iter:
 
                     <h3>Types de quantificateurs flous</h3>
                     <ul>
-                        <li><strong>Quantificateurs monotones :</strong> Fonctions qui ne vont que dans une seule direction (strictement croissantes comme "beaucoup" ou strictement décroissantes comme "peu"). Logiquement cohérents, mais ne peuvent pas couvrir des concepts cibles spécifiques.
+                        <li><strong>Quantificateurs monotones :</strong> Fonctions qui ne vont que dans une seule direction (strictement croissantes comme "beaucoup" ou strictement décroissantes comme "peu").
+                            <ul>
+                                <li><strong>Avantages/Inconvénients :</strong> Logiquement cohérents, mais ne peuvent pas couvrir des concepts cibles spécifiques (ex: "environ 5").</li>
+                            </ul>
                             <div class="chart-container" style="position: relative; height:300px; width:100%; max-width: 600px; margin: 1rem 0;">
                                 <canvas id="monotonicChartFR"></canvas>
                             </div>
                         </li>
-                        <li><strong>Quantificateurs non monotones :</strong> Fonctions centrées sur une valeur cible spécifique, utilisant des formes triangulaires ou gaussiennes (ex: "environ 5"). Idéal pour des concepts précis.
+                        <li><strong>Quantificateurs non monotones :</strong> Fonctions centrées sur une valeur cible spécifique, utilisant des formes triangulaires ou gaussiennes (ex: "environ 5", "presque la moitié").
+                            <ul>
+                                <li><strong>Avantages/Inconvénients :</strong> Idéal pour des concepts précis, mais plus complexe et moins stable.</li>
+                            </ul>
                             <div class="chart-container" style="position: relative; height:300px; width:100%; max-width: 600px; margin: 1rem 0;">
                                 <canvas id="nonMonotonicChartFR"></canvas>
                             </div>
                         </li>
                         <li><strong>Quantificateurs réguliers de Zadeh :</strong> Doivent strictement commencer à zéro et se terminer à exactement un ($Q(0)=0$ et $Q(1)=1$). Exemples : "la plupart", "beaucoup".
+                            <ul>
+                                <li><strong>Avantages/Inconvénients :</strong> Parfaitement compatibles avec la logique floue standard, mais limités aux cas proportionnels.</li>
+                            </ul>
                             <div class="chart-container" style="position: relative; height:300px; width:100%; max-width: 600px; margin: 1rem 0;">
                                 <canvas id="regularChartFR"></canvas>
                             </div>
                         </li>
-                        <li><strong>Quantificateurs non réguliers :</strong> Ne respectent pas les frontières strictes de Zadeh. Très flexibles pour des situations du monde réel.
+                        <li><strong>Quantificateurs non réguliers :</strong> Ne respectent pas les frontières strictes de Zadeh.
+                            <ul>
+                                <li><strong>Avantages/Inconvénients :</strong> Très flexibles pour des situations du monde réel, mais moins compatibles avec les modèles mathématiques standards.</li>
+                            </ul>
                             <div class="chart-container" style="position: relative; height:300px; width:100%; max-width: 600px; margin: 1rem 0;">
                                 <canvas id="nonRegularChartFR"></canvas>
                             </div>
                         </li>
-                        <li><strong>Quantificateurs linguistiques flous :</strong> Expressions du langage naturel modélisées directement par des fonctions floues. Extrêmement naturels mais très subjectifs.
+                        <li><strong>Quantificateurs linguistiques flous :</strong> Expressions du langage naturel modélisées directement par des fonctions floues (ex: "peu", "assez").
+                            <ul>
+                                <li><strong>Avantages/Inconvénients :</strong> Extrêmement naturels pour l'utilisateur, mais hautement subjectifs et nécessitent un calibrage minutieux.</li>
+                            </ul>
                             <div class="chart-container" style="position: relative; height:300px; width:100%; max-width: 600px; margin: 1rem 0;">
                                 <canvas id="linguisticChartFR"></canvas>
                             </div>
                         </li>
                     </ul>
+
+                    <h3>Intégration des quantificateurs flous dans les règles floues</h3>
+                    <p><strong>Le Problème des Règles Classiques :</strong> Sans quantificateurs, une règle floue standard ressemble à : <em>SI Température est chaud ALORS Ventilateur est rapide</em>. Bien que fonctionnelle, cette approche est souvent considérée comme trop brute, rigide, et manquant de nuance pour modéliser des scénarios complexes.</p>
+                    <p><strong>L'Intégration des Quantificateurs :</strong> L'ajout de quantificateurs permet d'enrichir ces règles pour les rendre plus nuancées et interprétables. Par exemple :</p>
+                    <ul>
+                        <li><strong>R1 :</strong> <em>SI Température est très chaude ALORS Ventilateur est très rapide.</em></li>
+                        <li><strong>R2 :</strong> <em>SI Température est moyennement chaude ALORS Ventilateur est moyen.</em></li>
+                        <li><strong>R3 :</strong> <em>SI Température est peu chaude ALORS Ventilateur est lent.</em></li>
+                    </ul>
+                    <p><strong>L'Effet des Modificateurs :</strong> Sur le plan logique, chaque mot modifie mathématiquement l'information brute :</p>
+                    <ul>
+                        <li><strong>"Très"</strong> renforce la condition.</li>
+                        <li><strong>"Moyennement"</strong> adoucit la condition.</li>
+                        <li><strong>"Peu"</strong> inverse ou réduit la condition.</li>
+                    </ul>
+                    <p><strong>Valeur Ajoutée (Conclusion) :</strong> L'utilisation de quantificateurs transforme des règles simples en expressions linguistiques riches. Cela apporte une très forte explicabilité au système, une plus grande flexibilité, et reproduit de manière beaucoup plus fidèle le raisonnement humain.</p>
+
                 </section>
 
                 <section class="card">
