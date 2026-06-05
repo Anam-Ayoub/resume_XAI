@@ -7,7 +7,7 @@
     <meta name="description" content="A comprehensive, beautifully designed study summary for Fuzzy Logic and Explainable AI (XAI).">
     
     <!-- Prism for Syntax Highlighting -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
@@ -339,7 +339,7 @@
                         <div id="solCh1Ex2En" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
                             <h3 style="margin-top: 0; color: var(--accent);">Solution Exercise 2</h3>
-<pre class="code-block-dark"><code>def trapezoidal(x, a, b, c, d):
+<pre class="code-block-dark"><code class="language-python">def trapezoidal(x, a, b, c, d):
     if x <= a or x >= d:
         return 0.0
     elif a < x < b:
@@ -711,7 +711,7 @@ while iteration < max_iter:
                         <div id="solCh3Ex2En" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
                             <h3 style="margin-top: 0; color: var(--accent);">Solution Exercise 2</h3>
-<pre class="code-block-dark"><code>import numpy as np
+<pre class="code-block-dark"><code class="language-python">import numpy as np
 
 def calcul_centres(X, U, m):
     # Raise the membership matrix to the power of m
@@ -827,7 +827,7 @@ def calcul_centres(X, U, m):
                         <div id="solCh4Ex2En" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
                             <h3 style="margin-top: 0; color: var(--accent);">Solution Exercise 2</h3>
-<pre class="code-block-dark"><code>import numpy as np
+<pre class="code-block-dark"><code class="language-python">import numpy as np
 
 def mu_low(x):
     return 1 - x
@@ -949,7 +949,7 @@ def anfis_xor(x, y):
                         <div id="solCh5Ex2En" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
                             <h3 style="margin-top: 0; color: var(--accent);">Solution Exercise 2</h3>
-<pre class="code-block-dark"><code># Definition of linguistic quantifiers
+<pre class="code-block-dark"><code class="language-python"># Definition of linguistic quantifiers
 def very(x):
     return x ** 2
 
@@ -1165,7 +1165,7 @@ graph TD
                             <ol>
                                 <li>Fuzzy Information Gain measures how much an attribute <strong>reduces uncertainty</strong> (entropy). The attribute with the highest gain is chosen as the decision node (root) because it <strong>best separates</strong> the different classes.</li>
                                 <li>Python Code:
-<pre class="code-block-dark"><code>def fuzzify_temperature(x):
+<pre class="code-block-dark"><code class="language-python">def fuzzify_temperature(x):
     # Calculation for Normal
     if x <= 37.5:
         mu_normal = 1.0
@@ -1481,7 +1481,7 @@ graph TD
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
 
                             <h3 style="margin-top: 0; color: var(--accent);">Solution Exercice 2</h3>
-<pre class="code-block-dark"><code>def trapezoidale(x, a, b, c, d):
+<pre class="code-block-dark"><code class="language-python">def trapezoidale(x, a, b, c, d):
     if x <= a or x >= d:
         return 0.0 # En dehors du support
     elif a < x < b:
@@ -1847,7 +1847,7 @@ while iteration < max_iter:
                         <div id="solCh3Ex2" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
                             <h3 style="margin-top: 0; color: var(--accent);">Solution Exercice 2</h3>
-<pre class="code-block-dark"><code>import numpy as np
+<pre class="code-block-dark"><code class="language-python">import numpy as np
 
 def calcul_centres(X, U, m):
     # Élévation de la matrice d'appartenance à la puissance m
@@ -1964,7 +1964,7 @@ def calcul_centres(X, U, m):
                         <div id="solCh4Ex2" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
                             <h3 style="margin-top: 0; color: var(--accent);">Solution Exercice 2</h3>
-<pre class="code-block-dark"><code>import numpy as np
+<pre class="code-block-dark"><code class="language-python">import numpy as np
 
 def mu_faible(x):
     return 1 - x
@@ -2118,7 +2118,7 @@ def anfis_xor(x, y):
                         <div id="solCh5Ex2" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
                             <h3 style="margin-top: 0; color: var(--accent);">Solution Exercice 2</h3>
-<pre class="code-block-dark"><code># Définition des quantificateurs linguistiques
+<pre class="code-block-dark"><code class="language-python"># Définition des quantificateurs linguistiques
 def tres(x):
     return x ** 2
 
@@ -2334,7 +2334,7 @@ graph TD
                             <ol>
                                 <li>Le Gain d'Information Flou permet de mesurer à quel point un attribut <strong>réduit l'incertitude</strong> (l'entropie). L'attribut qui possède le gain le plus élevé est choisi comme nœud de décision (racine) car c'est lui qui <strong>sépare le mieux</strong> les différentes classes.</li>
                                 <li>Code Python :
-<pre class="code-block-dark"><code>def fuzzify_temperature(x):
+<pre class="code-block-dark"><code class="language-python">def fuzzify_temperature(x):
     # Calcul pour Normale
     if x <= 37.5:
         mu_normale = 1.0
