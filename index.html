@@ -1667,6 +1667,68 @@ def anfis_xor(x, y):
                     </ul>
                     <p><strong>Valeur Ajoutée (Conclusion) :</strong> L'utilisation de quantificateurs transforme des règles simples en expressions linguistiques riches. Cela apporte une très forte explicabilité au système, une plus grande flexibilité, et reproduit de manière beaucoup plus fidèle le raisonnement humain.</p>
 
+                    <div class="card" style="margin-top: 3rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                        <h3 style="margin-top: 0; color: var(--accent);">Exercice 1 : Théorie et Calcul (Quantificateur "La plupart")</h3>
+                        <ol>
+                            <li>Quelle est la valeur ajoutée principale de l'utilisation de quantificateurs flous dans une base de règles par rapport à des règles floues simples ?</li>
+                            <li>On utilise le quantificateur flou régulier "La plupart" ($Q_{\text{most}}$), défini mathématiquement par :
+                                <ul>
+                                    <li>$Q_{\text{most}}(p) = 0$ si $p < 0.5$</li>
+                                    <li>$Q_{\text{most}}(p) = 2p - 1$ si $0.5 \le p \le 1$</li>
+                                </ul>
+                                Dans un réseau, 80% des indicateurs de charge sont élevés (soit une proportion $p = 0.8$). Calculez le degré de vérité de l'affirmation "La plupart des indicateurs sont élevés".
+                            </li>
+                            <li>Calculez ce même degré si seulement 40% ($p = 0.4$) des indicateurs sont élevés.</li>
+                        </ol>
+
+                        <button onclick="document.getElementById('solCh5Ex1').style.display = document.getElementById('solCh5Ex1').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Afficher / Masquer la solution</button>
+
+                        <div id="solCh5Ex1" style="display: none;">
+                            <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
+                            <h3 style="margin-top: 0; color: var(--accent);">Solutions Exercice 1</h3>
+                            <ol>
+                                <li>Les quantificateurs permettent de passer de règles brutes à des <strong>expressions linguistiques riches et nuancées</strong> (comme "très", "peu", "la plupart"). Cela apporte une plus grande flexibilité et rend le système beaucoup plus <strong>explicable</strong> et proche du raisonnement humain.</li>
+                                <li>Pour $p = 0.8$ (qui est $\ge 0.5$) :
+                                    <div class="math-block">$$ Q_{\text{most}}(0.8) = 2(0.8) - 1 = 1.6 - 1 = 0.6 $$</div>
+                                    (L'affirmation est considérée comme vraie à 60%).
+                                </li>
+                                <li>Pour $p = 0.4$ (qui est $< 0.5$) :
+                                    <div class="math-block">$$ Q_{\text{most}}(0.4) = 0 $$</div>
+                                    (Moins de la moitié vérifie la propriété, donc c'est totalement faux).
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-top: 2rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                        <h3 style="margin-top: 0; color: var(--accent);">Exercice 2 : Programmation Python (Modificateurs Linguistiques)</h3>
+                        <p>En vous basant sur la partie 4 de votre TP, écrivez trois fonctions Python <code>tres(x)</code>, <code>moyennement(x)</code>, et <code>peu(x)</code> qui appliquent ces modificateurs mathématiques à un degré d'appartenance $x$. Testez ensuite ces fonctions pour une température qui est initialement considérée comme "Chaude" à un degré $x = 0.64$.</p>
+
+                        <button onclick="document.getElementById('solCh5Ex2').style.display = document.getElementById('solCh5Ex2').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Afficher / Masquer la solution</button>
+
+                        <div id="solCh5Ex2" style="display: none;">
+                            <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
+                            <h3 style="margin-top: 0; color: var(--accent);">Solution Exercice 2</h3>
+<pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto;"><code># Définition des quantificateurs linguistiques
+def tres(x):
+    return x ** 2
+
+def moyennement(x):
+    return x ** 0.5  # équivalent à la racine carrée (1/2)
+
+def peu(x):
+    return 1 - x
+
+# Test pour x = 0.64
+x = 0.64
+print("Très chaud :", tres(x))               # 0.64^2 = 0.4096
+print("Moyennement chaud :", moyennement(x)) # √0.64 = 0.8
+print("Peu chaud :", peu(x))                 # 1 - 0.64 = 0.36
+</code></pre>
+                            <p style="margin-top: 1rem; font-size: 0.9em; color: var(--text-secondary);"><em>(On remarque que "très" diminue le degré pour le rendre plus strict, tandis que "moyennement" l'augmente pour l'adoucir).</em></p>
+                        </div>
+                    </div>
+
                 </section>
 
                 <section class="card">
