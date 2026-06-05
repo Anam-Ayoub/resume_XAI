@@ -1396,6 +1396,61 @@ while iteration < max_iter:
         break
         
     U = U_new</code></pre>
+                    <div class="card" style="margin-top: 3rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                        <h3 style="margin-top: 0; color: var(--accent);">Exercice 1 : Théorie et Calculs (Fuzzy C-Means)</h3>
+                        <ol>
+                            <li>Quelle est la différence fondamentale entre l'algorithme de clustering classique (K-Means) et le clustering flou (Fuzzy C-Means) concernant l'appartenance des points ?</li>
+                            <li>Dans une itération de l'algorithme FCM avec un paramètre de flou $m = 2$, nous voulons mettre à jour l'appartenance d'un point de donnée $x = 4$. Nous avons deux centres de clusters : $c_1 = 2$ et $c_2 = 8$. Sachant que la formule de mise à jour est :
+                                <div class="math-block">$$ u_{ij} = \frac{1}{\sum_{k=1}^c \left( \frac{|x_i - c_j|}{|x_i - c_k|} \right)^{\frac{2}{m-1}}} $$</div>
+                                Calculez les nouveaux degrés d'appartenance $u_{11}$ (pour le cluster 1) et $u_{12}$ (pour le cluster 2).
+                            </li>
+                        </ol>
+
+                        <button onclick="document.getElementById('solCh3Ex1').style.display = document.getElementById('solCh3Ex1').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Afficher / Masquer la solution</button>
+
+                        <div id="solCh3Ex1" style="display: none;">
+                            <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
+                            <h3 style="margin-top: 0; color: var(--accent);">Solutions Exercice 1</h3>
+                            <ol>
+                                <li>Dans le K-Means (clustering dur), chaque point appartient à un <strong>seul et unique cluster</strong> ($u_{ij} \in \{0, 1\}$). Dans le Fuzzy C-Means (clustering flou), un point peut appartenir à <strong>plusieurs clusters simultanément</strong> avec un certain degré d'appartenance compris entre $0$ et $1$ (avec la contrainte que la somme de ses degrés d'appartenance soit égale à $1$).</li>
+                                <li>Pour $x = 4$, $c_1 = 2$, $c_2 = 8$, et $m = 2$ (donc l'exposant $\frac{2}{m-1} = 2$) :
+                                    <br><br>
+                                    Les distances sont $d_1 = |4 - 2| = 2$ et $d_2 = |4 - 8| = 4$.
+                                    <br><br>
+                                    <strong>Calcul de $u_{11}$ :</strong>
+                                    <div class="math-block">$$ u_{11} = \frac{1}{\left(\frac{2}{2}\right)^2 + \left(\frac{2}{4}\right)^2} = \frac{1}{1 + 0.25} = \frac{1}{1.25} = 0.8 $$</div>
+                                    <strong>Calcul de $u_{12}$ :</strong>
+                                    <div class="math-block">$$ u_{12} = \frac{1}{\left(\frac{4}{2}\right)^2 + \left(\frac{4}{4}\right)^2} = \frac{1}{4 + 1} = \frac{1}{5} = 0.2 $$</div>
+                                    (Vérification : $0.8 + 0.2 = 1$, le point appartient à 80% au cluster 1 et à 20% au cluster 2).
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-top: 2rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                        <h3 style="margin-top: 0; color: var(--accent);">Exercice 2 : Programmation Python</h3>
+                        <p>En vous basant sur la formule mathématique des centres :</p>
+                        <div class="math-block">$$ c_j = \frac{\sum_{i=1}^n u_{ij}^m x_i}{\sum_{i=1}^n u_{ij}^m} $$</div>
+                        <p>Écrivez la fonction Python <code>calcul_centres(X, U, m)</code> qui permet de recalculer les centres des clusters à l'aide de la bibliothèque NumPy.</p>
+
+                        <button onclick="document.getElementById('solCh3Ex2').style.display = document.getElementById('solCh3Ex2').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Afficher / Masquer la solution</button>
+
+                        <div id="solCh3Ex2" style="display: none;">
+                            <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
+                            <h3 style="margin-top: 0; color: var(--accent);">Solution Exercice 2</h3>
+<pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto;"><code>import numpy as np
+
+def calcul_centres(X, U, m):
+    # Élévation de la matrice d'appartenance à la puissance m
+    um = U ** m 
+    # Produit matriciel pour le numérateur, et somme pour le dénominateur
+    centres = (um.T @ X) / np.sum(um.T, axis=1) 
+    return centres
+</code></pre>
+                            <p style="margin-top: 1rem; font-size: 0.9em; color: var(--text-secondary);"><em>(Code basé directement sur le TP du cours)</em></p>
+                        </div>
+                    </div>
+
                 </section>
 
                 <section id="anfis-fr">
