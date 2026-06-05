@@ -1880,6 +1880,76 @@ graph TD
                         <li><strong>Domaines d'application :</strong> Systèmes experts, finance, médecine et aide à la décision.</li>
                     </ul>
 
+                    <div class="card" style="margin-top: 3rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                        <h3 style="margin-top: 0; color: var(--accent);">Exercice 1 : Théorie et Fuzzification</h3>
+                        <ol>
+                            <li>Expliquez pourquoi une frontière de décision brutale (par exemple : Salaire > 3750) est une limite majeure des arbres de décision classiques, et comment l'arbre de décision flou permet de résoudre ce problème.</li>
+                            <li>Dans le cadre du diagnostic médical de votre TP, la température "Normale" est définie par :
+                                <div class="math-block">$$ \mu_{\text{Normale}}(x) = 38.5 - x $$</div>
+                                pour un intervalle de $37.5 < x < 38.5$. Calculez le degré d'appartenance à l'ensemble "Normale" pour un patient ayant une température de 37.8°C.
+                            </li>
+                        </ol>
+
+                        <button onclick="document.getElementById('solCh6Ex1').style.display = document.getElementById('solCh6Ex1').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Afficher / Masquer la solution</button>
+
+                        <div id="solCh6Ex1" style="display: none;">
+                            <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
+                            <h3 style="margin-top: 0; color: var(--accent);">Solutions Exercice 1</h3>
+                            <ol>
+                                <li>Dans un arbre classique, une variation infime (ex: un salaire de 3749 vs 3751) peut <strong>inverser totalement la décision</strong> (refus vs accord), ce qui rend le modèle instable et peu réaliste face à l'incertitude. L'arbre flou résout cela en remplaçant les seuils stricts par des <strong>degrés d'appartenance</strong> : une donnée peut appartenir partiellement à plusieurs classes (ex: 60% Moyen et 40% Élevé), offrant une transition douce et robuste.</li>
+                                <li>Pour $x = 37.8$ (qui est bien compris entre $37.5$ et $38.5$) :
+                                    <div class="math-block">$$ \mu_{\text{Normale}}(37.8) = 38.5 - 37.8 = 0.7 $$</div>
+                                    (Le patient a une température considérée "Normale" à 70%).
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-top: 2rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                        <h3 style="margin-top: 0; color: var(--accent);">Exercice 2 : Entropie, Règles et Programmation</h3>
+                        <ol>
+                            <li>Lors de la construction de l'arbre, quel est le but exact du calcul du "Gain d'Information Flou" pour un attribut (comme le Salaire ou l'Âge) ?</li>
+                            <li>En vous basant sur les formules de votre TP, écrivez une fonction Python <code>fuzzify_temperature(x)</code> qui prend une température $x$ et retourne ses degrés d'appartenance aux ensembles "Normale" et "Moyenne". Rappel des formules :
+                                <ul>
+                                    <li><strong>Normale :</strong> 1 si $x \le 37.5$ ; $38.5 - x$ si $37.5 < x < 38.5$ ; 0 sinon.</li>
+                                    <li><strong>Moyenne :</strong> $x - 37.5$ si $37.5 \le x \le 38.5$ ; $39.5 - x$ si $38.5 < x \le 39.5$ ; 0 sinon.</li>
+                                </ul>
+                            </li>
+                        </ol>
+
+                        <button onclick="document.getElementById('solCh6Ex2').style.display = document.getElementById('solCh6Ex2').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Afficher / Masquer la solution</button>
+
+                        <div id="solCh6Ex2" style="display: none;">
+                            <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
+                            <h3 style="margin-top: 0; color: var(--accent);">Solution Exercice 2</h3>
+                            <ol>
+                                <li>Le Gain d'Information Flou permet de mesurer à quel point un attribut <strong>réduit l'incertitude</strong> (l'entropie). L'attribut qui possède le gain le plus élevé est choisi comme nœud de décision (racine) car c'est lui qui <strong>sépare le mieux</strong> les différentes classes.</li>
+                                <li>Code Python :
+<pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto;"><code>def fuzzify_temperature(x):
+    # Calcul pour Normale
+    if x <= 37.5:
+        mu_normale = 1.0
+    elif 37.5 < x < 38.5:
+        mu_normale = 38.5 - x
+    else:
+        mu_normale = 0.0
+        
+    # Calcul pour Moyenne
+    if 37.5 <= x <= 38.5:
+        mu_moyenne = x - 37.5
+    elif 38.5 < x <= 39.5:
+        mu_moyenne = 39.5 - x
+    else:
+        mu_moyenne = 0.0
+        
+    return {"Normale": round(mu_normale, 2), "Moyenne": round(mu_moyenne, 2)}
+</code></pre>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </section>
+
             </main>
             
             <footer>
