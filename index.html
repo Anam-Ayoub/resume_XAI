@@ -1238,8 +1238,64 @@ graph TD
                             </div>
                         </div>
                     </div>
-                </section>
 
+                    <div class="card" style="margin-top: 3rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                        <h3 style="margin-top: 0; color: var(--accent);">Exercice 1 : Théorie et Modèle de Mamdani</h3>
+                        <ol>
+                            <li>Quelle est la différence principale entre la conclusion (sortie) d'une règle dans le modèle de Mamdani et celle dans le modèle de Sugeno ?</li>
+                            <li>On utilise un modèle de Mamdani pour régler la vitesse d'un moteur. Pour une température donnée, deux règles sont activées :
+                                <ul>
+                                    <li><strong>R1 :</strong> SI Température Chaude ALORS Vitesse Rapide. Le poids d'activation est $w_1 = 0.6$ et le centre géométrique de l'ensemble "Rapide" est $C_1 = 80$.</li>
+                                    <li><strong>R2 :</strong> SI Température Tiède ALORS Vitesse Moyenne. Le poids d'activation est $w_2 = 0.4$ et le centre de l'ensemble "Moyenne" est $C_2 = 50$.</li>
+                                </ul>
+                                Calculez la vitesse finale exacte en utilisant la méthode de la moyenne pondérée des centres.
+                            </li>
+                        </ol>
+
+                        <button onclick="document.getElementById('solCh2Ex1').style.display = document.getElementById('solCh2Ex1').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Afficher / Masquer la solution</button>
+
+                        <div id="solCh2Ex1" style="display: none;">
+                            <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
+                            <h3 style="margin-top: 0; color: var(--accent);">Solutions Exercice 1</h3>
+                            <ol>
+                                <li>Dans le modèle de Mamdani, la sortie d'une règle est un <strong>ensemble flou</strong> (comme une forme géométrique triangulaire). Dans le modèle de Sugeno, la conclusion d'une règle est une <strong>fonction mathématique stricte</strong> ou une <strong>constante mathématique</strong>.</li>
+                                <li>La formule de défuzzification (moyenne pondérée des centres) est $V = \frac{\sum w_i C_i}{\sum w_i}$.
+                                    <div class="math-block">$$ V = \frac{0.6 \times 80 + 0.4 \times 50}{0.6 + 0.4} = \frac{48 + 20}{1.0} = 68 $$</div>
+                                    La vitesse du moteur sera de 68.
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-top: 2rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                        <h3 style="margin-top: 0; color: var(--accent);">Exercice 2 : Calculs Sugeno et Tsukamoto</h3>
+                        <ol>
+                            <li><strong>Sugeno (Ordre 0) :</strong> Dans un système de contrôle, on a deux règles à constantes.<br>
+                                R1 : SI Pression Faible $\implies z_1 = 20$.<br>
+                                R2 : SI Pression Élevée $\implies z_2 = 80$.<br>
+                                Si les degrés d'appartenance sont $\mu_{faible} = 0.3$ et $\mu_{elevee} = 0.7$, calculez la sortie finale $z$.
+                            </li>
+                            <li><strong>Tsukamoto :</strong> Dans ce modèle, la sortie d'une règle est une fonction monotone. Une règle est activée avec un degré $\alpha_1 = 0.6$. La fonction de sortie "Vitesse Lente" est décroissante et définie par l'équation $\mu_{lent}(z) = \frac{100 - z}{50}$. Déterminez la valeur numérique exacte de la sortie $z_1$ pour cette règle.</li>
+                        </ol>
+
+                        <button onclick="document.getElementById('solCh2Ex2').style.display = document.getElementById('solCh2Ex2').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Afficher / Masquer la solution</button>
+
+                        <div id="solCh2Ex2" style="display: none;">
+                            <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
+                            <h3 style="margin-top: 0; color: var(--accent);">Solution Exercice 2</h3>
+                            <ol>
+                                <li>La formule pour Sugeno (ordre 0) est $z = \frac{\sum w_i z_i}{\sum w_i}$.
+                                    <div class="math-block">$$ z = \frac{0.3 \times 20 + 0.7 \times 80}{0.3 + 0.7} = \frac{6 + 56}{1} = 62 $$</div>
+                                </li>
+                                <li>Dans le modèle de Tsukamoto, on cherche $z_1$ tel que $\mu_{C1}(z_1) = \alpha_1$. On pose l'équation :
+                                    <div class="math-block">$$ \frac{100 - z_1}{50} = 0.6 $$</div>
+                                    On multiplie par 50 : $100 - z_1 = 30$. Donc, $z_1 = 100 - 30 = 70$.
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+
+                </section>
                 <section id="clustering-fr">
                     <h2>III. Clustering Flou</h2>
                     
