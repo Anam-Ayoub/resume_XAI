@@ -8,6 +8,7 @@
     --accent: #1A1A1A;
     --exercise-bg: #fdfbf7;
     --nav-bg: rgba(250, 249, 246, 0.95);
+    --code-bg: #f4f4f4;
 }
 
 body.dark-mode {
@@ -20,6 +21,7 @@ body.dark-mode {
     --accent: #E0E0E0;
     --exercise-bg: #242424;
     --nav-bg: rgba(18, 18, 18, 0.95);
+    --code-bg: #1E1E1E;
 }
 * {
     box-sizing: border-box;
@@ -197,11 +199,26 @@ figcaption {
 
 /* Code block customization */
 pre {
-    border-radius: 6px !important;
+    background: var(--code-bg) !important;
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.9rem;
+    margin: 1rem 0;
     border: 1px solid var(--border-color) !important;
-    background: #FAFAFA !important;
-    padding: 1rem !important;
-    font-size: 0.9rem !important;
+}
+
+code {
+    font-family: 'Consolas', 'Monaco', monospace;
+    background: var(--code-bg);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+pre code {
+    background: transparent;
+    padding: 0;
 }
 
 /* Interactive elements */
