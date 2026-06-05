@@ -7,6 +7,7 @@
     --hover-bg: #F9F9F9;
     --accent: #1A1A1A;
     --exercise-bg: #fdfbf7;
+    --nav-bg: rgba(250, 249, 246, 0.95);
 }
 
 body.dark-mode {
@@ -18,6 +19,7 @@ body.dark-mode {
     --hover-bg: #2C2C2C;
     --accent: #E0E0E0;
     --exercise-bg: #242424;
+    --nav-bg: rgba(18, 18, 18, 0.95);
 }
 * {
     box-sizing: border-box;
@@ -52,7 +54,7 @@ body.lang-fr [lang="en"] {
 
 .lang-btn {
     pointer-events: auto; /* Re-enable clicks on button */
-    background: #FFFFFF;
+    background: var(--card-bg);
     border: 1px solid var(--border-color);
     padding: 8px 18px;
     border-radius: 99px;
@@ -230,7 +232,7 @@ footer {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: rgba(250, 249, 246, 0.95);
+    background: var(--nav-bg);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border-color);
     padding: 0.75rem 2rem;

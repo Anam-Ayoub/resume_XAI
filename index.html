@@ -28,7 +28,7 @@
     <nav class="sticky-nav">
         <ul id="toc-list" class="toc-nav-list"></ul>
         <div class="lang-switch-container" style="display: flex; gap: 0.5rem;">
-            <button id="theme-switch" class="lang-btn">
+            <button id="theme-switch" class="lang-btn" style="padding: 8px; border-radius: 50%; aspect-ratio: 1/1; justify-content: center;">
                 <svg id="theme-icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                 </svg>
@@ -2444,9 +2444,16 @@ graph TD
                 const li = document.createElement('li');
                 const a = document.createElement('a');
                 a.href = `#${h2.id}`;
-                // Keep only the Roman numeral and first word or two to make buttons compact
-                let shortTitle = h2.textContent.split(' ').slice(0, 3).join(' ');
-                if (shortTitle.length > 25) shortTitle = shortTitle.substring(0, 22) + '...';
+                // Custom names for specific long titles
+                let shortTitle = h2.textContent;
+                if (shortTitle.includes("IV. Adaptive Neuro-Fuzzy") || shortTitle.includes("IV. Système d'Inférence Neuro-Flou")) {
+                    shortTitle = "IV. ANFIS";
+                } else if (shortTitle.includes("VI. Fuzzy Decision Trees") || shortTitle.includes("VI. Arbres de Décision")) {
+                    shortTitle = lang === 'fr' ? "VI. Arbre de Décision" : "VI. Decision Tree";
+                } else {
+                    shortTitle = shortTitle.split(' ').slice(0, 3).join(' ');
+                    if (shortTitle.length > 25) shortTitle = shortTitle.substring(0, 22) + '...';
+                }
                 a.textContent = shortTitle;
                 a.className = 'toc-btn';
                 li.appendChild(a);
