@@ -439,3 +439,69 @@ footer {
     border: 1px solid var(--border-color);
     border-radius: 8px;
 }
+
+/* Fuzzy Rules Styling */
+.rules-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+}
+
+.rule-box {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.rule-box.refuse {
+    border-left: 4px solid #ef4444;
+}
+
+.rule-box.accept {
+    border-left: 4px solid #10b981;
+}
+
+.rule-label {
+    background: var(--hover-bg);
+    color: var(--text-secondary);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-right: 0.5rem;
+}
+
+.rule-box .keyword {
+    color: #3b82f6;
+    font-weight: bold;
+}
+
+.rule-box .keyword.then {
+    color: #8b5cf6;
+}
+
+.rule-box .outcome {
+    font-weight: bold;
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+}
+
+.rule-box .outcome.refuse {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.rule-box .outcome.accept {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+}
