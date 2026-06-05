@@ -1503,6 +1503,86 @@ def calcul_centres(X, U, m):
                             <div class="math-block">$$ f = \sum \overline{w}_i f_i $$</div>
                         </li>
                     </ol>
+
+                    <div class="card" style="margin-top: 3rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                        <h3 style="margin-top: 0; color: var(--accent);">Exercice 1 : Théorie et Calcul des Couches ANFIS</h3>
+                        <ol>
+                            <li>Quelle est la différence majeure entre un réseau de neurones artificiel classique (ANN) et un système ANFIS en ce qui concerne la prise de décision ?</li>
+                            <li>On étudie un système ANFIS basé sur un modèle de Sugeno d'ordre 1 avec deux entrées ($x = 1, y = 2$) et deux règles :
+                                <ul>
+                                    <li><strong>R1 :</strong> SI $x$ est $A_1$ ET $y$ est $B_1$ ALORS $f_1 = x + y + 1$</li>
+                                    <li><strong>R2 :</strong> SI $x$ est $A_2$ ET $y$ est $B_2$ ALORS $f_2 = 2x + y$</li>
+                                </ul>
+                                Lors de l'étape de fuzzification (Couche 1), on obtient : $\mu_{A_1}(1) = 0.6$, $\mu_{B_1}(2) = 0.6$, $\mu_{A_2}(1) = 0.1$, et $\mu_{B_2}(2) = 0.6$. Calculez pas-à-pas les poids d'activation ($w_1, w_2$), les poids normalisés ($\overline{w}_1, \overline{w}_2$) et la sortie finale $f$.
+                            </li>
+                        </ol>
+
+                        <button onclick="document.getElementById('solCh4Ex1').style.display = document.getElementById('solCh4Ex1').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Afficher / Masquer la solution</button>
+
+                        <div id="solCh4Ex1" style="display: none;">
+                            <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
+                            <h3 style="margin-top: 0; color: var(--accent);">Solutions Exercice 1</h3>
+                            <ol>
+                                <li>Les ANN classiques sont des <strong>"boîtes noires"</strong> : ils prédisent bien mais ne peuvent pas expliquer leur raisonnement. ANFIS résout ce problème en combinant l'apprentissage automatique avec la logique floue (règles SI-ALORS), ce qui rend ses décisions <strong>totalement interprétables et explicables</strong>.</li>
+                                <li>Calculs (Couches 2 à 5) :
+                                    <br><br>
+                                    <strong>Couche 2 (Poids $w_i$) :</strong>
+                                    <div class="math-block">$$ w_1 = 0.6 \times 0.6 = 0.36 \quad | \quad w_2 = 0.1 \times 0.6 = 0.06 $$</div>
+                                    <strong>Couche 3 (Normalisation) :</strong> La somme des poids est $0.36 + 0.06 = 0.42$.
+                                    <div class="math-block">$$ \overline{w}_1 = \frac{0.36}{0.42} \approx 0.857 \quad | \quad \overline{w}_2 = \frac{0.06}{0.42} \approx 0.143 $$</div>
+                                    <strong>Couche 4 (Sorties Sugeno) :</strong>
+                                    <div class="math-block">$$ f_1 = 1 + 2 + 1 = 4 \quad | \quad f_2 = 2(1) + 2 = 4 $$</div>
+                                    <strong>Couche 5 (Sortie finale) :</strong>
+                                    <div class="math-block">$$ f = (0.857 \times 4) + (0.143 \times 4) = 4 $$</div>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-top: 2rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                        <h3 style="margin-top: 0; color: var(--accent);">Exercice 2 : Programmation Python (Opérateur XOR avec ANFIS)</h3>
+                        <p>Dans le cadre de l'évaluation de l'opérateur XOR avec ANFIS, nous utilisons deux ensembles flous : $\mu_{faible}(x) = 1 - x$ et $\mu_{eleve}(x) = x$. Les règles sont les suivantes :</p>
+                        <ul>
+                            <li><strong>R1 :</strong> SI $x$ faible ET $y$ faible $\implies$ sortie = 0</li>
+                            <li><strong>R2 :</strong> SI $x$ faible ET $y$ élevé $\implies$ sortie = 1</li>
+                            <li><strong>R3 :</strong> SI $x$ élevé ET $y$ faible $\implies$ sortie = 1</li>
+                            <li><strong>R4 :</strong> SI $x$ élevé ET $y$ élevé $\implies$ sortie = 0</li>
+                        </ul>
+                        <p>Écrivez une fonction Python <code>anfis_xor(x, y)</code> qui calcule les poids d'activation de ces 4 règles, les normalise, et retourne la sortie finale du système.</p>
+
+                        <button onclick="document.getElementById('solCh4Ex2').style.display = document.getElementById('solCh4Ex2').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Afficher / Masquer la solution</button>
+
+                        <div id="solCh4Ex2" style="display: none;">
+                            <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
+                            <h3 style="margin-top: 0; color: var(--accent);">Solution Exercice 2</h3>
+<pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto;"><code>import numpy as np
+
+def mu_faible(x):
+    return 1 - x
+
+def mu_eleve(x):
+    return x
+
+def anfis_xor(x, y):
+    # Calcul des poids d'activation pour les 4 règles
+    w1 = mu_faible(x) * mu_faible(y)
+    w2 = mu_faible(x) * mu_eleve(y)
+    w3 = mu_eleve(x) * mu_faible(y)
+    w4 = mu_eleve(x) * mu_eleve(y)
+    
+    weights = np.array([w1, w2, w3, w4])
+    outputs = np.array([0, 1, 1, 0]) # Sorties respectives des règles
+    
+    # Normalisation
+    weights = weights / np.sum(weights)
+    
+    # Sortie finale (somme pondérée)
+    return np.sum(weights * outputs)
+</code></pre>
+                            <p style="margin-top: 1rem; font-size: 0.9em; color: var(--text-secondary);"><em>(Code directement issu de la partie 2 du TP ANFIS)</em></p>
+                        </div>
+                    </div>
+
                 </section>
                 <section id="quantifiers-fr">
                     <h2>V. Quantificateurs Flous</h2>
