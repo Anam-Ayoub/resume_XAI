@@ -2476,15 +2476,34 @@ graph TD
                 const isDark = document.body.classList.contains('dark-mode');
                 const textColor = isDark ? '#E0E0E0' : '#545454';
                 const gridColor = isDark ? '#333333' : '#E5E5E5';
+                
+                // Unified palette: variants of white for dark mode, variants of black for light mode
+                const palette = isDark 
+                    ? ['#FFFFFF', '#A3A3A3', '#666666', '#D4D4D4', '#E5E5E5'] 
+                    : ['#000000', '#595959', '#999999', '#2B2B2B', '#1A1A1A'];
+
                 Chart.defaults.color = textColor;
                 Chart.defaults.borderColor = gridColor;
+                
                 for (let id in Chart.instances) {
-                    Chart.instances[id].update();
+                    const chart = Chart.instances[id];
+                    chart.data.datasets.forEach((dataset, index) => {
+                        if (dataset.borderColor && dataset.borderColor !== 'transparent') {
+                            const newColor = palette[index % palette.length];
+                            dataset.borderColor = newColor;
+                            
+                            if (dataset.backgroundColor && dataset.backgroundColor !== 'transparent') {
+                                dataset.backgroundColor = newColor + '33'; // 20% opacity
+                            }
+                        }
+                    });
+                    chart.update();
                 }
             }
 
-            // Initial theme update for charts
-            updateChartTheme();
+            // Initial theme update for charts will happen at the end
+            
+
 
             // Observe body class changes to update charts dynamically
             const observer = new MutationObserver(updateChartTheme);
@@ -3429,6 +3448,9 @@ graph TD
                     }
                 });
             }
+
+            // Apply unified palette now that all charts exist
+            updateChartTheme();
         });
     </script>
     <!-- Mermaid for graphs -->
