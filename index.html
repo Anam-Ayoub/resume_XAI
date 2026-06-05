@@ -271,7 +271,7 @@
                         <canvas id="notChartEn"></canvas>
                     </div>
 
-                    <div class="card" style="margin-top: 3rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                    <div class="card exercise-card">
                         <h3 style="margin-top: 0; color: var(--accent);">Exercise 1: Theory, Graph, and Calculations</h3>
                         <p>We model the battery level of a phone $x \in [0, 100]$ with a fuzzy set "Medium" defined by a triangular membership function with points $(20, 50, 80)$.</p>
                         <ol>
@@ -282,7 +282,7 @@
                             <li>For a level $x = 35$, given $\mu_{\text{Medium}}(35) = 0.5$ and another set "Low" such that $\mu_{\text{Low}}(35) = 0.8$. Calculate the AND, OR, and NOT("Medium") operators according to Zadeh's logic.</li>
                         </ol>
 
-                        <button onclick="document.getElementById('solCh1Ex1En').style.display = document.getElementById('solCh1Ex1En').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Show / Hide Solution</button>
+                        <button onclick="document.getElementById('solCh1Ex1En').style.display = document.getElementById('solCh1Ex1En').style.display === 'none' ? 'block' : 'none'" class="solution-btn">Show / Hide Solution</button>
 
                         <div id="solCh1Ex1En" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
@@ -314,16 +314,16 @@
                         </div>
                     </div>
 
-                    <div class="card" style="margin-top: 2rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                    <div class="card exercise-card secondary">
                         <h3 style="margin-top: 0; color: var(--accent);">Exercise 2: Programming</h3>
                         <p>Based on the mathematical definitions from the course, write a Python function <code>trapezoidal(x, a, b, c, d)</code> that returns the membership degree $\mu(x)$ for a trapezoidal fuzzy set. Test it for $x = 25$ with the points $(10, 20, 30, 40)$.</p>
 
-                        <button onclick="document.getElementById('solCh1Ex2En').style.display = document.getElementById('solCh1Ex2En').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Show / Hide Solution</button>
+                        <button onclick="document.getElementById('solCh1Ex2En').style.display = document.getElementById('solCh1Ex2En').style.display === 'none' ? 'block' : 'none'" class="solution-btn">Show / Hide Solution</button>
 
                         <div id="solCh1Ex2En" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
                             <h3 style="margin-top: 0; color: var(--accent);">Solution Exercise 2</h3>
-<pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto;"><code>def trapezoidal(x, a, b, c, d):
+<pre class="code-block-dark"><code>def trapezoidal(x, a, b, c, d):
     if x <= a or x >= d:
         return 0.0
     elif a < x < b:
@@ -494,7 +494,7 @@ print(trapezoidal(25, 10, 20, 30, 40))
                         </div>
                     </div>
 
-                    <div class="card" style="margin-top: 3rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                    <div class="card exercise-card">
                         <h3 style="margin-top: 0; color: var(--accent);">Exercise 1: Theory and Mamdani Model</h3>
                         <ol>
                             <li>What is the main difference between a rule's conclusion (output) in the Mamdani model versus the Sugeno model?</li>
@@ -507,7 +507,7 @@ print(trapezoidal(25, 10, 20, 30, 40))
                             </li>
                         </ol>
 
-                        <button onclick="document.getElementById('solCh2Ex1En').style.display = document.getElementById('solCh2Ex1En').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Show / Hide Solution</button>
+                        <button onclick="document.getElementById('solCh2Ex1En').style.display = document.getElementById('solCh2Ex1En').style.display === 'none' ? 'block' : 'none'" class="solution-btn">Show / Hide Solution</button>
 
                         <div id="solCh2Ex1En" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
@@ -522,7 +522,7 @@ print(trapezoidal(25, 10, 20, 30, 40))
                         </div>
                     </div>
 
-                    <div class="card" style="margin-top: 2rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                    <div class="card exercise-card secondary">
                         <h3 style="margin-top: 0; color: var(--accent);">Exercise 2: Sugeno and Tsukamoto Calculations</h3>
                         <ol>
                             <li><strong>Sugeno (Zero-order):</strong> In a control system, there are two constant-output rules.<br>
@@ -533,7 +533,7 @@ print(trapezoidal(25, 10, 20, 30, 40))
                             <li><strong>Tsukamoto:</strong> In this model, the output of a rule is a monotonic function. A rule is activated with a degree $\alpha_1 = 0.6$. The output function "Slow Speed" is decreasing and defined by $\mu_{\text{slow}}(z) = \frac{100 - z}{50}$. Determine the exact numerical value of the output $z_1$ for this rule.</li>
                         </ol>
 
-                        <button onclick="document.getElementById('solCh2Ex2En').style.display = document.getElementById('solCh2Ex2En').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Show / Hide Solution</button>
+                        <button onclick="document.getElementById('solCh2Ex2En').style.display = document.getElementById('solCh2Ex2En').style.display === 'none' ? 'block' : 'none'" class="solution-btn">Show / Hide Solution</button>
 
                         <div id="solCh2Ex2En" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
@@ -653,7 +653,7 @@ while iteration < max_iter:
         
     U = U_new</code></pre>
 
-                    <div class="card" style="margin-top: 3rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                    <div class="card exercise-card">
                         <h3 style="margin-top: 0; color: var(--accent);">Exercise 1: Theory and Calculations (Fuzzy C-Means)</h3>
                         <ol>
                             <li>What is the fundamental difference between the classic clustering algorithm (K-Means) and fuzzy clustering (Fuzzy C-Means) regarding point membership?</li>
@@ -663,7 +663,7 @@ while iteration < max_iter:
                             </li>
                         </ol>
 
-                        <button onclick="document.getElementById('solCh3Ex1En').style.display = document.getElementById('solCh3Ex1En').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Show / Hide Solution</button>
+                        <button onclick="document.getElementById('solCh3Ex1En').style.display = document.getElementById('solCh3Ex1En').style.display === 'none' ? 'block' : 'none'" class="solution-btn">Show / Hide Solution</button>
 
                         <div id="solCh3Ex1En" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
@@ -684,18 +684,18 @@ while iteration < max_iter:
                         </div>
                     </div>
 
-                    <div class="card" style="margin-top: 2rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                    <div class="card exercise-card secondary">
                         <h3 style="margin-top: 0; color: var(--accent);">Exercise 2: Python Programming</h3>
                         <p>Based on the mathematical formula for cluster centers:</p>
                         <div class="math-block">$$ c_j = \frac{\sum_{i=1}^n u_{ij}^m x_i}{\sum_{i=1}^n u_{ij}^m} $$</div>
                         <p>Write the Python function <code>calcul_centres(X, U, m)</code> to recalculate the cluster centers using the NumPy library.</p>
 
-                        <button onclick="document.getElementById('solCh3Ex2En').style.display = document.getElementById('solCh3Ex2En').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Show / Hide Solution</button>
+                        <button onclick="document.getElementById('solCh3Ex2En').style.display = document.getElementById('solCh3Ex2En').style.display === 'none' ? 'block' : 'none'" class="solution-btn">Show / Hide Solution</button>
 
                         <div id="solCh3Ex2En" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
                             <h3 style="margin-top: 0; color: var(--accent);">Solution Exercise 2</h3>
-<pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto;"><code>import numpy as np
+<pre class="code-block-dark"><code>import numpy as np
 
 def calcul_centres(X, U, m):
     # Raise the membership matrix to the power of m
@@ -760,7 +760,7 @@ def calcul_centres(X, U, m):
                         </li>
                     </ol>
 
-                    <div class="card" style="margin-top: 3rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                    <div class="card exercise-card">
                         <h3 style="margin-top: 0; color: var(--accent);">Exercise 1: Theory and ANFIS Layer Calculations</h3>
                         <ol>
                             <li>What is the major difference between a classic Artificial Neural Network (ANN) and an ANFIS system regarding decision making?</li>
@@ -773,7 +773,7 @@ def calcul_centres(X, U, m):
                             </li>
                         </ol>
 
-                        <button onclick="document.getElementById('solCh4Ex1En').style.display = document.getElementById('solCh4Ex1En').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Show / Hide Solution</button>
+                        <button onclick="document.getElementById('solCh4Ex1En').style.display = document.getElementById('solCh4Ex1En').style.display === 'none' ? 'block' : 'none'" class="solution-btn">Show / Hide Solution</button>
 
                         <div id="solCh4Ex1En" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
@@ -795,7 +795,7 @@ def calcul_centres(X, U, m):
                         </div>
                     </div>
 
-                    <div class="card" style="margin-top: 2rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                    <div class="card exercise-card secondary">
                         <h3 style="margin-top: 0; color: var(--accent);">Exercise 2: Python Programming (ANFIS XOR Operator)</h3>
                         <p>To evaluate the XOR operator with ANFIS, we use two fuzzy sets: $\mu_{\text{low}}(x) = 1 - x$ and $\mu_{\text{high}}(x) = x$. The rules are as follows:</p>
                         <ul>
@@ -806,12 +806,12 @@ def calcul_centres(X, U, m):
                         </ul>
                         <p>Write a Python function <code>anfis_xor(x, y)</code> that calculates the activation weights of these 4 rules, normalizes them, and returns the system's final output.</p>
 
-                        <button onclick="document.getElementById('solCh4Ex2En').style.display = document.getElementById('solCh4Ex2En').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Show / Hide Solution</button>
+                        <button onclick="document.getElementById('solCh4Ex2En').style.display = document.getElementById('solCh4Ex2En').style.display === 'none' ? 'block' : 'none'" class="solution-btn">Show / Hide Solution</button>
 
                         <div id="solCh4Ex2En" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
                             <h3 style="margin-top: 0; color: var(--accent);">Solution Exercise 2</h3>
-<pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto;"><code>import numpy as np
+<pre class="code-block-dark"><code>import numpy as np
 
 def mu_low(x):
     return 1 - x
@@ -891,7 +891,7 @@ def anfis_xor(x, y):
                         </li>
                     </ul>
 
-                    <div class="card" style="margin-top: 3rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                    <div class="card exercise-card">
                         <h3 style="margin-top: 0; color: var(--accent);">Exercise 1: Theory and Calculation ("Most" Quantifier)</h3>
                         <ol>
                             <li>What is the main added value of using fuzzy quantifiers in a rule base compared to simple fuzzy rules?</li>
@@ -905,7 +905,7 @@ def anfis_xor(x, y):
                             <li>Calculate this same degree if only 40% ($p = 0.4$) of indicators are high.</li>
                         </ol>
 
-                        <button onclick="document.getElementById('solCh5Ex1En').style.display = document.getElementById('solCh5Ex1En').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Show / Hide Solution</button>
+                        <button onclick="document.getElementById('solCh5Ex1En').style.display = document.getElementById('solCh5Ex1En').style.display === 'none' ? 'block' : 'none'" class="solution-btn">Show / Hide Solution</button>
 
                         <div id="solCh5Ex1En" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
@@ -924,16 +924,16 @@ def anfis_xor(x, y):
                         </div>
                     </div>
 
-                    <div class="card" style="margin-top: 2rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                    <div class="card exercise-card secondary">
                         <h3 style="margin-top: 0; color: var(--accent);">Exercise 2: Python Programming (Linguistic Modifiers)</h3>
                         <p>Write three Python functions <code>very(x)</code>, <code>moderately(x)</code>, and <code>slightly(x)</code> that apply mathematical modifiers to a membership degree $x$. Then test these functions for a temperature that is initially considered "Hot" with a degree $x = 0.64$.</p>
 
-                        <button onclick="document.getElementById('solCh5Ex2En').style.display = document.getElementById('solCh5Ex2En').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Show / Hide Solution</button>
+                        <button onclick="document.getElementById('solCh5Ex2En').style.display = document.getElementById('solCh5Ex2En').style.display === 'none' ? 'block' : 'none'" class="solution-btn">Show / Hide Solution</button>
 
                         <div id="solCh5Ex2En" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
                             <h3 style="margin-top: 0; color: var(--accent);">Solution Exercise 2</h3>
-<pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto;"><code># Definition of linguistic quantifiers
+<pre class="code-block-dark"><code># Definition of linguistic quantifiers
 def very(x):
     return x ** 2
 
@@ -1104,7 +1104,7 @@ graph TD
                         <li><strong>Applications:</strong> Expert systems, finance, medicine, and general decision support.</li>
                     </ul>
 
-                    <div class="card" style="margin-top: 3rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                    <div class="card exercise-card">
                         <h3 style="margin-top: 0; color: var(--accent);">Exercise 1: Theory and Fuzzification</h3>
                         <ol>
                             <li>Explain why a sharp decision boundary (e.g., Salary > 3750) is a major limitation of classic decision trees, and how the fuzzy decision tree solves this problem.</li>
@@ -1114,7 +1114,7 @@ graph TD
                             </li>
                         </ol>
 
-                        <button onclick="document.getElementById('solCh6Ex1En').style.display = document.getElementById('solCh6Ex1En').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Show / Hide Solution</button>
+                        <button onclick="document.getElementById('solCh6Ex1En').style.display = document.getElementById('solCh6Ex1En').style.display === 'none' ? 'block' : 'none'" class="solution-btn">Show / Hide Solution</button>
 
                         <div id="solCh6Ex1En" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
@@ -1129,7 +1129,7 @@ graph TD
                         </div>
                     </div>
 
-                    <div class="card" style="margin-top: 2rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                    <div class="card exercise-card secondary">
                         <h3 style="margin-top: 0; color: var(--accent);">Exercise 2: Entropy, Rules, and Programming</h3>
                         <ol>
                             <li>When building the tree, what is the exact purpose of calculating the "Fuzzy Information Gain" for an attribute (like Salary or Age)?</li>
@@ -1141,7 +1141,7 @@ graph TD
                             </li>
                         </ol>
 
-                        <button onclick="document.getElementById('solCh6Ex2En').style.display = document.getElementById('solCh6Ex2En').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Show / Hide Solution</button>
+                        <button onclick="document.getElementById('solCh6Ex2En').style.display = document.getElementById('solCh6Ex2En').style.display === 'none' ? 'block' : 'none'" class="solution-btn">Show / Hide Solution</button>
 
                         <div id="solCh6Ex2En" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
@@ -1149,7 +1149,7 @@ graph TD
                             <ol>
                                 <li>Fuzzy Information Gain measures how much an attribute <strong>reduces uncertainty</strong> (entropy). The attribute with the highest gain is chosen as the decision node (root) because it <strong>best separates</strong> the different classes.</li>
                                 <li>Python Code:
-<pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto;"><code>def fuzzify_temperature(x):
+<pre class="code-block-dark"><code>def fuzzify_temperature(x):
     # Calculation for Normal
     if x <= 37.5:
         mu_normal = 1.0
@@ -1412,7 +1412,7 @@ graph TD
                         <canvas id="notChartFr"></canvas>
                     </div>
 
-                    <div class="card" style="margin-top: 3rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                    <div class="card exercise-card">
                         <h3 style="margin-top: 0; color: var(--accent);">Exercice 1 : Théorie, Graphique et Calculs</h3>
                         <p>On modélise le niveau de batterie d'un téléphone $x \in [0, 100]$ avec un ensemble flou "Moyen" défini par une fonction triangulaire avec les points $(20, 50, 80)$.</p>
                         <ol>
@@ -1423,7 +1423,7 @@ graph TD
                             <li>Pour un niveau $x=35$, on donne $\mu_{Moyen}(35)=0.5$ et on introduit un autre ensemble "Faible" tel que $\mu_{Faible}(35)=0.8$. Calculez les opérateurs ET, OU, et NON("Moyen") selon la logique de Zadeh.</li>
                         </ol>
 
-                        <button onclick="document.getElementById('solEx1').style.display = document.getElementById('solEx1').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Afficher / Masquer la solution</button>
+                        <button onclick="document.getElementById('solEx1').style.display = document.getElementById('solEx1').style.display === 'none' ? 'block' : 'none'" class="solution-btn">Afficher / Masquer la solution</button>
 
                         <div id="solEx1" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
@@ -1455,17 +1455,17 @@ graph TD
                         </div>
                     </div>
 
-                    <div class="card" style="margin-top: 2rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                    <div class="card exercise-card secondary">
                         <h3 style="margin-top: 0; color: var(--accent);">Exercice 2 : Programmation</h3>
                         <p>En vous basant sur les définitions mathématiques du cours, écrivez une fonction Python <code>trapezoidale(x, a, b, c, d)</code> qui retourne le degré d'appartenance exact d'une valeur $x$ à un ensemble flou de forme trapézoïdale.</p>
 
-                        <button onclick="document.getElementById('solEx2').style.display = document.getElementById('solEx2').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Afficher / Masquer la solution</button>
+                        <button onclick="document.getElementById('solEx2').style.display = document.getElementById('solEx2').style.display === 'none' ? 'block' : 'none'" class="solution-btn">Afficher / Masquer la solution</button>
 
                         <div id="solEx2" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
 
                             <h3 style="margin-top: 0; color: var(--accent);">Solution Exercice 2</h3>
-<pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto;"><code>def trapezoidale(x, a, b, c, d):
+<pre class="code-block-dark"><code>def trapezoidale(x, a, b, c, d):
     if x <= a or x >= d:
         return 0.0 # En dehors du support
     elif a < x < b:
@@ -1632,7 +1632,7 @@ graph TD
                         </div>
                     </div>
 
-                    <div class="card" style="margin-top: 3rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                    <div class="card exercise-card">
                         <h3 style="margin-top: 0; color: var(--accent);">Exercice 1 : Théorie et Modèle de Mamdani</h3>
                         <ol>
                             <li>Quelle est la différence principale entre la conclusion (sortie) d'une règle dans le modèle de Mamdani et celle dans le modèle de Sugeno ?</li>
@@ -1645,7 +1645,7 @@ graph TD
                             </li>
                         </ol>
 
-                        <button onclick="document.getElementById('solCh2Ex1').style.display = document.getElementById('solCh2Ex1').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Afficher / Masquer la solution</button>
+                        <button onclick="document.getElementById('solCh2Ex1').style.display = document.getElementById('solCh2Ex1').style.display === 'none' ? 'block' : 'none'" class="solution-btn">Afficher / Masquer la solution</button>
 
                         <div id="solCh2Ex1" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
@@ -1660,7 +1660,7 @@ graph TD
                         </div>
                     </div>
 
-                    <div class="card" style="margin-top: 2rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                    <div class="card exercise-card secondary">
                         <h3 style="margin-top: 0; color: var(--accent);">Exercice 2 : Calculs Sugeno et Tsukamoto</h3>
                         <ol>
                             <li><strong>Sugeno (Ordre 0) :</strong> Dans un système de contrôle, on a deux règles à constantes.<br>
@@ -1671,7 +1671,7 @@ graph TD
                             <li><strong>Tsukamoto :</strong> Dans ce modèle, la sortie d'une règle est une fonction monotone. Une règle est activée avec un degré $\alpha_1 = 0.6$. La fonction de sortie "Vitesse Lente" est décroissante et définie par l'équation $\mu_{lent}(z) = \frac{100 - z}{50}$. Déterminez la valeur numérique exacte de la sortie $z_1$ pour cette règle.</li>
                         </ol>
 
-                        <button onclick="document.getElementById('solCh2Ex2').style.display = document.getElementById('solCh2Ex2').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Afficher / Masquer la solution</button>
+                        <button onclick="document.getElementById('solCh2Ex2').style.display = document.getElementById('solCh2Ex2').style.display === 'none' ? 'block' : 'none'" class="solution-btn">Afficher / Masquer la solution</button>
 
                         <div id="solCh2Ex2" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
@@ -1789,7 +1789,7 @@ while iteration < max_iter:
         break
         
     U = U_new</code></pre>
-                    <div class="card" style="margin-top: 3rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                    <div class="card exercise-card">
                         <h3 style="margin-top: 0; color: var(--accent);">Exercice 1 : Théorie et Calculs (Fuzzy C-Means)</h3>
                         <ol>
                             <li>Quelle est la différence fondamentale entre l'algorithme de clustering classique (K-Means) et le clustering flou (Fuzzy C-Means) concernant l'appartenance des points ?</li>
@@ -1799,7 +1799,7 @@ while iteration < max_iter:
                             </li>
                         </ol>
 
-                        <button onclick="document.getElementById('solCh3Ex1').style.display = document.getElementById('solCh3Ex1').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Afficher / Masquer la solution</button>
+                        <button onclick="document.getElementById('solCh3Ex1').style.display = document.getElementById('solCh3Ex1').style.display === 'none' ? 'block' : 'none'" class="solution-btn">Afficher / Masquer la solution</button>
 
                         <div id="solCh3Ex1" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
@@ -1820,18 +1820,18 @@ while iteration < max_iter:
                         </div>
                     </div>
 
-                    <div class="card" style="margin-top: 2rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                    <div class="card exercise-card secondary">
                         <h3 style="margin-top: 0; color: var(--accent);">Exercice 2 : Programmation Python</h3>
                         <p>En vous basant sur la formule mathématique des centres :</p>
                         <div class="math-block">$$ c_j = \frac{\sum_{i=1}^n u_{ij}^m x_i}{\sum_{i=1}^n u_{ij}^m} $$</div>
                         <p>Écrivez la fonction Python <code>calcul_centres(X, U, m)</code> qui permet de recalculer les centres des clusters à l'aide de la bibliothèque NumPy.</p>
 
-                        <button onclick="document.getElementById('solCh3Ex2').style.display = document.getElementById('solCh3Ex2').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Afficher / Masquer la solution</button>
+                        <button onclick="document.getElementById('solCh3Ex2').style.display = document.getElementById('solCh3Ex2').style.display === 'none' ? 'block' : 'none'" class="solution-btn">Afficher / Masquer la solution</button>
 
                         <div id="solCh3Ex2" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
                             <h3 style="margin-top: 0; color: var(--accent);">Solution Exercice 2</h3>
-<pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto;"><code>import numpy as np
+<pre class="code-block-dark"><code>import numpy as np
 
 def calcul_centres(X, U, m):
     # Élévation de la matrice d'appartenance à la puissance m
@@ -1897,7 +1897,7 @@ def calcul_centres(X, U, m):
                         </li>
                     </ol>
 
-                    <div class="card" style="margin-top: 3rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                    <div class="card exercise-card">
                         <h3 style="margin-top: 0; color: var(--accent);">Exercice 1 : Théorie et Calcul des Couches ANFIS</h3>
                         <ol>
                             <li>Quelle est la différence majeure entre un réseau de neurones artificiel classique (ANN) et un système ANFIS en ce qui concerne la prise de décision ?</li>
@@ -1910,7 +1910,7 @@ def calcul_centres(X, U, m):
                             </li>
                         </ol>
 
-                        <button onclick="document.getElementById('solCh4Ex1').style.display = document.getElementById('solCh4Ex1').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Afficher / Masquer la solution</button>
+                        <button onclick="document.getElementById('solCh4Ex1').style.display = document.getElementById('solCh4Ex1').style.display === 'none' ? 'block' : 'none'" class="solution-btn">Afficher / Masquer la solution</button>
 
                         <div id="solCh4Ex1" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
@@ -1932,7 +1932,7 @@ def calcul_centres(X, U, m):
                         </div>
                     </div>
 
-                    <div class="card" style="margin-top: 2rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                    <div class="card exercise-card secondary">
                         <h3 style="margin-top: 0; color: var(--accent);">Exercice 2 : Programmation Python (Opérateur XOR avec ANFIS)</h3>
                         <p>Dans le cadre de l'évaluation de l'opérateur XOR avec ANFIS, nous utilisons deux ensembles flous : $\mu_{faible}(x) = 1 - x$ et $\mu_{eleve}(x) = x$. Les règles sont les suivantes :</p>
                         <ul>
@@ -1943,12 +1943,12 @@ def calcul_centres(X, U, m):
                         </ul>
                         <p>Écrivez une fonction Python <code>anfis_xor(x, y)</code> qui calcule les poids d'activation de ces 4 règles, les normalise, et retourne la sortie finale du système.</p>
 
-                        <button onclick="document.getElementById('solCh4Ex2').style.display = document.getElementById('solCh4Ex2').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Afficher / Masquer la solution</button>
+                        <button onclick="document.getElementById('solCh4Ex2').style.display = document.getElementById('solCh4Ex2').style.display === 'none' ? 'block' : 'none'" class="solution-btn">Afficher / Masquer la solution</button>
 
                         <div id="solCh4Ex2" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
                             <h3 style="margin-top: 0; color: var(--accent);">Solution Exercice 2</h3>
-<pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto;"><code>import numpy as np
+<pre class="code-block-dark"><code>import numpy as np
 
 def mu_faible(x):
     return 1 - x
@@ -2060,7 +2060,7 @@ def anfis_xor(x, y):
                     </ul>
                     <p><strong>Valeur Ajoutée (Conclusion) :</strong> L'utilisation de quantificateurs transforme des règles simples en expressions linguistiques riches. Cela apporte une très forte explicabilité au système, une plus grande flexibilité, et reproduit de manière beaucoup plus fidèle le raisonnement humain.</p>
 
-                    <div class="card" style="margin-top: 3rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                    <div class="card exercise-card">
                         <h3 style="margin-top: 0; color: var(--accent);">Exercice 1 : Théorie et Calcul (Quantificateur "La plupart")</h3>
                         <ol>
                             <li>Quelle est la valeur ajoutée principale de l'utilisation de quantificateurs flous dans une base de règles par rapport à des règles floues simples ?</li>
@@ -2074,7 +2074,7 @@ def anfis_xor(x, y):
                             <li>Calculez ce même degré si seulement 40% ($p = 0.4$) des indicateurs sont élevés.</li>
                         </ol>
 
-                        <button onclick="document.getElementById('solCh5Ex1').style.display = document.getElementById('solCh5Ex1').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Afficher / Masquer la solution</button>
+                        <button onclick="document.getElementById('solCh5Ex1').style.display = document.getElementById('solCh5Ex1').style.display === 'none' ? 'block' : 'none'" class="solution-btn">Afficher / Masquer la solution</button>
 
                         <div id="solCh5Ex1" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
@@ -2093,16 +2093,16 @@ def anfis_xor(x, y):
                         </div>
                     </div>
 
-                    <div class="card" style="margin-top: 2rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                    <div class="card exercise-card secondary">
                         <h3 style="margin-top: 0; color: var(--accent);">Exercice 2 : Programmation Python (Modificateurs Linguistiques)</h3>
                         <p>En vous basant sur la partie 4 de votre TP, écrivez trois fonctions Python <code>tres(x)</code>, <code>moyennement(x)</code>, et <code>peu(x)</code> qui appliquent ces modificateurs mathématiques à un degré d'appartenance $x$. Testez ensuite ces fonctions pour une température qui est initialement considérée comme "Chaude" à un degré $x = 0.64$.</p>
 
-                        <button onclick="document.getElementById('solCh5Ex2').style.display = document.getElementById('solCh5Ex2').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Afficher / Masquer la solution</button>
+                        <button onclick="document.getElementById('solCh5Ex2').style.display = document.getElementById('solCh5Ex2').style.display === 'none' ? 'block' : 'none'" class="solution-btn">Afficher / Masquer la solution</button>
 
                         <div id="solCh5Ex2" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
                             <h3 style="margin-top: 0; color: var(--accent);">Solution Exercice 2</h3>
-<pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto;"><code># Définition des quantificateurs linguistiques
+<pre class="code-block-dark"><code># Définition des quantificateurs linguistiques
 def tres(x):
     return x ** 2
 
@@ -2273,7 +2273,7 @@ graph TD
                         <li><strong>Domaines d'application :</strong> Systèmes experts, finance, médecine et aide à la décision.</li>
                     </ul>
 
-                    <div class="card" style="margin-top: 3rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                    <div class="card exercise-card">
                         <h3 style="margin-top: 0; color: var(--accent);">Exercice 1 : Théorie et Fuzzification</h3>
                         <ol>
                             <li>Expliquez pourquoi une frontière de décision brutale (par exemple : Salaire > 3750) est une limite majeure des arbres de décision classiques, et comment l'arbre de décision flou permet de résoudre ce problème.</li>
@@ -2283,7 +2283,7 @@ graph TD
                             </li>
                         </ol>
 
-                        <button onclick="document.getElementById('solCh6Ex1').style.display = document.getElementById('solCh6Ex1').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Afficher / Masquer la solution</button>
+                        <button onclick="document.getElementById('solCh6Ex1').style.display = document.getElementById('solCh6Ex1').style.display === 'none' ? 'block' : 'none'" class="solution-btn">Afficher / Masquer la solution</button>
 
                         <div id="solCh6Ex1" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
@@ -2298,7 +2298,7 @@ graph TD
                         </div>
                     </div>
 
-                    <div class="card" style="margin-top: 2rem; background: #fdfbf7; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0;">
+                    <div class="card exercise-card secondary">
                         <h3 style="margin-top: 0; color: var(--accent);">Exercice 2 : Entropie, Règles et Programmation</h3>
                         <ol>
                             <li>Lors de la construction de l'arbre, quel est le but exact du calcul du "Gain d'Information Flou" pour un attribut (comme le Salaire ou l'Âge) ?</li>
@@ -2310,7 +2310,7 @@ graph TD
                             </li>
                         </ol>
 
-                        <button onclick="document.getElementById('solCh6Ex2').style.display = document.getElementById('solCh6Ex2').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Afficher / Masquer la solution</button>
+                        <button onclick="document.getElementById('solCh6Ex2').style.display = document.getElementById('solCh6Ex2').style.display === 'none' ? 'block' : 'none'" class="solution-btn">Afficher / Masquer la solution</button>
 
                         <div id="solCh6Ex2" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
@@ -2318,7 +2318,7 @@ graph TD
                             <ol>
                                 <li>Le Gain d'Information Flou permet de mesurer à quel point un attribut <strong>réduit l'incertitude</strong> (l'entropie). L'attribut qui possède le gain le plus élevé est choisi comme nœud de décision (racine) car c'est lui qui <strong>sépare le mieux</strong> les différentes classes.</li>
                                 <li>Code Python :
-<pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto;"><code>def fuzzify_temperature(x):
+<pre class="code-block-dark"><code>def fuzzify_temperature(x):
     # Calcul pour Normale
     if x <= 37.5:
         mu_normale = 1.0
