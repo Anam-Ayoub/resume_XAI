@@ -756,11 +756,23 @@ graph TD
                         </li>
                         <li><strong>Rule Generation Principle:</strong> A rule is created by taking the fuzzified values, selecting the dominant class, and translating the path into natural linguistic terms.</li>
                     </ul>
-                    <div class="math-block">
-                        <strong>Examples of generated rules:</strong><br><br>
-                        <em>Rule 1:</em> IF Salary is Low AND Debt is High THEN Decision = Refuse<br>
-                        <em>Rule 2:</em> IF Salary is Medium AND Age is Young AND Debt is Medium THEN Decision = Accept<br>
-                        <em>Rule 3:</em> IF Salary is High AND Age is Medium AND Debt is Low THEN Decision = Accept
+                    <div class="rules-container">
+                        <strong>Examples of generated rules:</strong>
+                        <div class="rule-box refuse">
+                            <span class="rule-label">Rule 1</span>
+                            <span class="keyword">IF</span> Salary is Low <span class="keyword">AND</span> Debt is High 
+                            <span class="keyword then">THEN</span> Decision = <span class="outcome refuse">Refuse</span>
+                        </div>
+                        <div class="rule-box accept">
+                            <span class="rule-label">Rule 2</span>
+                            <span class="keyword">IF</span> Salary is Medium <span class="keyword">AND</span> Age is Young <span class="keyword">AND</span> Debt is Medium 
+                            <span class="keyword then">THEN</span> Decision = <span class="outcome accept">Accept</span>
+                        </div>
+                        <div class="rule-box accept">
+                            <span class="rule-label">Rule 3</span>
+                            <span class="keyword">IF</span> Salary is High <span class="keyword">AND</span> Age is Medium <span class="keyword">AND</span> Debt is Low 
+                            <span class="keyword then">THEN</span> Decision = <span class="outcome accept">Accept</span>
+                        </div>
                     </div>
 
                     <h3>Conclusion</h3>
@@ -1005,6 +1017,72 @@ graph TD
                     </div>
                     <div class="chart-container" style="position: relative; height:300px; width:100%; margin-top: 2rem;">
                         <canvas id="notChartFr"></canvas>
+                    </div>
+
+                    <div class="card" style="margin-top: 3rem; background: #fdfbf7; border-left: 4px solid var(--accent-color);">
+                        <h3 style="margin-top: 0; color: var(--accent-color);">Exercice 1 : Théorie, Graphique et Calculs</h3>
+                        <p>On modélise le niveau de batterie d'un téléphone $x \in [0, 100]$ avec un ensemble flou "Moyen" défini par une fonction triangulaire avec les points $(20, 50, 80)$.</p>
+                        <ol>
+                            <li>Quelle est la différence fondamentale entre un ensemble classique et un ensemble flou ?</li>
+                            <li>Décrivez l'allure de cette fonction d'appartenance.</li>
+                            <li>Déterminez le Support, le Noyau et la Hauteur de l'ensemble "Moyen". Cet ensemble est-il normalisé ?</li>
+                            <li>Calculez l'$\alpha$-coupe pour $\alpha=0.5$ et déduisez les points de croisement.</li>
+                            <li>Pour un niveau $x=35$, on donne $\mu_{Moyen}(35)=0.5$ et on introduit un autre ensemble "Faible" tel que $\mu_{Faible}(35)=0.8$. Calculez les opérateurs ET, OU, et NON("Moyen") selon la logique de Zadeh.</li>
+                        </ol>
+
+                        <button onclick="document.getElementById('solEx1').style.display = document.getElementById('solEx1').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent-color); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Afficher / Masquer la solution</button>
+
+                        <div id="solEx1" style="display: none;">
+                            <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
+
+                            <h3 style="margin-top: 0; color: var(--accent-color);">Solutions Exercice 1</h3>
+                            <ol>
+                                <li>Un ensemble classique utilise des valeurs strictes d'appartenance $\{0,1\}$, tandis qu'un ensemble flou permet une appartenance partielle continue sur l'intervalle $[0,1]$.</li>
+                                <li>C'est un triangle qui commence à $y=0$ pour $x=20$, monte linéairement jusqu'à un pic parfait de $y=1$ pour $x=50$, et redescend linéairement à $y=0$ pour $x=80$.
+                                    <div class="chart-container" style="position: relative; height:250px; width:100%; margin: 1rem 0;">
+                                        <canvas id="exercice1Chart"></canvas>
+                                    </div>
+                                </li>
+                                <li><strong>Support</strong> : $]20,80[$ (les valeurs où $\mu(x)>0$). <strong>Noyau</strong> : $\{50\}$ (la valeur où $\mu(x)=1$). <strong>Hauteur</strong> : 1. Puisque la hauteur maximale atteint 1, l'ensemble est officiellement normalisé.</li>
+                                <li>L'$\alpha$-coupe à 0.5 cherche l'intervalle où $\mu(x) \ge 0.5$.
+                                    <ul>
+                                        <li>Pente montante : $(x-20)/(50-20) = 0.5 \implies x=35$.</li>
+                                        <li>Pente descendante : $(80-x)/(80-50) = 0.5 \implies x=65$.</li>
+                                    </ul>
+                                    $\alpha$-coupe : L'intervalle est $[35, 65]$. Les points de croisement sont exactement 35 et 65.
+                                </li>
+                                <li>Selon Zadeh :
+                                    <ul>
+                                        <li><strong>ET</strong> ($\min$) : $\min(0.5, 0.8) = 0.5$.</li>
+                                        <li><strong>OU</strong> ($\max$) : $\max(0.5, 0.8) = 0.8$.</li>
+                                        <li><strong>NON</strong> ($1-\mu$) pour "Moyen" : $1 - 0.5 = 0.5$.</li>
+                                    </ul>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-top: 2rem; background: #fdfbf7; border-left: 4px solid var(--accent-color);">
+                        <h3 style="margin-top: 0; color: var(--accent-color);">Exercice 2 : Programmation</h3>
+                        <p>En vous basant sur les définitions mathématiques du cours, écrivez une fonction Python <code>trapezoidale(x, a, b, c, d)</code> qui retourne le degré d'appartenance exact d'une valeur $x$ à un ensemble flou de forme trapézoïdale.</p>
+
+                        <button onclick="document.getElementById('solEx2').style.display = document.getElementById('solEx2').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent-color); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Afficher / Masquer la solution</button>
+
+                        <div id="solEx2" style="display: none;">
+                            <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
+
+                            <h3 style="margin-top: 0; color: var(--accent-color);">Solution Exercice 2</h3>
+<pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto;"><code>def trapezoidale(x, a, b, c, d):
+    if x <= a or x >= d:
+        return 0.0 # En dehors du support
+    elif a < x < b:
+        return (x - a) / (b - a) # Pente montante
+    elif b <= x <= c:
+        return 1.0 # Le noyau (plateau)
+    elif c < x < d:
+        return (d - x) / (d - c) # Pente descendante
+</code></pre>
+                        </div>
                     </div>
 
                 </section>
@@ -1524,11 +1602,23 @@ graph TD
                         </li>
                         <li><strong>Principe de génération :</strong> Une règle est créée en prenant les valeurs fuzzifiées, sélectionnant la classe dominante et en traduisant le chemin en termes linguistiques naturels.</li>
                     </ul>
-                    <div class="math-block">
-                        <strong>Exemples de règles générées :</strong><br><br>
-                        <em>Règle 1 :</em> SI Salaire est Faible ET Dette est Élevée ALORS Décision = Refuser<br>
-                        <em>Règle 2 :</em> SI Salaire est Moyen ET Age est Jeune ET Dette est Moyenne ALORS Décision = Accorder<br>
-                        <em>Règle 3 :</em> SI Salaire est Élevé ET Age est Moyen ET Dette est Faible ALORS Décision = Accorder
+                    <div class="rules-container">
+                        <strong>Exemples de règles générées :</strong>
+                        <div class="rule-box refuse">
+                            <span class="rule-label">Règle 1</span>
+                            <span class="keyword">SI</span> Salaire est Faible <span class="keyword">ET</span> Dette est Élevée 
+                            <span class="keyword then">ALORS</span> Décision = <span class="outcome refuse">Refuser</span>
+                        </div>
+                        <div class="rule-box accept">
+                            <span class="rule-label">Règle 2</span>
+                            <span class="keyword">SI</span> Salaire est Moyen <span class="keyword">ET</span> Age est Jeune <span class="keyword">ET</span> Dette est Moyenne 
+                            <span class="keyword then">ALORS</span> Décision = <span class="outcome accept">Accorder</span>
+                        </div>
+                        <div class="rule-box accept">
+                            <span class="rule-label">Règle 3</span>
+                            <span class="keyword">SI</span> Salaire est Élevé <span class="keyword">ET</span> Age est Moyen <span class="keyword">ET</span> Dette est Faible 
+                            <span class="keyword then">ALORS</span> Décision = <span class="outcome accept">Accorder</span>
+                        </div>
                     </div>
 
                     <h3>Conclusion (Arbres flous)</h3>
@@ -2521,6 +2611,43 @@ graph TD
                     });
                 }
             });
+
+            // Exercise 1 Chart (Moyen: 20, 50, 80)
+            const ex1Ctx = document.getElementById('exercice1Chart');
+            if (ex1Ctx) {
+                const ex1Data = [];
+                for(let i=0; i<=100; i++) {
+                    let y = 0;
+                    if(i > 20 && i <= 50) y = (i - 20) / 30;
+                    else if(i > 50 && i < 80) y = (80 - i) / 30;
+                    ex1Data.push({x: i, y});
+                }
+                new Chart(ex1Ctx, {
+                    type: 'line',
+                    data: {
+                        datasets: [{
+                            label: 'Batterie Moyenne',
+                            data: ex1Data,
+                            borderColor: '#10b981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0,
+                            pointRadius: 0
+                        }]
+                    },
+                    options: {
+                        ...commonOptions,
+                        scales: {
+                            x: { type: 'linear', min: 0, max: 100, title: { display: true, text: 'Niveau de batterie (%)' } },
+                            y: { min: 0, max: 1.1, title: { display: true, text: 'Degré d\'appartenance μ(x)' } }
+                        },
+                        plugins: {
+                            title: { display: false }
+                        }
+                    }
+                });
+            }
         });
     </script>
     <!-- Mermaid for graphs -->
