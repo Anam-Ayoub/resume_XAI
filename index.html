@@ -1019,8 +1019,8 @@ graph TD
                         <canvas id="notChartFr"></canvas>
                     </div>
 
-                    <div class="card" style="margin-top: 3rem; background: #fdfbf7; border-left: 4px solid var(--accent-color);">
-                        <h3 style="margin-top: 0; color: var(--accent-color);">Exercice 1 : Théorie, Graphique et Calculs</h3>
+                    <div class="card" style="margin-top: 3rem; background: #fdfbf7; border-left: 4px solid var(--accent);">
+                        <h3 style="margin-top: 0; color: var(--accent);">Exercice 1 : Théorie, Graphique et Calculs</h3>
                         <p>On modélise le niveau de batterie d'un téléphone $x \in [0, 100]$ avec un ensemble flou "Moyen" défini par une fonction triangulaire avec les points $(20, 50, 80)$.</p>
                         <ol>
                             <li>Quelle est la différence fondamentale entre un ensemble classique et un ensemble flou ?</li>
@@ -1030,12 +1030,12 @@ graph TD
                             <li>Pour un niveau $x=35$, on donne $\mu_{Moyen}(35)=0.5$ et on introduit un autre ensemble "Faible" tel que $\mu_{Faible}(35)=0.8$. Calculez les opérateurs ET, OU, et NON("Moyen") selon la logique de Zadeh.</li>
                         </ol>
 
-                        <button onclick="document.getElementById('solEx1').style.display = document.getElementById('solEx1').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent-color); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Afficher / Masquer la solution</button>
+                        <button onclick="document.getElementById('solEx1').style.display = document.getElementById('solEx1').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Afficher / Masquer la solution</button>
 
                         <div id="solEx1" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
 
-                            <h3 style="margin-top: 0; color: var(--accent-color);">Solutions Exercice 1</h3>
+                            <h3 style="margin-top: 0; color: var(--accent);">Solutions Exercice 1</h3>
                             <ol>
                                 <li>Un ensemble classique utilise des valeurs strictes d'appartenance $\{0,1\}$, tandis qu'un ensemble flou permet une appartenance partielle continue sur l'intervalle $[0,1]$.</li>
                                 <li>C'est un triangle qui commence à $y=0$ pour $x=20$, monte linéairement jusqu'à un pic parfait de $y=1$ pour $x=50$, et redescend linéairement à $y=0$ pour $x=80$.
@@ -1062,16 +1062,16 @@ graph TD
                         </div>
                     </div>
 
-                    <div class="card" style="margin-top: 2rem; background: #fdfbf7; border-left: 4px solid var(--accent-color);">
-                        <h3 style="margin-top: 0; color: var(--accent-color);">Exercice 2 : Programmation</h3>
+                    <div class="card" style="margin-top: 2rem; background: #fdfbf7; border-left: 4px solid var(--accent);">
+                        <h3 style="margin-top: 0; color: var(--accent);">Exercice 2 : Programmation</h3>
                         <p>En vous basant sur les définitions mathématiques du cours, écrivez une fonction Python <code>trapezoidale(x, a, b, c, d)</code> qui retourne le degré d'appartenance exact d'une valeur $x$ à un ensemble flou de forme trapézoïdale.</p>
 
-                        <button onclick="document.getElementById('solEx2').style.display = document.getElementById('solEx2').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent-color); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Afficher / Masquer la solution</button>
+                        <button onclick="document.getElementById('solEx2').style.display = document.getElementById('solEx2').style.display === 'none' ? 'block' : 'none'" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: inherit; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Afficher / Masquer la solution</button>
 
                         <div id="solEx2" style="display: none;">
                             <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
 
-                            <h3 style="margin-top: 0; color: var(--accent-color);">Solution Exercice 2</h3>
+                            <h3 style="margin-top: 0; color: var(--accent);">Solution Exercice 2</h3>
 <pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto;"><code>def trapezoidale(x, a, b, c, d):
     if x <= a or x >= d:
         return 0.0 # En dehors du support
