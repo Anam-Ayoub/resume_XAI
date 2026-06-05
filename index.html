@@ -27,7 +27,23 @@
     
     <nav class="sticky-nav">
         <ul id="toc-list" class="toc-nav-list"></ul>
-        <div class="lang-switch-container">
+        <div class="lang-switch-container" style="display: flex; gap: 0.5rem;">
+            <button id="theme-switch" class="lang-btn">
+                <svg id="theme-icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg id="theme-icon-sun" style="display: none;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            </button>
             <button id="lang-switch" class="lang-btn">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="10"></circle>
@@ -2388,6 +2404,30 @@ graph TD
             }
         });
 
+        // Dark Mode Logic
+        const themeBtn = document.getElementById('theme-switch');
+        const iconMoon = document.getElementById('theme-icon-moon');
+        const iconSun = document.getElementById('theme-icon-sun');
+
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            iconMoon.style.display = 'none';
+            iconSun.style.display = 'block';
+        }
+
+        themeBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                iconMoon.style.display = 'none';
+                iconSun.style.display = 'block';
+            } else {
+                localStorage.setItem('theme', 'light');
+                iconMoon.style.display = 'block';
+                iconSun.style.display = 'none';
+            }
+        });
+
         // Dynamic Table of Contents Generator
         function buildTOC(lang) {
             const tocList = document.getElementById('toc-list');
@@ -2425,6 +2465,24 @@ graph TD
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            function updateChartTheme() {
+                const isDark = document.body.classList.contains('dark-mode');
+                const textColor = isDark ? '#E0E0E0' : '#545454';
+                const gridColor = isDark ? '#333333' : '#E5E5E5';
+                Chart.defaults.color = textColor;
+                Chart.defaults.borderColor = gridColor;
+                for (let id in Chart.instances) {
+                    Chart.instances[id].update();
+                }
+            }
+
+            // Initial theme update for charts
+            updateChartTheme();
+
+            // Observe body class changes to update charts dynamically
+            const observer = new MutationObserver(updateChartTheme);
+            observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+
             const pointLabelsPlugin = {
                 id: 'pointLabels',
                 afterDraw(chart) {
