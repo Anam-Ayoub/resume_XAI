@@ -22,6 +22,8 @@
         };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Vis Network for Graphs -->
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
 </head>
 <body class="lang-fr">
     
@@ -977,13 +979,7 @@ print("Slightly hot:", slightly(x))     # 1 - 0.64 = 0.36
                     <h3>Introduction & Review (Classic Trees)</h3>
                     <ul>
                         <li><strong>Classic Trees:</strong> Supervised learning models making hierarchical decisions via rules. They consist of a root node, branches, and leaves, where each node applies a strict, precise binary test (e.g., Age > 30).
-<div class="mermaid">
-graph TD
-    A["Age > 30 ?"] -->|Yes| B["High Income?"]
-    A -->|No| C["Refuse"]
-    B -->|Yes| D["Accept"]
-    B -->|No| E["Refuse"]
-</div>
+<div id="tree-en-1" style="width: 100%; height: 300px; border: 1px solid var(--border-color); border-radius: 8px; margin: 1rem 0; background: var(--card-bg);"></div>
                         </li>
                         <li><strong>Fuzzy Decision Trees:</strong> Extend classic trees using fuzzy logic to handle uncertainty and imprecision. A single data point can belong partially to multiple classes.</li>
                         <li><strong>Construction of a Classic Tree:</strong> Uses algorithms like ID3, C4.5, and CART to find the best attributes to separate the data based on calculation criteria:
@@ -1086,12 +1082,7 @@ graph TD
                     <ul>
                         <li><strong>Fuzzy Weights:</strong> The weight of each fuzzy branch is calculated by summing the membership degrees.</li>
                         <li><strong>Fuzzy Information Gain:</strong> Determines which attribute to place at the top of the tree.
-<div class="mermaid">
-graph TD
-    A["Salary"] -->|Low| B["Refuse"]
-    A -->|Medium| C["Mixed"]
-    A -->|High| D["Accept"]
-</div>
+<div id="tree-en-2" style="width: 100%; height: 250px; border: 1px solid var(--border-color); border-radius: 8px; margin: 1rem 0; background: var(--card-bg);"></div>
                         </li>
                         <li><strong>Rule Generation Principle:</strong> A rule is created by taking the fuzzified values, selecting the dominant class, and translating the path into natural linguistic terms.</li>
                     </ul>
@@ -2146,13 +2137,7 @@ print("Peu chaud :", peu(x))                 # 1 - 0.64 = 0.36
                     <h3>Introduction & Rappel (Arbres Classiques)</h3>
                     <ul>
                         <li><strong>Arbres classiques :</strong> Modèles d'apprentissage supervisé prenant des décisions hiérarchiques via des règles. Ils appliquent un test binaire strict et précis (ex : Age > 30).
-<div class="mermaid">
-graph TD
-    A["Age > 30 ?"] -->|Oui| B["Revenu élevé ?"]
-    A -->|Non| C["Refus"]
-    B -->|Oui| D["Accepte"]
-    B -->|Non| E["Refus"]
-</div>
+<div id="tree-fr-1" style="width: 100%; height: 300px; border: 1px solid var(--border-color); border-radius: 8px; margin: 1rem 0; background: var(--card-bg);"></div>
                         </li>
                         <li><strong>Arbres de Décision Flous :</strong> Étendent les arbres classiques en utilisant la logique floue pour gérer l'incertitude. Un point de données peut appartenir partiellement à plusieurs classes.</li>
                         <li><strong>Construction d'un Arbre Classique :</strong> Utilise des algorithmes comme ID3, C4.5 et CART pour séparer les données selon des critères mathématiques :
@@ -2255,12 +2240,7 @@ graph TD
                     <ul>
                         <li><strong>Poids flous des ensembles :</strong> Le poids de chaque branche est calculé en sommant les degrés d'appartenance.</li>
                         <li><strong>Gain d'Information Flou :</strong> Détermine quel attribut placer au sommet de l'arbre.
-<div class="mermaid">
-graph TD
-    A["Salaire"] -->|Faible| B["Refuser"]
-    A -->|Moyen| C["Mixte"]
-    A -->|Élevé| D["Accorder"]
-</div>
+<div id="tree-fr-2" style="width: 100%; height: 250px; border: 1px solid var(--border-color); border-radius: 8px; margin: 1rem 0; background: var(--card-bg);"></div>
                         </li>
                         <li><strong>Principe de génération :</strong> Une règle est créée en prenant les valeurs fuzzifiées, sélectionnant la classe dominante et en traduisant le chemin en termes linguistiques naturels.</li>
                     </ul>
@@ -3466,14 +3446,82 @@ graph TD
             updateChartTheme();
         });
     </script>
-    <!-- Mermaid for graphs -->
-    <script type="module">
-        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-        mermaid.initialize({ 
-            startOnLoad: true, 
-            theme: 'default',
-            fontFamily: 'inherit'
+    
+
+    <!-- Vis Network Initialization -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function updateVisTheme() {
+                const isDark = document.body.classList.contains('dark-mode');
+                const textColor = isDark ? '#E0E0E0' : '#1A1A1A';
+                const nodeBg = isDark ? '#1E1E1E' : '#FFFFFF';
+                const edgeColor = isDark ? '#A0A0A0' : '#545454';
+                
+                const commonOptions = {
+                    layout: { hierarchical: { direction: 'UD', sortMethod: 'directed', levelSeparation: 80, nodeSpacing: 150 } },
+                    physics: false,
+                    interaction: { dragNodes: false, dragView: false, zoomView: false },
+                    nodes: { shape: 'box', margin: 10, font: { size: 14, color: textColor }, color: { background: nodeBg, border: edgeColor } },
+                    edges: { font: { size: 12, color: textColor, align: 'horizontal' }, color: { color: edgeColor }, arrows: 'to' }
+                };
+
+                // Helper to apply colors based on semantic meaning
+                function getBg(label) {
+                    if(label.includes('Accept') || label.includes('Accepte') || label.includes('Accorder')) return isDark ? '#064e3b' : '#d1fae5';
+                    if(label.includes('Refuse') || label.includes('Refus')) return isDark ? '#7f1d1d' : '#fee2e2';
+                    if(label.includes('Mix')) return isDark ? '#78350f' : '#fef3c7';
+                    return nodeBg;
+                }
+                function getBorder(label) {
+                    if(label.includes('Accept') || label.includes('Accepte') || label.includes('Accorder')) return '#10b981';
+                    if(label.includes('Refuse') || label.includes('Refus')) return '#ef4444';
+                    if(label.includes('Mix')) return '#f59e0b';
+                    return edgeColor;
+                }
+                
+                function styleNodes(nodesArray) {
+                    return nodesArray.map(n => ({...n, color: { background: getBg(n.label), border: getBorder(n.label) }}));
+                }
+
+                if (document.getElementById('tree-en-1')) {
+                    new vis.Network(document.getElementById('tree-en-1'), {
+                        nodes: styleNodes([{id: 1, label: 'Age > 30 ?'}, {id: 2, label: 'High Income?'}, {id: 3, label: 'Refuse'}, {id: 4, label: 'Accept'}, {id: 5, label: 'Refuse'}]),
+                        edges: [{from: 1, to: 2, label: 'Yes'}, {from: 1, to: 3, label: 'No'}, {from: 2, to: 4, label: 'Yes'}, {from: 2, to: 5, label: 'No'}]
+                    }, commonOptions);
+                }
+                
+                if (document.getElementById('tree-en-2')) {
+                    new vis.Network(document.getElementById('tree-en-2'), {
+                        nodes: styleNodes([{id: 1, label: 'Salary'}, {id: 2, label: 'Refuse'}, {id: 3, label: 'Mixed'}, {id: 4, label: 'Accept'}]),
+                        edges: [{from: 1, to: 2, label: 'Low'}, {from: 1, to: 3, label: 'Medium'}, {from: 1, to: 4, label: 'High'}]
+                    }, commonOptions);
+                }
+                
+                if (document.getElementById('tree-fr-1')) {
+                    new vis.Network(document.getElementById('tree-fr-1'), {
+                        nodes: styleNodes([{id: 1, label: 'Age > 30 ?'}, {id: 2, label: 'Revenu élevé ?'}, {id: 3, label: 'Refus'}, {id: 4, label: 'Accepte'}, {id: 5, label: 'Refus'}]),
+                        edges: [{from: 1, to: 2, label: 'Oui'}, {from: 1, to: 3, label: 'Non'}, {from: 2, to: 4, label: 'Oui'}, {from: 2, to: 5, label: 'Non'}]
+                    }, commonOptions);
+                }
+                
+                if (document.getElementById('tree-fr-2')) {
+                    new vis.Network(document.getElementById('tree-fr-2'), {
+                        nodes: styleNodes([{id: 1, label: 'Salaire'}, {id: 2, label: 'Refuser'}, {id: 3, label: 'Mixte'}, {id: 4, label: 'Accorder'}]),
+                        edges: [{from: 1, to: 2, label: 'Faible'}, {from: 1, to: 3, label: 'Moyen'}, {from: 1, to: 4, label: 'Élevé'}]
+                    }, commonOptions);
+                }
+            }
+            
+            updateVisTheme();
+            const obs = new MutationObserver(updateVisTheme);
+            obs.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+            
+            // Also redraw when language switches to handle display: none resizing issues
+            document.getElementById('lang-switch').addEventListener('click', () => {
+                setTimeout(updateVisTheme, 50); // slight delay to allow display block to apply
+            });
         });
     </script>
 </body>
+
 </html>
