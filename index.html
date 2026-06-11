@@ -2871,7 +2871,7 @@ print("Peu chaud :", peu(x))                 # 1 - 0.64 = 0.36
             function updateChartTheme() {
                 const isDark = document.body.classList.contains('dark-mode');
                 const textColor = isDark ? '#E0E0E0' : '#545454';
-                const gridColor = isDark ? '#333333' : '#E5E5E5';
+                const gridColor = isDark ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)';
                 
                 // Unified palette: variants of white for dark mode, variants of black for light mode
                 const palette = isDark 
@@ -2880,6 +2880,7 @@ print("Peu chaud :", peu(x))                 # 1 - 0.64 = 0.36
 
                 Chart.defaults.color = textColor;
                 Chart.defaults.borderColor = gridColor;
+                Chart.defaults.scale.grid.color = gridColor; // ensure grid lines use this color
                 
                 for (let id in Chart.instances) {
                     const chart = Chart.instances[id];
