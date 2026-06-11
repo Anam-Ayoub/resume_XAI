@@ -2903,6 +2903,16 @@ print("Peu chaud :", peu(x))                 # 1 - 0.64 = 0.36
                             }
                         }
                     });
+                    // Explicitly update scale grid colors for already-instantiated charts
+                    if (chart.options.scales) {
+                        for (const axis in chart.options.scales) {
+                            if (!chart.options.scales[axis].grid) {
+                                chart.options.scales[axis].grid = {};
+                            }
+                            chart.options.scales[axis].grid.color = gridColor;
+                            chart.options.scales[axis].ticks.color = textColor;
+                        }
+                    }
                     chart.update();
                 }
             }
