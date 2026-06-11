@@ -210,6 +210,22 @@
 
                     <div class="function-section">
                         <h4>Sigmoid Function</h4>
+                        <p><strong>Concept:</strong> The sigmoid function is an S-shaped curve used for smooth transitions. It is defined by a crossover point where the degree is exactly 0.5, and a slope parameter.</p>
+                        
+                        <div class="math-block">
+                            <strong>Formula:</strong><br>
+                            $$ \mu(x) = \frac{1}{1+e^{-a(x-c)}} $$
+                        </div>
+                        
+                        <p><strong>Key Parameters:</strong></p>
+                        <ul>
+                            <li><strong>$c$ (Crossover point):</strong> The point where $\mu(c) = 0.5$.</li>
+                            <li><strong>$a$ (Slope/Inclination):</strong> Controls how steep the transition is.</li>
+                        </ul>
+                    </div>
+
+                    <div class="function-section">
+                        <h4>Sigmoid Function</h4>
                         <p><strong>Concept:</strong> The sigmoid function provides a smooth transition from 0 to 1 (or 1 to 0). It is often used for concepts like "very large" or "very small" where the membership degree stays at 1 after a certain point.</p>
                         
                         <div class="math-block">
@@ -512,6 +528,56 @@ print(trapezoidal(25, 10, 20, 30, 40))
                         </div>
                     </div>
 
+                    <div class="card model-section">
+                        <h4>D. Comparison: Mamdani vs. Sugeno vs. Tsukamoto</h4>
+                        <table style="width: 100%; text-align: left; margin-top: 1rem; border-collapse: collapse;">
+                            <tr style="border-bottom: 2px solid var(--border-color);">
+                                <th style="padding: 0.5rem 0;">Feature</th>
+                                <th style="padding: 0.5rem 0;">Mamdani</th>
+                                <th style="padding: 0.5rem 0;">Sugeno</th>
+                                <th style="padding: 0.5rem 0;">Tsukamoto</th>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 0.5rem 0;"><strong>Output type</strong></td>
+                                <td style="padding: 0.5rem 0;">Fuzzy set</td>
+                                <td style="padding: 0.5rem 0;">Math function (Linear/Const)</td>
+                                <td style="padding: 0.5rem 0;">Monotonic value</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 0.5rem 0;"><strong>Aggregation</strong></td>
+                                <td style="padding: 0.5rem 0;">Defuzzification (Centroid)</td>
+                                <td style="padding: 0.5rem 0;">Weighted average</td>
+                                <td style="padding: 0.5rem 0;">Weighted average</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 0.5rem 0;"><strong>Characteristic</strong></td>
+                                <td style="padding: 0.5rem 0;">Interpretable, slower</td>
+                                <td style="padding: 0.5rem 0;">Mathematical, faster</td>
+                                <td style="padding: 0.5rem 0;">Precise constraints</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem 0;"><strong>Use Case</strong></td>
+                                <td style="padding: 0.5rem 0;">Control systems</td>
+                                <td style="padding: 0.5rem 0;">Optimization, ANFIS</td>
+                                <td style="padding: 0.5rem 0;">Specialized models</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="card">
+                        <h3>Practical Application: Credit Decision Support</h3>
+                        <p><strong>Scenario:</strong> Determine credit amount based on Income and Debt using fuzzy logic.</p>
+                        <ul>
+                            <li><strong>Income:</strong> Low (monotonic decreasing), High (monotonic increasing).</li>
+                            <li><strong>Debt:</strong> Low (monotonic decreasing), High (monotonic increasing).</li>
+                            <li><strong>Credit (Tsukamoto monotonic output):</strong> Small (decreasing), Large (increasing).</li>
+                        </ul>
+                        <p><strong>Rule Base Example:</strong><br>
+                        R1: IF Income is Low AND Debt is High THEN Credit is Small.<br>
+                        R3: IF Income is High AND Debt is High THEN Credit is Large.</p>
+                        <p><strong>Steps:</strong> Evaluate membership degrees &rarr; Calculate rule activation degrees ($\alpha_n$) &rarr; Calculate individual exact outputs ($z_i$) using Tsukamoto inverse &rarr; Compute final credit amount via weighted average $W = \sum(\alpha_i z_i) / \sum \alpha_i$.</p>
+                    </div>
+
                     <div class="card exercise-card">
                         <h3 style="margin-top: 0; color: var(--accent);">Exercise 1: Theory and Mamdani Model</h3>
                         <ol>
@@ -605,6 +671,16 @@ print(trapezoidal(25, 10, 20, 30, 40))
                             </ul>
                         </li>
                     </ul>
+
+                    <div class="card model-section">
+                        <h4>Parameter 'm' (Fuzziness Coefficient)</h4>
+                        <p>The parameter $m > 1$ controls the degree of fuzziness in the clustering:</p>
+                        <ul>
+                            <li><strong>$m \to 1$:</strong> Tends towards Hard Clustering (Boolean logic, memberships approach 0 or 1).</li>
+                            <li><strong>$m = 2$:</strong> Standard value used in most applications.</li>
+                            <li><strong>$m \to \infty$:</strong> Extreme fuzziness. All points belong equally to all clusters ($1/c$).</li>
+                        </ul>
+                    </div>
 
                     <h3>FCM Algorithm Steps</h3>
                     <ol>
@@ -725,6 +801,19 @@ def calcul_centres(X, U, m):
                         </div>
                     </div>
 
+                    <div class="card exercise-card">
+                        <h3 style="margin-top: 0; color: var(--accent);">Exercise 3: Practical FCM (Monthly Expenditures)</h3>
+                        <p>Given the monthly expenditures of 4 clients: $X = \{50, 120, 200, 300\}$ euros. We want to group them into $C=2$ clusters.</p>
+                        <p>If after convergence the centers are $c_1 \approx 85$ (low spenders) and $c_2 \approx 250$ (big spenders), explain how a client spending 160 euros would be classified in K-Means versus FCM.</p>
+                        <button onclick="document.getElementById('solCh3Ex3En').style.display = document.getElementById('solCh3Ex3En').style.display === 'none' ? 'block' : 'none'" class="solution-btn">Show / Hide Solution</button>
+                        <div id="solCh3Ex3En" style="display: none;">
+                            <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
+                            <h3 style="margin-top: 0; color: var(--accent);">Solution Exercise 3</h3>
+                            <p><strong>In K-Means:</strong> The client spending 160€ is closer to $c_1$ (distance 75) than $c_2$ (distance 90). They will be 100% classified as a "low spender".</p>
+                            <p><strong>In FCM:</strong> The client is somewhat between the two centers. They will have a dual-membership, for example, 55% "low spender" and 45% "big spender". This provides a much more nuanced and realistic profile for targeted marketing.</p>
+                        </div>
+                    </div>
+
                 </section>
 
                 <section id="anfis-en">
@@ -777,6 +866,55 @@ def calcul_centres(X, U, m):
                             <div class="math-block">$$ f = \sum \overline{w}_i f_i $$</div>
                         </li>
                     </ol>
+
+                    <div class="card model-section">
+                        <h4>5. ANFIS vs. Artificial Neural Networks (ANN)</h4>
+                        <table style="width: 100%; text-align: left; margin-top: 1rem; border-collapse: collapse;">
+                            <tr style="border-bottom: 2px solid var(--border-color);">
+                                <th style="padding: 0.5rem 0;">Feature</th>
+                                <th style="padding: 0.5rem 0;">ANN (Neural Networks)</th>
+                                <th style="padding: 0.5rem 0;">ANFIS</th>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 0.5rem 0;"><strong>Nature</strong></td>
+                                <td style="padding: 0.5rem 0;">Black Box</td>
+                                <td style="padding: 0.5rem 0;">Interpretable (White/Grey Box)</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 0.5rem 0;"><strong>Rules</strong></td>
+                                <td style="padding: 0.5rem 0;">Hidden in weights</td>
+                                <td style="padding: 0.5rem 0;">Explicit IF-THEN Sugeno rules</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 0.5rem 0;"><strong>Learning</strong></td>
+                                <td style="padding: 0.5rem 0;">Gradient Descent / Backprop</td>
+                                <td style="padding: 0.5rem 0;">Hybrid (Least Squares + Gradient)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem 0;"><strong>Explainability</strong></td>
+                                <td style="padding: 0.5rem 0;">Very Low</td>
+                                <td style="padding: 0.5rem 0;">High</td>
+                            </tr>
+                        </table>
+                        
+                        <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 250px;">
+                                <h5>Advantages & Learning</h5>
+                                <ul style="list-style-type: disc; margin-left: 1.5rem;">
+                                    <li><strong>Interpretable:</strong> Provides human-readable rules.</li>
+                                    <li><strong>Automatic Learning:</strong> Extracts rules from data.</li>
+                                    <li><strong>Learning Algorithm:</strong> Hybrid. Forward pass uses Least Squares for rule consequences. Backward pass uses Gradient Descent for membership functions.</li>
+                                </ul>
+                            </div>
+                            <div style="flex: 1; min-width: 250px;">
+                                <h5>Disadvantages & Applications</h5>
+                                <ul style="list-style-type: disc; margin-left: 1.5rem;">
+                                    <li><strong>Cons:</strong> High computational cost, rule explosion with many inputs, sensitive to data quality.</li>
+                                    <li><strong>Applications:</strong> Prediction, Medical diagnosis, Finance (Credit scoring), Energy (Smart grids), Predictive maintenance, Robotics, <strong>Explainable AI (XAI)</strong>.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="card exercise-card">
                         <h3 style="margin-top: 0; color: var(--accent);">Exercise 1: Theory and ANFIS Layer Calculations</h3>
@@ -908,6 +1046,22 @@ def anfis_xor(x, y):
                             </div>
                         </li>
                     </ul>
+
+                    <h3>Integration of fuzzy quantifiers into fuzzy rules</h3>
+                    <p><strong>The Problem with Classic Rules:</strong> Without quantifiers, a standard fuzzy rule looks like: <em>IF Temperature is hot THEN Fan is fast</em>. While functional, this approach is often considered too raw, rigid, and lacking nuance to model complex scenarios.</p>
+                    <p><strong>The Integration of Quantifiers:</strong> Adding quantifiers enriches these rules to make them more nuanced and interpretable. For example:</p>
+                    <ul>
+                        <li><strong>R1:</strong> <em>IF Temperature is very hot THEN Fan is very fast.</em></li>
+                        <li><strong>R2:</strong> <em>IF Temperature is moderately hot THEN Fan is medium.</em></li>
+                        <li><strong>R3:</strong> <em>IF Temperature is slightly hot THEN Fan is slow.</em></li>
+                    </ul>
+                    <p><strong>The Effect of Modifiers:</strong> Logically, each word mathematically modifies the raw information:</p>
+                    <ul>
+                        <li><strong>"Very"</strong> reinforces the condition.</li>
+                        <li><strong>"Moderately"</strong> softens the condition.</li>
+                        <li><strong>"Slightly"</strong> inverses or reduces the condition.</li>
+                    </ul>
+                    <p><strong>Added Value (Conclusion):</strong> The use of quantifiers transforms simple rules into rich linguistic expressions. This provides strong explainability to the system, greater flexibility, and reproduces human reasoning much more faithfully.</p>
 
                     <div class="card exercise-card">
                         <h3 style="margin-top: 0; color: var(--accent);">Exercise 1: Theory and Calculation ("Most" Quantifier)</h3>
@@ -1062,21 +1216,40 @@ print("Slightly hot:", slightly(x))     # 1 - 0.64 = 0.36
                     </div>
 
                     <h3>Why Use a Fuzzy Decision Tree?</h3>
-                    <p>Classic trees have several limitations:</p>
-                    <ul>
-                        <li><strong>Strict Boundaries:</strong> Rigid cutoffs are not realistic (e.g., a tiny change leads to opposite decisions).</li>
-                        <li><strong>No Linguistic Terms:</strong> They manipulate exact numbers instead of human concepts like "low salary".</li>
-                        <li><strong>Poor Uncertainty Handling:</strong> Highly unstable to small data variations.</li>
-                        <li><strong>Rule Explosion & Overfitting:</strong> Deep trees memorize training data but fail on new clients.</li>
-                    </ul>
+                    <p>Classic trees have 9 major limitations:</p>
+                    <ol>
+                        <li><strong>Brutal decision boundaries:</strong> Rigid cutoffs are not realistic.</li>
+                        <li><strong>Absence of linguistic notions:</strong> Manipulates exact numbers instead of concepts.</li>
+                        <li><strong>Poor uncertainty management:</strong> Highly unstable to small data variations.</li>
+                        <li><strong>Extreme sensitivity:</strong> Small variations completely change the tree.</li>
+                        <li><strong>Difficulty modeling experts:</strong> Experts think in fuzzy terms, not strict bounds.</li>
+                        <li><strong>Poor interpretation of intermediate zones:</strong> Hard to classify borderline cases.</li>
+                        <li><strong>Rule explosion:</strong> Trees become too deep and complex.</li>
+                        <li><strong>Overfitting:</strong> Deep trees memorize noise in training data.</li>
+                        <li><strong>Inability to represent membership degrees:</strong> Forced binary 0 or 1 classification.</li>
+                    </ol>
                     <p><strong>The Fuzzy Solution:</strong> Fuzzy trees replace strict bounds with membership degrees, making decisions progressive instead of binary.</p>
 
                     <h3>Construction of a Fuzzy Decision Tree</h3>
                     <p>The goal is to build the tree using fuzzy membership degrees, calculate fuzzy entropies, and generate fuzzy rules.</p>
-                    <ul>
-                        <li><strong>Fuzzy Sets:</strong> Instead of a strict boundary, variables are divided into fuzzy sets like "Low", "Medium", and "High".</li>
-                        <li><strong>Fuzzy Entropy:</strong> Similar to classic entropy, but uses fuzzy probabilities. To find the probability, you sum the membership degrees for each class instead of counting whole units.</li>
-                    </ul>
+                    <div class="card model-section">
+                        <h4>1. Fuzzification (Example: Credit Dataset)</h4>
+                        <p>Instead of strict boundaries, variables are fuzzified into sets:</p>
+                        <ul>
+                            <li><strong>Salary:</strong> Low (≤3000-4000), Medium (3000-5000), High (4000-5000+) - Triangular MFs.</li>
+                            <li><strong>Age:</strong> Young (≤25-35), Medium (25-45), Senior (35-45+) - Triangular MFs.</li>
+                            <li><strong>Debt:</strong> Low (≤20-40), Medium (20-60), High (40-60+) - Triangular MFs.</li>
+                        </ul>
+                        <p><em>Example:</em> For a Salary of 3500, the fuzzification yields $\mu_{\text{Low}} = 0.5$, $\mu_{\text{Medium}} = 0.5$, and $\mu_{\text{High}} = 0$. The data point belongs to multiple classes simultaneously.</p>
+                    </div>
+                    <div class="card model-section">
+                        <h4>2. Fuzzy Entropy and Information Gain</h4>
+                        <p>Similar to classic entropy, but uses fuzzy probabilities. You sum the membership degrees for each class instead of counting units.</p>
+                        <ul>
+                            <li><strong>Fuzzy Entropy ($H_f$):</strong> For "Medium Salary", the subset is mixed, yielding an entropy $H \approx 0.918$. Pure subsets ("Low" or "High") yield $H=0$.</li>
+                            <li><strong>Fuzzy Gain:</strong> The fuzzy information gain determines the best split. For example, Fuzzy Gain(Salary) = 0.789, while Fuzzy Gain(Age) = 0.533. Salary is chosen as the root node.</li>
+                        </ul>
+                    </div>
 
                     <h3>Rule Generation</h3>
                     <ul>
@@ -1103,6 +1276,37 @@ print("Slightly hot:", slightly(x))     # 1 - 0.64 = 0.36
                             <span class="keyword">IF</span> Salary is High <span class="keyword">AND</span> Age is Medium <span class="keyword">AND</span> Debt is Low 
                             <span class="keyword then">THEN</span> Decision = <span class="outcome accept">Accept</span>
                         </div>
+                    </div>
+
+                    <div class="card model-section">
+                        <h4>Comparison: Classic vs. Fuzzy Trees</h4>
+                        <table style="width: 100%; text-align: left; margin-top: 1rem; border-collapse: collapse;">
+                            <tr style="border-bottom: 2px solid var(--border-color);">
+                                <th style="padding: 0.5rem 0;">Feature</th>
+                                <th style="padding: 0.5rem 0;">Classic Tree</th>
+                                <th style="padding: 0.5rem 0;">Fuzzy Tree</th>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 0.5rem 0;"><strong>Thresholds</strong></td>
+                                <td style="padding: 0.5rem 0;">Brutal ($x > 3750$)</td>
+                                <td style="padding: 0.5rem 0;">Soft / Overlapping sets</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 0.5rem 0;"><strong>Robustness</strong></td>
+                                <td style="padding: 0.5rem 0;">Low (very sensitive)</td>
+                                <td style="padding: 0.5rem 0;">High (absorbs noise)</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 0.5rem 0;"><strong>Realism</strong></td>
+                                <td style="padding: 0.5rem 0;">Mathematical logic</td>
+                                <td style="padding: 0.5rem 0;">Human-like reasoning</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem 0;"><strong>Complexity</strong></td>
+                                <td style="padding: 0.5rem 0;">High (many rules)</td>
+                                <td style="padding: 0.5rem 0;">Lower (compact rules)</td>
+                            </tr>
+                        </table>
                     </div>
 
                     <h3>Conclusion</h3>
@@ -1336,6 +1540,22 @@ print("Slightly hot:", slightly(x))     # 1 - 0.64 = 0.36
                         <div class="chart-container" style="position: relative; height:300px; width:100%">
                             <canvas id="gaussianChartFr"></canvas>
                         </div>
+                    </div>
+
+                    <div class="function-section">
+                        <h4>Fonction Sigmoïde</h4>
+                        <p><strong>Concept :</strong> La fonction sigmoïde est une courbe en forme de S utilisée pour des transitions douces. Elle est définie par un point de croisement où le degré est exactement 0.5, et un paramètre de pente.</p>
+                        
+                        <div class="math-block">
+                            <strong>Formule :</strong><br>
+                            $$ \mu(x) = \frac{1}{1+e^{-a(x-c)}} $$
+                        </div>
+                        
+                        <p><strong>Paramètres Clés :</strong></p>
+                        <ul>
+                            <li><strong>$c$ (Point de croisement) :</strong> Le point où $\mu(c) = 0.5$.</li>
+                            <li><strong>$a$ (Pente/Inclinaison) :</strong> Contrôle la raideur de la transition.</li>
+                        </ul>
                     </div>
 
                     <div class="function-section">
@@ -1639,6 +1859,56 @@ print("Slightly hot:", slightly(x))     # 1 - 0.64 = 0.36
                         </div>
                     </div>
 
+                    <div class="card model-section">
+                        <h4>D. Comparaison : Mamdani vs Sugeno vs Tsukamoto</h4>
+                        <table style="width: 100%; text-align: left; margin-top: 1rem; border-collapse: collapse;">
+                            <tr style="border-bottom: 2px solid var(--border-color);">
+                                <th style="padding: 0.5rem 0;">Caractéristique</th>
+                                <th style="padding: 0.5rem 0;">Mamdani</th>
+                                <th style="padding: 0.5rem 0;">Sugeno</th>
+                                <th style="padding: 0.5rem 0;">Tsukamoto</th>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 0.5rem 0;"><strong>Type de sortie</strong></td>
+                                <td style="padding: 0.5rem 0;">Ensemble flou</td>
+                                <td style="padding: 0.5rem 0;">Fonction math. (Lin/Const)</td>
+                                <td style="padding: 0.5rem 0;">Valeur monotone</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 0.5rem 0;"><strong>Agrégation</strong></td>
+                                <td style="padding: 0.5rem 0;">Défuzzification (Centre)</td>
+                                <td style="padding: 0.5rem 0;">Moyenne pondérée</td>
+                                <td style="padding: 0.5rem 0;">Moyenne pondérée</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 0.5rem 0;"><strong>Caractéristique</strong></td>
+                                <td style="padding: 0.5rem 0;">Interprétable, plus lent</td>
+                                <td style="padding: 0.5rem 0;">Mathématique, plus rapide</td>
+                                <td style="padding: 0.5rem 0;">Contraintes précises</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem 0;"><strong>Cas d'usage</strong></td>
+                                <td style="padding: 0.5rem 0;">Systèmes de contrôle</td>
+                                <td style="padding: 0.5rem 0;">Optimisation, ANFIS</td>
+                                <td style="padding: 0.5rem 0;">Modèles spécialisés</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="card">
+                        <h3>Cas Pratique : Aide à la décision pour le crédit</h3>
+                        <p><strong>Scénario :</strong> Déterminer le montant du crédit basé sur le Revenu et la Dette en utilisant la logique floue.</p>
+                        <ul>
+                            <li><strong>Revenu :</strong> Faible (décroissant monotone), Élevé (croissant monotone).</li>
+                            <li><strong>Dette :</strong> Faible (décroissant monotone), Élevée (croissant monotone).</li>
+                            <li><strong>Crédit (sortie Tsukamoto monotone) :</strong> Petit (décroissant), Grand (croissant).</li>
+                        </ul>
+                        <p><strong>Exemple de base de règles :</strong><br>
+                        R1: SI Revenu Faible ET Dette Élevée ALORS Crédit Petit.<br>
+                        R3: SI Revenu Élevé ET Dette Élevée ALORS Crédit Grand.</p>
+                        <p><strong>Étapes :</strong> Évaluer les degrés d'appartenance &rarr; Calculer l'activation des règles ($\alpha_n$) &rarr; Calculer les sorties exactes individuelles ($z_i$) via l'inverse Tsukamoto &rarr; Calculer le montant final du crédit par moyenne pondérée $W = \sum(\alpha_i z_i) / \sum \alpha_i$.</p>
+                    </div>
+
                     <div class="card exercise-card">
                         <h3 style="margin-top: 0; color: var(--accent);">Exercice 1 : Théorie et Modèle de Mamdani</h3>
                         <ol>
@@ -1731,6 +2001,16 @@ print("Slightly hot:", slightly(x))     # 1 - 0.64 = 0.36
                             </ul>
                         </li>
                     </ul>
+
+                    <div class="card model-section">
+                        <h4>Paramètre 'm' (Coefficient de Flou)</h4>
+                        <p>Le paramètre $m > 1$ contrôle le niveau de flou dans le clustering :</p>
+                        <ul>
+                            <li><strong>$m \to 1$ :</strong> Tend vers le Hard Clustering (logique booléenne, appartenances proches de 0 ou 1).</li>
+                            <li><strong>$m = 2$ :</strong> Valeur standard utilisée dans la plupart des applications.</li>
+                            <li><strong>$m \to \infty$ :</strong> Flou extrême. Tous les points appartiennent également à tous les clusters ($1/c$).</li>
+                        </ul>
+                    </div>
 
                     <h3>Étapes de l'Algorithme FCM</h3>
                     <ol>
@@ -1851,6 +2131,19 @@ def calcul_centres(X, U, m):
                         </div>
                     </div>
 
+                    <div class="card exercise-card">
+                        <h3 style="margin-top: 0; color: var(--accent);">Exercice 3 : FCM Pratique (Dépenses Mensuelles)</h3>
+                        <p>Soit les dépenses mensuelles de 4 clients : $X = \{50, 120, 200, 300\}$ euros. Nous voulons les regrouper en $C=2$ clusters.</p>
+                        <p>Si après convergence les centres sont $c_1 \approx 85$ (petits acheteurs) et $c_2 \approx 250$ (gros acheteurs), expliquez comment un client dépensant 160 euros serait classifié en K-Means versus FCM.</p>
+                        <button onclick="document.getElementById('solCh3Ex3Fr').style.display = document.getElementById('solCh3Ex3Fr').style.display === 'none' ? 'block' : 'none'" class="solution-btn">Afficher / Masquer la solution</button>
+                        <div id="solCh3Ex3Fr" style="display: none;">
+                            <hr style="border: 0; border-top: 1px dashed var(--border-color); margin: 2rem 0;">
+                            <h3 style="margin-top: 0; color: var(--accent);">Solution Exercice 3</h3>
+                            <p><strong>En K-Means :</strong> Le client dépensant 160€ est plus proche de $c_1$ (distance 75) que de $c_2$ (distance 90). Il sera classé à 100% comme "petit acheteur".</p>
+                            <p><strong>En FCM :</strong> Le client se situe entre les deux centres. Il aura une double appartenance, par exemple 55% "petit acheteur" et 45% "gros acheteur". Cela offre un profil beaucoup plus nuancé et réaliste pour le marketing ciblé.</p>
+                        </div>
+                    </div>
+
                 </section>
 
                 <section id="anfis-fr">
@@ -1903,6 +2196,55 @@ def calcul_centres(X, U, m):
                             <div class="math-block">$$ f = \sum \overline{w}_i f_i $$</div>
                         </li>
                     </ol>
+
+                    <div class="card model-section">
+                        <h4>5. ANFIS vs Réseaux de Neurones Artificiels (ANN)</h4>
+                        <table style="width: 100%; text-align: left; margin-top: 1rem; border-collapse: collapse;">
+                            <tr style="border-bottom: 2px solid var(--border-color);">
+                                <th style="padding: 0.5rem 0;">Caractéristique</th>
+                                <th style="padding: 0.5rem 0;">ANN (Réseaux de Neurones)</th>
+                                <th style="padding: 0.5rem 0;">ANFIS</th>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 0.5rem 0;"><strong>Nature</strong></td>
+                                <td style="padding: 0.5rem 0;">Boîte Noire</td>
+                                <td style="padding: 0.5rem 0;">Interprétable (Boîte Blanche/Grise)</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 0.5rem 0;"><strong>Règles</strong></td>
+                                <td style="padding: 0.5rem 0;">Cachées dans les poids</td>
+                                <td style="padding: 0.5rem 0;">Règles explicites SI-ALORS de Sugeno</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 0.5rem 0;"><strong>Apprentissage</strong></td>
+                                <td style="padding: 0.5rem 0;">Descente de gradient / Rétropropagation</td>
+                                <td style="padding: 0.5rem 0;">Hybride (Moindres Carrés + Gradient)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem 0;"><strong>Explicabilité</strong></td>
+                                <td style="padding: 0.5rem 0;">Très Faible</td>
+                                <td style="padding: 0.5rem 0;">Élevée</td>
+                            </tr>
+                        </table>
+                        
+                        <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 250px;">
+                                <h5>Avantages & Apprentissage</h5>
+                                <ul style="list-style-type: disc; margin-left: 1.5rem;">
+                                    <li><strong>Interprétable :</strong> Fournit des règles lisibles par l'humain.</li>
+                                    <li><strong>Apprentissage auto :</strong> Extrait les règles des données.</li>
+                                    <li><strong>Algorithme :</strong> Hybride. Passe avant utilise les Moindres Carrés pour les conséquences. Passe arrière utilise la Descente de Gradient pour les fonctions d'appartenance.</li>
+                                </ul>
+                            </div>
+                            <div style="flex: 1; min-width: 250px;">
+                                <h5>Inconvénients & Applications</h5>
+                                <ul style="list-style-type: disc; margin-left: 1.5rem;">
+                                    <li><strong>Inconvénients :</strong> Coût de calcul élevé, explosion combinatoire des règles, sensible à la qualité des données.</li>
+                                    <li><strong>Applications :</strong> Prédiction, Diagnostic médical, Finance (Score de crédit), Énergie (Smart grids), Maintenance prédictive, Robotique, <strong>Explainable AI (XAI)</strong>.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="card exercise-card">
                         <h3 style="margin-top: 0; color: var(--accent);">Exercice 1 : Théorie et Calcul des Couches ANFIS</h3>
@@ -2220,21 +2562,40 @@ print("Peu chaud :", peu(x))                 # 1 - 0.64 = 0.36
                     </div>
 
                     <h3>Pourquoi utiliser un arbre de décision flou ?</h3>
-                    <p>Les arbres classiques ont plusieurs limites :</p>
-                    <ul>
-                        <li><strong>Frontières de décision brutales :</strong> Les limites strictes ne sont pas réalistes.</li>
-                        <li><strong>Absence de notion linguistique :</strong> Manipulation de nombres exacts au lieu de concepts humains (ex : "salaire faible").</li>
-                        <li><strong>Mauvaise gestion de l'incertitude :</strong> Très instable face aux petites variations.</li>
-                        <li><strong>Surapprentissage :</strong> Arbres profonds qui mémorisent les données d'entraînement mais échouent sur de nouveaux clients.</li>
-                    </ul>
+                    <p>Les arbres classiques ont 9 limites majeures :</p>
+                    <ol>
+                        <li><strong>Frontières de décision brutales :</strong> Limites strictes peu réalistes.</li>
+                        <li><strong>Absence de notion linguistique :</strong> Manipulation de nombres exacts au lieu de concepts.</li>
+                        <li><strong>Mauvaise gestion de l'incertitude :</strong> Instabilité face aux données ambiguës.</li>
+                        <li><strong>Sensibilité extrême :</strong> De petites variations changent complètement l'arbre.</li>
+                        <li><strong>Difficulté de modéliser l'expert :</strong> Les experts raisonnent en termes flous.</li>
+                        <li><strong>Mauvaise interprétation des zones intermédiaires :</strong> Cas limites mal classés.</li>
+                        <li><strong>Explosion des règles :</strong> Arbres trop profonds et complexes.</li>
+                        <li><strong>Surapprentissage (Overfitting) :</strong> Mémorisation du bruit d'entraînement.</li>
+                        <li><strong>Incapacité à représenter les degrés d'appartenance :</strong> Classification binaire forcée (0 ou 1).</li>
+                    </ol>
                     <p><strong>La Solution Floue :</strong> Remplacer les limites strictes par des degrés d'appartenance, rendant les décisions progressives.</p>
 
                     <h3>Construction d'un Arbre de Décision Flou</h3>
                     <p>L'objectif est de construire l'arbre en utilisant des degrés d'appartenance flous, calculer les entropies floues et générer des règles floues.</p>
-                    <ul>
-                        <li><strong>Ensembles flous :</strong> Les variables sont divisées en ensembles flous (ex: "Faible", "Moyen", "Élevé").</li>
-                        <li><strong>Entropie Floue :</strong> Utilise des probabilités floues (en sommant les degrés d'appartenance pour chaque classe).</li>
-                    </ul>
+                    <div class="card model-section">
+                        <h4>1. Fuzzification (Exemple : Données de Crédit)</h4>
+                        <p>Les variables sont divisées en ensembles flous (fonctions triangulaires) :</p>
+                        <ul>
+                            <li><strong>Salaire :</strong> Faible (≤3000-4000), Moyen (3000-5000), Élevé (4000-5000+).</li>
+                            <li><strong>Age :</strong> Jeune (≤25-35), Moyen (25-45), Senior (35-45+).</li>
+                            <li><strong>Dette :</strong> Faible (≤20-40), Moyenne (20-60), Élevée (40-60+).</li>
+                        </ul>
+                        <p><em>Exemple :</em> Pour un Salaire de 3500, la fuzzification donne $\mu_{\text{Faible}} = 0.5$, $\mu_{\text{Moyen}} = 0.5$, et $\mu_{\text{Élevé}} = 0$. Le point appartient à plusieurs classes simultanément.</p>
+                    </div>
+                    <div class="card model-section">
+                        <h4>2. Entropie Floue et Gain d'Information</h4>
+                        <p>Similaire à l'entropie classique, mais utilise des probabilités floues (somme des degrés d'appartenance).</p>
+                        <ul>
+                            <li><strong>Entropie Floue ($H_f$) :</strong> Pour "Salaire Moyen", le sous-ensemble est mixte, donnant une entropie $H \approx 0.918$. Les sous-ensembles purs ("Faible" ou "Élevé") donnent $H=0$.</li>
+                            <li><strong>Gain Flou :</strong> Détermine le meilleur nœud. Exemple : Gain Flou(Salaire) = 0.789, Gain Flou(Age) = 0.533. Le Salaire devient la racine.</li>
+                        </ul>
+                    </div>
 
                     <h3>Génération des règles</h3>
                     <ul>
@@ -2261,6 +2622,37 @@ print("Peu chaud :", peu(x))                 # 1 - 0.64 = 0.36
                             <span class="keyword">SI</span> Salaire est Élevé <span class="keyword">ET</span> Age est Moyen <span class="keyword">ET</span> Dette est Faible 
                             <span class="keyword then">ALORS</span> Décision = <span class="outcome accept">Accorder</span>
                         </div>
+                    </div>
+
+                    <div class="card model-section">
+                        <h4>Comparaison : Arbres Classiques vs Flous</h4>
+                        <table style="width: 100%; text-align: left; margin-top: 1rem; border-collapse: collapse;">
+                            <tr style="border-bottom: 2px solid var(--border-color);">
+                                <th style="padding: 0.5rem 0;">Caractéristique</th>
+                                <th style="padding: 0.5rem 0;">Arbre Classique</th>
+                                <th style="padding: 0.5rem 0;">Arbre Flou</th>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 0.5rem 0;"><strong>Seuils</strong></td>
+                                <td style="padding: 0.5rem 0;">Brutaux ($x > 3750$)</td>
+                                <td style="padding: 0.5rem 0;">Doux / Chevauchants</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 0.5rem 0;"><strong>Robustesse</strong></td>
+                                <td style="padding: 0.5rem 0;">Faible (très sensible)</td>
+                                <td style="padding: 0.5rem 0;">Élevée (absorbe le bruit)</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: 0.5rem 0;"><strong>Réalisme</strong></td>
+                                <td style="padding: 0.5rem 0;">Logique mathématique</td>
+                                <td style="padding: 0.5rem 0;">Raisonnement humain</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem 0;"><strong>Complexité</strong></td>
+                                <td style="padding: 0.5rem 0;">Élevée (beaucoup de règles)</td>
+                                <td style="padding: 0.5rem 0;">Faible (règles compactes)</td>
+                            </tr>
+                        </table>
                     </div>
 
                     <h3>Conclusion (Arbres flous)</h3>
