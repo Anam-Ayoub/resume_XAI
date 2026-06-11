@@ -3914,6 +3914,75 @@ print("Peu chaud :", peu(x))                 # 1 - 0.64 = 0.36
             });
         });
     </script>
+
+    <!-- Custom Collapsible Sections & Animation Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section');
+            
+            sections.forEach((section, index) => {
+                // Add staggered animation classes to children of section for enter animation
+                section.style.animationDelay = `${index * 0.1}s`;
+                section.classList.add('fade-in-section');
+
+                const h2 = section.querySelector('h2');
+                if (!h2) return;
+
+                // Create wrapper for collapsible content
+                const wrapper = document.createElement('div');
+                wrapper.className = 'section-collapsible-wrapper expanded';
+                
+                // Move all siblings after h2 into the wrapper
+                let nextSibling = h2.nextSibling;
+                while (nextSibling) {
+                    const toMove = nextSibling;
+                    nextSibling = nextSibling.nextSibling;
+                    wrapper.appendChild(toMove);
+                }
+                
+                section.appendChild(wrapper);
+
+                // Add chevron icon to h2
+                const chevron = document.createElement('span');
+                chevron.className = 'chevron-icon';
+                chevron.innerHTML = '▼';
+                h2.appendChild(chevron);
+                h2.style.cursor = 'pointer';
+                h2.classList.add('collapsible-header');
+
+                // Toggle logic
+                h2.addEventListener('click', () => {
+                    const isExpanded = wrapper.classList.contains('expanded');
+                    if (isExpanded) {
+                        wrapper.style.maxHeight = wrapper.scrollHeight + 'px'; // Set explicit height first for transition
+                        setTimeout(() => { wrapper.style.maxHeight = '0px'; wrapper.style.opacity = '0'; }, 10);
+                        wrapper.classList.remove('expanded');
+                        chevron.style.transform = 'rotate(-90deg)';
+                    } else {
+                        wrapper.classList.add('expanded');
+                        wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
+                        wrapper.style.opacity = '1';
+                        chevron.style.transform = 'rotate(0deg)';
+                        setTimeout(() => { wrapper.style.maxHeight = 'none'; }, 400); // Remove explicit height after transition
+                    }
+                });
+            });
+
+            // Intersection Observer for scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.card, .exercise-card, figure').forEach(el => {
+                observer.observe(el);
+                el.classList.add('scroll-fade-up');
+            });
+        });
+    </script>
 </body>
 
 </html>
