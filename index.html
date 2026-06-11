@@ -897,23 +897,27 @@ def calcul_centres(X, U, m):
                             </tr>
                         </table>
                         
-                        <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
-                            <div style="flex: 1; min-width: 250px;">
-                                <h5>Advantages & Learning</h5>
-                                <ul style="list-style-type: disc; margin-left: 1.5rem;">
-                                    <li><strong>Interpretable:</strong> Provides human-readable rules.</li>
-                                    <li><strong>Automatic Learning:</strong> Extracts rules from data.</li>
-                                    <li><strong>Learning Algorithm:</strong> Hybrid. Forward pass uses Least Squares for rule consequences. Backward pass uses Gradient Descent for membership functions.</li>
-                                </ul>
-                            </div>
-                            <div style="flex: 1; min-width: 250px;">
-                                <h5>Disadvantages & Applications</h5>
-                                <ul style="list-style-type: disc; margin-left: 1.5rem;">
-                                    <li><strong>Cons:</strong> High computational cost, rule explosion with many inputs, sensitive to data quality.</li>
-                                    <li><strong>Applications:</strong> Prediction, Medical diagnosis, Finance (Credit scoring), Energy (Smart grids), Predictive maintenance, Robotics, <strong>Explainable AI (XAI)</strong>.</li>
-                                </ul>
-                            </div>
-                        </div>
+                        <table style="width: 100%; text-align: left; margin-top: 2rem; border-collapse: collapse;">
+                            <tr style="border-bottom: 2px solid var(--border-color);">
+                                <th style="padding: 0.5rem 0; width: 50%;">Advantages & Learning</th>
+                                <th style="padding: 0.5rem 0; width: 50%;">Disadvantages & Applications</th>
+                            </tr>
+                            <tr style="vertical-align: top;">
+                                <td style="padding: 1rem 1rem 1rem 0; border-right: 1px dashed var(--border-color);">
+                                    <ul style="list-style-type: disc; margin-left: 1.5rem; margin-top: 0;">
+                                        <li><strong>Interpretable:</strong> Provides human-readable rules.</li>
+                                        <li><strong>Automatic Learning:</strong> Extracts rules from data.</li>
+                                        <li><strong>Learning Algorithm:</strong> Hybrid. Forward pass uses Least Squares for rule consequences. Backward pass uses Gradient Descent for membership functions.</li>
+                                    </ul>
+                                </td>
+                                <td style="padding: 1rem 0 1rem 1.5rem;">
+                                    <ul style="list-style-type: disc; margin-left: 1.5rem; margin-top: 0;">
+                                        <li><strong>Cons:</strong> High computational cost, rule explosion with many inputs, sensitive to data quality.</li>
+                                        <li><strong>Applications:</strong> Prediction, Medical diagnosis, Finance (Credit scoring), Energy (Smart grids), Predictive maintenance, Robotics, <strong>Explainable AI (XAI)</strong>.</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
 
                     <div class="card exercise-card">
@@ -1310,10 +1314,16 @@ print("Slightly hot:", slightly(x))     # 1 - 0.64 = 0.36
                     </div>
 
                     <h3>Conclusion</h3>
-                    <ul>
-                        <li><strong>Main Advantages:</strong> Better uncertainty management, progressive decisions, greater robustness, and rules that map closely to natural human reasoning.</li>
-                        <li><strong>Applications:</strong> Expert systems, finance, medicine, and general decision support.</li>
-                    </ul>
+                    <table style="width: 100%; text-align: left; margin-top: 1rem; border-collapse: collapse;">
+                        <tr style="border-bottom: 2px solid var(--border-color);">
+                            <th style="padding: 0.5rem 0; width: 50%;">Main Advantages</th>
+                            <th style="padding: 0.5rem 0; width: 50%;">Applications</th>
+                        </tr>
+                        <tr style="vertical-align: top;">
+                            <td style="padding: 1rem 1rem 1rem 0; border-right: 1px dashed var(--border-color);">Better uncertainty management, progressive decisions, greater robustness, and rules that map closely to natural human reasoning.</td>
+                            <td style="padding: 1rem 0 1rem 1.5rem;">Expert systems, finance, medicine, and general decision support.</td>
+                        </tr>
+                    </table>
 
                     <div class="card exercise-card">
                         <h3 style="margin-top: 0; color: var(--accent);">Exercise 1: Theory and Fuzzification</h3>
@@ -2227,23 +2237,27 @@ def calcul_centres(X, U, m):
                             </tr>
                         </table>
                         
-                        <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
-                            <div style="flex: 1; min-width: 250px;">
-                                <h5>Avantages & Apprentissage</h5>
-                                <ul style="list-style-type: disc; margin-left: 1.5rem;">
-                                    <li><strong>Interprétable :</strong> Fournit des règles lisibles par l'humain.</li>
-                                    <li><strong>Apprentissage auto :</strong> Extrait les règles des données.</li>
-                                    <li><strong>Algorithme :</strong> Hybride. Passe avant utilise les Moindres Carrés pour les conséquences. Passe arrière utilise la Descente de Gradient pour les fonctions d'appartenance.</li>
-                                </ul>
-                            </div>
-                            <div style="flex: 1; min-width: 250px;">
-                                <h5>Inconvénients & Applications</h5>
-                                <ul style="list-style-type: disc; margin-left: 1.5rem;">
-                                    <li><strong>Inconvénients :</strong> Coût de calcul élevé, explosion combinatoire des règles, sensible à la qualité des données.</li>
-                                    <li><strong>Applications :</strong> Prédiction, Diagnostic médical, Finance (Score de crédit), Énergie (Smart grids), Maintenance prédictive, Robotique, <strong>Explainable AI (XAI)</strong>.</li>
-                                </ul>
-                            </div>
-                        </div>
+                        <table style="width: 100%; text-align: left; margin-top: 2rem; border-collapse: collapse;">
+                            <tr style="border-bottom: 2px solid var(--border-color);">
+                                <th style="padding: 0.5rem 0; width: 50%;">Avantages & Apprentissage</th>
+                                <th style="padding: 0.5rem 0; width: 50%;">Inconvénients & Applications</th>
+                            </tr>
+                            <tr style="vertical-align: top;">
+                                <td style="padding: 1rem 1rem 1rem 0; border-right: 1px dashed var(--border-color);">
+                                    <ul style="list-style-type: disc; margin-left: 1.5rem; margin-top: 0;">
+                                        <li><strong>Interprétable :</strong> Fournit des règles lisibles par l'humain.</li>
+                                        <li><strong>Apprentissage auto :</strong> Extrait les règles des données.</li>
+                                        <li><strong>Algorithme :</strong> Hybride. Passe avant utilise les Moindres Carrés pour les conséquences. Passe arrière utilise la Descente de Gradient pour les fonctions d'appartenance.</li>
+                                    </ul>
+                                </td>
+                                <td style="padding: 1rem 0 1rem 1.5rem;">
+                                    <ul style="list-style-type: disc; margin-left: 1.5rem; margin-top: 0;">
+                                        <li><strong>Inconvénients :</strong> Coût de calcul élevé, explosion combinatoire des règles, sensible à la qualité des données.</li>
+                                        <li><strong>Applications :</strong> Prédiction, Diagnostic médical, Finance (Score de crédit), Énergie (Smart grids), Maintenance prédictive, Robotique, <strong>Explainable AI (XAI)</strong>.</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
 
                     <div class="card exercise-card">
@@ -2656,10 +2670,16 @@ print("Peu chaud :", peu(x))                 # 1 - 0.64 = 0.36
                     </div>
 
                     <h3>Conclusion (Arbres flous)</h3>
-                    <ul>
-                        <li><strong>Avantages principaux :</strong> Meilleure gestion de l'incertitude, décisions progressives, robustesse améliorée et règles proches du raisonnement humain.</li>
-                        <li><strong>Domaines d'application :</strong> Systèmes experts, finance, médecine et aide à la décision.</li>
-                    </ul>
+                    <table style="width: 100%; text-align: left; margin-top: 1rem; border-collapse: collapse;">
+                        <tr style="border-bottom: 2px solid var(--border-color);">
+                            <th style="padding: 0.5rem 0; width: 50%;">Avantages principaux</th>
+                            <th style="padding: 0.5rem 0; width: 50%;">Domaines d'application</th>
+                        </tr>
+                        <tr style="vertical-align: top;">
+                            <td style="padding: 1rem 1rem 1rem 0; border-right: 1px dashed var(--border-color);">Meilleure gestion de l'incertitude, décisions progressives, robustesse améliorée et règles proches du raisonnement humain.</td>
+                            <td style="padding: 1rem 0 1rem 1.5rem;">Systèmes experts, finance, médecine et aide à la décision.</td>
+                        </tr>
+                    </table>
 
                     <div class="card exercise-card">
                         <h3 style="margin-top: 0; color: var(--accent);">Exercice 1 : Théorie et Fuzzification</h3>
