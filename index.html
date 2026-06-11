@@ -3228,7 +3228,7 @@ print("Peu chaud :", peu(x))                 # 1 - 0.64 = 0.36
                             datasets: [{
                                 label: 'Normalized Set',
                                 data: normData,
-                                borderColor: '#3b82f6',
+                                borderColor: '#8b98a5',
                                 backgroundColor: 'transparent',
                                 borderWidth: 2,
                                 fill: false,
@@ -3352,7 +3352,7 @@ print("Peu chaud :", peu(x))                 # 1 - 0.64 = 0.36
                             datasets: [{
                                 label: 'Convex',
                                 data: convexData,
-                                borderColor: '#3b82f6', backgroundColor: 'transparent', borderWidth: 2, fill: false, tension: 0.4, pointRadius: 0
+                                borderColor: '#8b98a5', backgroundColor: 'transparent', borderWidth: 2, fill: false, tension: 0.4, pointRadius: 0
                             }]
                         },
                         options: { ...baseConvexOptions, plugins: { title: { display: true, text: lang === 'En' ? 'Convex Set' : 'Ensemble Convexe' } } },
@@ -3368,7 +3368,7 @@ print("Peu chaud :", peu(x))                 # 1 - 0.64 = 0.36
                             datasets: [{
                                 label: 'Non-Convex',
                                 data: nonConvexData,
-                                borderColor: '#3b82f6', backgroundColor: 'transparent', borderWidth: 2, fill: false, tension: 0.4, pointRadius: 0
+                                borderColor: '#8b98a5', backgroundColor: 'transparent', borderWidth: 2, fill: false, tension: 0.4, pointRadius: 0
                             }]
                         },
                         options: { ...baseConvexOptions, plugins: { title: { display: true, text: lang === 'En' ? 'Non-Convex Set' : 'Ensemble Non-Convexe' } } },
@@ -3421,7 +3421,7 @@ print("Peu chaud :", peu(x))                 # 1 - 0.64 = 0.36
                     {
                         label: 'A (Triangle)',
                         data: interDataTriangle,
-                        borderColor: '#3b82f6',
+                        borderColor: '#8b98a5',
                         backgroundColor: 'transparent',
                         fill: false,
                         tension: 0,
@@ -3485,7 +3485,7 @@ print("Peu chaud :", peu(x))                 # 1 - 0.64 = 0.36
                     {
                         label: 'A (Triangle)',
                         data: interDataTriangle,
-                        borderColor: '#3b82f6',
+                        borderColor: '#8b98a5',
                         backgroundColor: 'transparent',
                         fill: false,
                         tension: 0,
@@ -3543,7 +3543,7 @@ print("Peu chaud :", peu(x))                 # 1 - 0.64 = 0.36
                     {
                         label: 'A (Triangle)',
                         data: interDataTriangle,
-                        borderColor: '#3b82f6',
+                        borderColor: '#8b98a5',
                         backgroundColor: 'transparent',
                         fill: false,
                         tension: 0,
@@ -3576,8 +3576,8 @@ print("Peu chaud :", peu(x))                 # 1 - 0.64 = 0.36
                         {index: 3, formula: 'μ(15) = (15-10)/10 = 0.5'},
                         {index: 5.2, formula: 'μ(26) = (30-26)/10 = 0.4'}
                     ],
-                    borderColor: '#3b82f6',
-                    backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                    borderColor: '#8b98a5',
+                    backgroundColor: 'rgba(139, 152, 165, 0.2)',
                     fill: true,
                     tension: 0
                 }]
@@ -3621,8 +3621,8 @@ print("Peu chaud :", peu(x))                 # 1 - 0.64 = 0.36
                         {index: 13, formula: 'μ(13) = e^-(49/50) = 0.38'},
                         {index: 27, formula: 'μ(27) = e^-(49/50) = 0.38'}
                     ],
-                    borderColor: '#8b5cf6',
-                    backgroundColor: 'rgba(139, 92, 246, 0.2)',
+                    borderColor: '#536471',
+                    backgroundColor: 'rgba(83, 100, 113, 0.2)',
                     fill: true,
                     tension: 0.4,
                     pointRadius: 0
@@ -3749,8 +3749,8 @@ print("Peu chaud :", peu(x))                 # 1 - 0.64 = 0.36
                             datasets: [{
                                 label: 'Régulier',
                                 data: monoX,
-                                borderColor: '#3b82f6',
-                                backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                                borderColor: '#8b98a5',
+                                backgroundColor: 'rgba(139, 152, 165, 0.2)',
                                 fill: true,
                                 tension: 0,
                                 pointRadius: 0
@@ -3803,7 +3803,7 @@ print("Peu chaud :", peu(x))                 # 1 - 0.64 = 0.36
                                 {
                                     label: 'Peu',
                                     data: peuY,
-                                    borderColor: '#d946ef',
+                                    borderColor: '#536471',
                                     backgroundColor: 'transparent',
                                     fill: false,
                                     tension: 0.4,
@@ -3941,9 +3941,6 @@ print("Peu chaud :", peu(x))                 # 1 - 0.64 = 0.36
             const sections = document.querySelectorAll('section');
             
             sections.forEach((section, index) => {
-                // Add staggered animation classes to children of section for enter animation
-                section.style.animationDelay = `${index * 0.1}s`;
-                section.classList.add('fade-in-section');
 
                 const h2 = section.querySelector('h2');
                 if (!h2) return;
@@ -3986,20 +3983,6 @@ print("Peu chaud :", peu(x))                 # 1 - 0.64 = 0.36
                         setTimeout(() => { wrapper.style.maxHeight = 'none'; }, 400); // Remove explicit height after transition
                     }
                 });
-            });
-
-            // Intersection Observer for scroll animations
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.card, .exercise-card, figure').forEach(el => {
-                observer.observe(el);
-                el.classList.add('scroll-fade-up');
             });
         });
     </script>
