@@ -3984,6 +3984,21 @@ print("Peu chaud :", peu(x))                 # 1 - 0.64 = 0.36
                     }
                 });
             });
+
+            // Intersection Observer for lightweight scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        // Optional: observer.unobserve(entry.target); // if we want it to only animate once
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.card, .exercise-card, figure').forEach(el => {
+                observer.observe(el);
+                el.classList.add('scroll-fade-up');
+            });
         });
     </script>
 </body>
