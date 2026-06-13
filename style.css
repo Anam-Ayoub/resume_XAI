@@ -518,15 +518,3 @@ footer {
     font-size: 0.9rem;
     margin-top: 3rem;
 }
-
-/* Animations */
-.scroll-fade-up {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-}
-
-.scroll-fade-up.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
